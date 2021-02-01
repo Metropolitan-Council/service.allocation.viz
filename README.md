@@ -1,1 +1,1 @@
-service-allocation-viz
+service.allocation.viz
