@@ -10,7 +10,8 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # List the first level UI elements here
     fluidPage(
-      h1("service.allocation.viz")
+      h1("service.allocation.viz"),
+      mod_scrolly_container_ui("scrolly_container_ui_1")
     )
   )
 }
@@ -23,20 +24,18 @@ app_ui <- function(request) {
 #' @import shiny
 #' @importFrom golem add_resource_path activate_js favicon bundle_resources
 #' @noRd
-golem_add_external_resources <- function(){
-
+golem_add_external_resources <- function() {
   add_resource_path(
-    'www', app_sys('app/www')
+    "www", app_sys("app/www")
   )
 
   tags$head(
     # favicon(),
     bundle_resources(
-      path = app_sys('app/www'),
-      app_title = 'service.allocation.viz'
+      path = app_sys("app/www"),
+      app_title = "service.allocation.viz"
     )
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()
   )
 }
-

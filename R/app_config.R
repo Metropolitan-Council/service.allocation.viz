@@ -4,7 +4,7 @@
 #'     point to inside the current package.
 #'
 #' @noRd
-app_sys <- function(...){
+app_sys <- function(...) {
   system.file(..., package = "service.allocation.viz")
 }
 
@@ -19,10 +19,9 @@ app_sys <- function(...){
 #'
 #' @noRd
 get_golem_config <- function(
-  value,
-  config = Sys.getenv("R_CONFIG_ACTIVE", "default"),
-  use_parent = TRUE
-){
+                             value,
+                             config = Sys.getenv("R_CONFIG_ACTIVE", "default"),
+                             use_parent = TRUE) {
   config::get(
     value = value,
     config = config,
@@ -31,4 +30,3 @@ get_golem_config <- function(
     use_parent = use_parent
   )
 }
-
