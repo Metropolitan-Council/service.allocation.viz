@@ -13,13 +13,19 @@ app_server <- function(input, output, session) {
     "scrolly_container_ui_1"
   )
 
+  slider_input <- callModule(mod_slider_server, "slider_ui_1")
+
+
 
   callModule(mod_plot_server, "plot_ui_1",
     scroll_section = scrolly_section
   )
-
   callModule(mod_plot_server, "plot_ui_2",
              scroll_section = scrolly_section
   )
+
+
+  callModule(mod_table_server, "table_ui_1",
+             slider_input = slider_input)
 
 }
