@@ -3,6 +3,7 @@
 library(dplyr)
 library(readxl)
 library(janitor)
+library(data.table)
 
 
 # Scenario def ------------------------------------------------------------
@@ -15,10 +16,15 @@ scenario_def <- read_xlsx(path = "data-raw/scenario_def.xlsx", col_types = c(
   clean_names() %>%
   rename(scenario = x1) %>%
   rowwise() %>%
-  mutate(expanded_on_demand_service = case_when(
-    expanded_on_demand_service == "Yes" ~ 1,
-    TRUE ~ 0
-  ))
+  mutate(expanded_on_demand_service =
+           case_when(
+             expanded_on_demand_service == "Yes" ~ 1,
+             TRUE ~ 0
+           ),
+         scenario_id = stringr::str_sub(scenario, start = -1L, end = -1L)
+  ) %>%
+  as.data.table()
+
 
 
 
@@ -48,7 +54,10 @@ scenario_def_long <- scenario_def %>%
     # scenario,
     key = "improvement_type",
     value = value
-  )
+  ) %>%
+  mutate(scenario_text = stringr::str_replace_all(improvement_type, "_", " ") %>%
+           stringr::str_to_sentence()) %>%
+  as.data.table()
 
 
 
