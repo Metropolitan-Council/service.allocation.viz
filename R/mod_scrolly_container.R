@@ -16,15 +16,34 @@ mod_scrolly_container_ui <- function(id) {
       scrollytell::scrolly_graph(
         textOutput(ns("section")),
         mod_slider_ui("slider_ui_1"),
-        mod_plot_ui("plot_ui_1")
+        mod_plot_ui("plot_ui_1"),
+        br(),
+        br(),
+        br(),
+
+
       ),
 
       scrollytell::scrolly_sections(
         # HTML('<center>'),
-        scrollytell::scrolly_section(id = 0, HTML(shinipsum::random_text(nwords = 20))),
+        scrollytell::scrolly_section(id = 0, HTML(shinipsum::random_text(nwords = 20)),
+                                     mod_plot_ui("plot_ui_2")
+        ),
+        br(),
+        br(),
+
         scrollytell::scrolly_section(id = 1, HTML(shinipsum::random_text(nwords = 40))),
+        br(),
+        br(),
+
         scrollytell::scrolly_section(id = 2, HTML(shinipsum::random_text(nwords = 60))),
-        scrollytell::scrolly_section(id = 3, HTML(shinipsum::random_text(nwords = 80)))
+        br(),
+        br(),
+
+        scrollytell::scrolly_section(id = 3, HTML(shinipsum::random_text(nwords = 80))),
+        br(),
+        br()
+
         # scrollytell::scrolly_section(id = 4, render_text(4)),
         # scrollytell::scrolly_section(id = 5, render_text(5)),
         # HTML('</center>')

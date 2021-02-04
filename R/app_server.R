@@ -17,4 +17,9 @@ app_server <- function(input, output, session) {
   callModule(mod_plot_server, "plot_ui_1",
     scroll_section = scrolly_section
   )
+
+  callModule(mod_plot_server, "plot_ui_2",
+             scroll_section = scrolly_section
+  )
+
 }
