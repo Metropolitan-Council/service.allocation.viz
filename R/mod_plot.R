@@ -22,13 +22,13 @@ mod_plot_server <- function(input, output, session, scroll_section) {
 
   output$pl <- plotly::renderPlotly({
     # browser()
-    if (scroll_section$scr_section == 1) {
+    if (scroll_section$scr_section == 0) {
       shinipsum::random_ggplotly(type = "boxplot")
-    } else if (scroll_section$scr_section == 2) {
+    } else if (scroll_section$scr_section == 1) {
       shinipsum::random_ggplotly(type = "hex")
-    } else if (scroll_section$scr_section == 3) {
+    } else if (scroll_section$scr_section == 2) {
       shinipsum::random_ggplotly(type = "tile")
-    } else if (scroll_section$scr_section == 4) {
+    } else if (scroll_section$scr_section == 3) {
       shinipsum::random_ggplotly(type = "tile")
     }
   })
