@@ -29,7 +29,7 @@ scenario_rdrshp <- read_xlsx(path = "data-raw/scenario_rdrshp.xlsx") %>%
 
   scenario_def$ridership_increase_percent <- scenario_rdrshp$ridership_increase_percent
 
-  scenario_def %>%
+scenario_def_long <- scenario_def %>%
   # group_by(scenario) %>%
   tidyr::gather(high_frequency_routes_improved,
                 local_routes_improved_to_high_frequency,
@@ -43,7 +43,7 @@ scenario_rdrshp <- read_xlsx(path = "data-raw/scenario_rdrshp.xlsx") %>%
                 ridership_increase_percent,
                 # scenario,
                 key = "improvement_type",
-                value = value) %>% View
+                value = value)
 
 
 
@@ -51,5 +51,7 @@ scenario_rdrshp <- read_xlsx(path = "data-raw/scenario_rdrshp.xlsx") %>%
 
 
 
-usethis::use_data(scenarios, overwrite = TRUE)
+usethis::use_data(scenario_def, overwrite = TRUE)
+usethis::use_data(scenario_def_long, overwrite = TRUE)
+
 
