@@ -10,8 +10,30 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # List the first level UI elements here
     fluidPage(
+      # HTML('<center>'),
       h1("service.allocation.viz"),
-      mod_scrolly_container_ui("scrolly_container_ui_1")
+      h2("Here is what you can expect from this viz"),
+      tags$body(shinipsum::random_text(nwords = 200)),
+
+      br(),
+      br(),
+      br(),
+
+      mod_scrolly_container_ui("scrolly_container_ui_1"),
+      # HTML('</center>'),
+
+      tags$footer(
+        #----
+        tags$a(
+          href = "https://metrocouncil.org", target = "_blank",
+          img(src = "www/main-logo.png", align = "right", style = "padding: 1%")
+        )
+        # tags$div(
+        #   tags$a(href="https://github.com/Metropolitan-Council/loop-sensor-trends", target="_blank",
+        #          icon(name = "github", lib = "font-awesome"))
+        # )
+      )
+
     )
   )
 }
