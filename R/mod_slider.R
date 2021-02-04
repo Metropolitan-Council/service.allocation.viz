@@ -12,15 +12,19 @@ mod_slider_ui <- function(id) {
   ns <- NS(id)
   tagList(
     shinyWidgets::sliderTextInput(
-      inputId = ns("mySliderText"),
-      label = "Your choice:",
+      inputId = ns("slider"),
+      label = "Scenario",
       grid = TRUE,
       force_edges = TRUE,
       choices = c(
-        "Strongly disagree",
-        "Disagree", "Neither agree nor disagree",
-        "Agree", "Strongly agree"
-      )
+        "1",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "2"
+      ),
     )
   )
 }
@@ -30,6 +34,18 @@ mod_slider_ui <- function(id) {
 #' @noRd
 mod_slider_server <- function(input, output, session) {
   ns <- session$ns
+
+  vals <- reactiveValues()
+
+  observeEvent(input$slider, {
+    vals$slider <- input$slider
+  })
+
+  selected_scenario_def <- reactive({
+    scenario_def_long[scenario_id == slider_input$slider,]
+  })
+
+  return(vals)
 }
 
 ## To be copied in the UI
