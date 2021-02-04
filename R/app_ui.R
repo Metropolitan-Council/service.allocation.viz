@@ -33,7 +33,6 @@ app_ui <- function(request) {
         #          icon(name = "github", lib = "font-awesome"))
         # )
       )
-
     )
   )
 }

@@ -42,7 +42,7 @@ mod_slider_server <- function(input, output, session) {
   })
 
   selected_scenario_def <- reactive({
-    scenario_def_long[scenario_id == slider_input$slider,]
+    scenario_def_long[scenario_id == slider_input$slider, ]
   })
 
   return(vals)

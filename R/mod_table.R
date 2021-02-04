@@ -8,37 +8,43 @@
 #'
 #' @importFrom shiny NS tagList
 #' @importFrom DT DTOutput renderDT
-mod_table_ui <- function(id){
+mod_table_ui <- function(id) {
   ns <- NS(id)
   tagList(
-
-    DT::DTOutput(ns("table"), width = "58%",
-                 height = "400px")
+    DT::DTOutput(ns("table"),
+      width = "58%",
+      height = "400px"
+    )
   )
 }
 
 #' table Server Function
 #'
 #' @noRd
-mod_table_server <- function(input, output, session, slider_input){
+mod_table_server <- function(input, output, session, slider_input) {
   ns <- session$ns
 
   table_data <- reactive({
-    scenario_def_long[scenario_id == slider_input$slider,]
+    scenario_def_long[scenario_id == slider_input$slider, ]
   })
 
   output$table <- renderDT({
-    DT::datatable(data = table_data()[, .(scenario_text, value)],
-                  rownames = FALSE,
-                  colnames = c(
-                    "Improvement Type",
-                    paste0("Scenario ", slider_input$slider)),
-                  fillContainer = FALSE,
-                  filter = "none",
-                  options = list(dom = "t",
-                                 columnDefs = list(list(className = "dt-center", targets = 1)))) %>%
+    DT::datatable(
+      data = table_data()[, .(scenario_text, value)],
+      rownames = FALSE,
+      colnames = c(
+        "Improvement Type",
+        paste0("Scenario ", slider_input$slider)
+      ),
+      fillContainer = FALSE,
+      filter = "none",
+      options = list(
+        dom = "t",
+        columnDefs = list(list(className = "dt-center", targets = 1))
+      )
+    ) %>%
       DT::formatStyle(
-        columns = 'value',
+        columns = "value",
         color = "black",
         backgroundColor = "pink",
         borderColor = "white",
@@ -47,8 +53,6 @@ mod_table_server <- function(input, output, session, slider_input){
         borderTopColor = "white"
       )
   })
-
-
 }
 
 ## To be copied in the UI
@@ -56,4 +60,3 @@ mod_table_server <- function(input, output, session, slider_input){
 
 ## To be copied in the server
 # callModule(mod_table_server, "table_ui_1")
-

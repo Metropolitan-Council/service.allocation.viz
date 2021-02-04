@@ -21,11 +21,11 @@ app_server <- function(input, output, session) {
     scroll_section = scrolly_section
   )
   callModule(mod_plot_server, "plot_ui_2",
-             scroll_section = scrolly_section
+    scroll_section = scrolly_section
   )
 
 
   callModule(mod_table_server, "table_ui_1",
-             slider_input = slider_input)
-
+    slider_input = slider_input
+  )
 }
