@@ -14,39 +14,77 @@ mod_scrolly_container_ui <- function(id) {
       outputId = ns("scr"),
 
       scrollytell::scrolly_graph(
+        HTML('<center>'),
         textOutput(ns("section")),
         mod_slider_ui("slider_ui_1"),
-        mod_plot_ui("plot_ui_1"),
-        br(),
-        br(),
-        br(),
+        # mod_plot_ui("plot_ui_1"),
+        # br(),
+        # br(),
+        # br(),
+        HTML('</center>')
 
 
       ),
 
       scrollytell::scrolly_sections(
-        # HTML('<center>'),
-        scrollytell::scrolly_section(id = 0, HTML(shinipsum::random_text(nwords = 20)),
-                                     mod_plot_ui("plot_ui_2")
+        scrollytell::scrolly_section(
+          id = 00,
+          h3("Choose your scenario and scroll down for more")
         ),
-        br(),
+
+        scrollytell::scrolly_section(
+          id = 0,
+          wellPanel(
+            h3("Here is a header for the first scrolly"),
+            tags$body(shinipsum::random_text(nwords = 20))
+          ),
+          HTML('<center>'),
+          mod_table_ui("table_ui_1"),
+          HTML('</center>'),
+
+
+
+        ),
+        # br(),
         br(),
 
-        scrollytell::scrolly_section(id = 1, HTML(shinipsum::random_text(nwords = 40))),
-        br(),
+        scrollytell::scrolly_section(
+          id = 1,
+          wellPanel(
+            h3("Now a section for the second scrolly"),
+            HTML(shinipsum::random_text(nwords = 40))),
+
+          HTML('<center>'),
+          mod_plot_ui("plot_ui_1"),
+          HTML('</center>')
+
+
+        ),
+        # br(),
         br(),
 
-        scrollytell::scrolly_section(id = 2, HTML(shinipsum::random_text(nwords = 60))),
-        br(),
+        scrollytell::scrolly_section(
+          id = 2,
+          wellPanel(
+            h3("Wow another one"),
+            HTML(shinipsum::random_text(nwords = 40))),
+
+          HTML('<center>'),
+          mod_plot_ui("plot_ui_2"),
+          HTML('</center>')
+
+        ),
+        # br(),
         br(),
 
-        scrollytell::scrolly_section(id = 3, HTML(shinipsum::random_text(nwords = 80))),
+        scrollytell::scrolly_section(id = 3,
+                                     HTML(shinipsum::random_text(nwords = 80))),
+        # br(),
         br(),
-        br()
 
         # scrollytell::scrolly_section(id = 4, render_text(4)),
         # scrollytell::scrolly_section(id = 5, render_text(5)),
-        # HTML('</center>')
+        HTML('</center>')
       )
     )
   )
