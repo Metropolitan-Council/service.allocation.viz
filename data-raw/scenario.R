@@ -58,3 +58,5 @@ scenario_def_long <- scenario_def %>%
 
 usethis::use_data(scenario_def, overwrite = TRUE)
 usethis::use_data(scenario_def_long, overwrite = TRUE)
+
+write.csv(scenario_def_long, "data-raw/scenario_def_long.csv")
