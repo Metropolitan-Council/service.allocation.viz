@@ -30,6 +30,6 @@ app_server <- function(input, output, session) {
   )
 
   callModule(mod_plot_scenario_summary_server, "plot_scenario_summary_ui_1",
-             slider_input = slider_input)
-
+    slider_input = slider_input
+  )
 }

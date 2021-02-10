@@ -20,10 +20,15 @@ Imports:
     magrittr (>= 2.0.1),
     scrollytell (>= 0.1.0.9000),
     shiny (>= 1.5.0.9001),
-    shinyWidgets (>= 0.5.6)
+    shinyWidgets (>= 0.5.6),
+    stringr (>= 1.4.0)
 Suggests: 
     dplyr (>= 1.0.3),
+    knitr (>= 1.31),
+    rmarkdown (>= 2.6),
     tidyr (>= 1.1.2)
+VignetteBuilder: 
+    knitr
 Remotes: 
     statistiekcbs/scrollytell
 Encoding: UTF-8

@@ -7,11 +7,10 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_plot_scenario_summary_ui <- function(id){
+mod_plot_scenario_summary_ui <- function(id) {
   ns <- NS(id)
   tagList(
     plotly::plotlyOutput(ns("scenario_summary"))
-
   )
 }
 
@@ -22,8 +21,7 @@ mod_plot_scenario_summary_ui <- function(id){
 #' @import plotly
 #' @importFrom stringr str_wrap
 mod_plot_scenario_summary_server <- function(input, output, session,
-                                             slider_input = slider_input
-){
+                                             slider_input = slider_input) {
   ns <- session$ns
 
   summary_data <- reactive({
@@ -86,4 +84,3 @@ mod_plot_scenario_summary_server <- function(input, output, session,
 
 ## To be copied in the server
 # callModule(mod_plot_scenario_summary_server, "plot_scenario_summary_ui_1")
-
