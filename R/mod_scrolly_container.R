@@ -46,12 +46,12 @@ mod_scrolly_container_ui <- function(id) {
         scrollytell::scrolly_section(
           id = 1,
           wellPanel(
-            h3("Now a section for the second scrolly"),
+            h3("Scenario Summary"),
             HTML(shinipsum::random_text(nwords = 40))
           ),
 
           HTML("<center>"),
-          mod_plot_ui("plot_ui_1"),
+          mod_plot_scenario_summary_ui("plot_scenario_summary_ui_1"),
           HTML("</center>")
         ),
         # br(),
