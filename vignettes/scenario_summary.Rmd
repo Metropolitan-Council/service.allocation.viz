@@ -1,0 +1,99 @@
+---
+title: "Scenario summary"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{scenario_summary}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(service.allocation.viz)
+library(ggplot2)
+library(plotly)
+library(dplyr)
+library(extrafont)
+library(ggimage)
+library(png)
+library(hrbrthemes)
+# devtools::install_github("hrbrmstr/waffle")
+# devtools::install_github("hrbrmstr/hrbrthemes")
+
+library(waffle)
+
+ggplot2::theme_set(councilR::council_theme(use_showtext = TRUE))
+```
+
+```{r}
+showtext::showtext_auto()
+sysfonts::font_paths()
+files <- sysfonts::font_files()
+sysfonts::font_add("FontAwesome5Free-Solid", "fa-solid-900.ttf")
+sysfonts::font_add("Font Awesome 5 Brands Regular", "fa-brands-400.ttf")
+
+```
+
+```{r}
+se_population_type_sample <- se_population_type_long %>% 
+  filter(scenario_short == "Scenario 1")
+```
+
+
+```{r}
+se_population_type_sample %>% 
+         filter(item_category %in% c("pop",
+                            "hi_emp"
+                            # "lo_emp_pct"
+                            )) 
+```
+
+
+```{r}
+plot <- ggplot(data = se_population_type_sample %>% 
+         filter(item_category %in% c("pop",
+                            "emp"
+                            # "lo_emp_pct"
+                            )) %>% 
+         mutate(lab = paste0("+",round(pct * 100), "% ",
+                               format(round(total), big.mark = ",")))) +
+  geom_tile(aes(x = c(1,0,1,0),
+                y = 1,
+                fill = item_category),
+            show.legend = F) +
+  facet_wrap(~expand_improve,
+             labeller = labeller(expand_improve = c(Expand = "Expand Access",
+                                                    Improve = "Improved Transit Service"))) +
+  geom_text(aes(x = c(1,0,1,0),
+                y = 1,
+                label = str_wrap(lab, width = 9)),
+           position = position_dodge(width = 0)) +
+  scale_fill_manual(labels = c("Jobs",
+                                 "People"),
+                      values = c("#E2F0D9",
+                                  "#DAE3F3")) +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank())
+
+ggplotly(plot)
+```
+```{r}
+savings <- c(
+  `Mortgage\n($84,911)` = 84911, `Auto and\ntuition loans\n($14,414)` = 14414,
+  `Home equity loans\n($10,062)` = 10062, `Credit Cards\n($8,565)` = 8565
+)
+
+waffle(
+  savings / 392, rows = 7, size = 0.5, legend_pos = "bottom",
+  colors = c("#c7d4b6", "#a3aabd", "#a0d0de", "#97b5cf")
+)
+```
+
