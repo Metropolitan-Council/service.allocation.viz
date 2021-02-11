@@ -1,3 +1,4 @@
+#' @title App utilities
 #' Inverted versions of in, is.null and is.na
 #'
 #' @noRd
@@ -63,74 +64,52 @@ rv <- shiny::reactiveValues
 rvtl <- shiny::reactiveValuesToList
 
 
+#' theme elements
+#'
+#'
+#'
+#' @importFrom showtext showtext_auto
+#' @importFrom sysfonts font_paths font_files font_add
 
-#' Additional global values
+showtext::showtext_auto()
+sysfonts::font_paths()
+files <- sysfonts::font_files()
+sysfonts::font_add("HelveticaNeueLT Std Cn", "HelveticaNeueLTStd-Cn.otf")
+sysfonts::font_add("HelveticaNeueLT Std Lt", "HelveticaNeueLTStd-Lt.otf")
+sysfonts::font_add("HelveticaNeueLT Std Med Cn", "HelveticaNeueLTStd-MdCn.otf")
+sysfonts::font_add("Arial Narrow", "ARIALN.TTF")
+sysfonts::font_add("Palatino Linotype", "pala.ttf")
+sysfonts::font_add("Arial", "arial.ttf")
 
 
-ggplot2::theme(
-  line = element_blank(),
-  rect = element_blank(),
-  text = element_text(
-    family = base_family,
-    face = "plain",
-    colour = "black",
-    size = base_size,
-    lineheight = 0.9,
-    hjust = 0.5,
-    vjust = 0.5,
-    angle = 0,
-    margin = margin(),
-    debug = FALSE
-  ),
-  axis.text = element_blank(),
-  axis.title = element_blank(),
-  axis.ticks.length = unit(0, "pt"),
-  axis.ticks.length.x = NULL,
-  axis.ticks.length.x.top = NULL,
-  axis.ticks.length.x.bottom = NULL,
-  axis.ticks.length.y = NULL,
-  axis.ticks.length.y.left = NULL,
-  axis.ticks.length.y.right = NULL,
-  legend.box = NULL,
-  legend.key.size = unit(1.2, "lines"),
-  legend.position = "right",
-  legend.text = element_text(size = rel(0.8)),
-  legend.title = element_text(hjust = 0),
-  strip.text = element_text(size = rel(0.8)),
-  strip.switch.pad.grid = unit(
-    half_line / 2,
-    "pt"
-  ),
-  strip.switch.pad.wrap = unit(
-    half_line / 2,
-    "pt"
-  ),
-  panel.ontop = FALSE,
-  panel.spacing = unit(
-    half_line,
-    "pt"
-  ),
-  plot.margin = unit(c(0, 0, 0, 0), "lines"),
-  plot.title = element_text(
-    size = rel(1.2),
-    hjust = 0,
-    vjust = 1,
-    margin = margin(t = half_line)
-  ),
-  plot.title.position = "panel",
-  plot.subtitle = element_text(hjust = 0, vjust = 1, margin = margin(t = half_line)),
-  plot.caption = element_text(
-    size = rel(0.8),
-    hjust = 1,
-    vjust = 1,
-    margin = margin(t = half_line)
-  ),
-  plot.caption.position = "panel",
-  plot.tag = element_text(
-    size = rel(1.2),
-    hjust = 0.5,
-    vjust = 0.5
-  ),
-  plot.tag.position = "topleft",
-  complete = TRUE
+font_sizes <- list(
+  font_size_base = 12,
+  font_size_plot_title = 22,
+  font_size_axis_title = 14,
+  font_size_legend_title = 14,
+  font_size_strip_title = 16,
+  font_size_axis_text = 11,
+  font_size_legend_text = 10,
+  font_size_caption = 8,
+  font_size_margin = 10
 )
+
+font_families <- list(
+  font_family_base = "Arial",
+  font_family_title = "HelveticaNeueLT Std Lt",
+  font_family_caption = "Palatino Linotype",
+  font_family_subtitle = "Helvetica",
+  font_family_strip = "Arial Narrow"
+)
+
+size_margin <- 10
+
+font_family_list <- "Roman, Helvetica, Tahoma, Geneva, Arial, sans-serif"
+
+axis_options = list(
+  zeroline = FALSE,
+  showline = FALSE,
+  showgrid = FALSE,
+  visible = FALSE
+)
+
