@@ -118,7 +118,11 @@ se_population_type <- read_xlsx("data-raw/service_eval_clean.xlsx") %>%
     expand_improve = case_when(
       stringr::str_detect(scenario, "Expand") ~ "Expand",
       stringr::str_detect(scenario, "Improve") ~ "Improve"
-    )
+    ),
+    expand_improve_sen = case_when(
+      stringr::str_detect(scenario, "Expand") ~ "expand acess to",
+      stringr::str_detect(scenario, "Improve") ~ "improve service for"
+    ),
   ) %>%
   filter(!is.na(expand_improve))
 
@@ -177,11 +181,16 @@ se_population_type_long <-
     lab = paste0(
       "+",
       round(pct * 100),
-      "% ",
-      format(round(total), big.mark = ",")
+      "% "
     ),
-    scenario_id = stringr::str_sub(scenario_short, start = -1L, end = -1L)
+    scenario_id = stringr::str_sub(scenario_short, start = -1L, end = -1L),
+    type = ifelse(item_category == "emp", "Jobs", " People"),
   ) %>%
+  mutate(hover_text = paste0(
+    "<b>", scenario_short, "</b>", " will ", expand_improve_sen, "<br>",
+    " an estimated ", "<b>", format(round(total), big.mark = ","), "</b>",
+    ifelse(item_category == "emp", " jobs ", " people ")
+  )) %>%
   data.table::as.data.table()
 
 
