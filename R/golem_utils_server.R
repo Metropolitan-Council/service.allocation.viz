@@ -106,10 +106,9 @@ size_margin <- 10
 
 font_family_list <- "Roman, Helvetica, Tahoma, Geneva, Arial, sans-serif"
 
-axis_options = list(
+axis_options <- list(
   zeroline = FALSE,
   showline = FALSE,
   showgrid = FALSE,
   visible = FALSE
 )
-

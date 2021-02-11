@@ -7,10 +7,9 @@
 #' @import councilR
 #'
 app_theme <- function(
-  font_sizes_ = font_sizes,
-  font_families_ = font_families,
-  size_margin_ = size_margin
-) {
+                      font_sizes_ = font_sizes,
+                      font_families_ = font_families,
+                      size_margin_ = size_margin) {
   base_size <- font_sizes_$font_size_base
   base_line_size <- base_size / 22
   base_rect_size <- base_size / 22
@@ -53,8 +52,10 @@ app_theme <- function(
       size = font_sizes_$font_size_legend_title,
       hjust = 0
     ),
-    strip.text = element_text(size = font_sizes_$font_size_strip_title,
-                              family = font_families$font_family_title),
+    strip.text = element_text(
+      size = font_sizes_$font_size_strip_title,
+      family = font_families$font_family_title
+    ),
     strip.switch.pad.grid = unit(
       half_line / 2,
       "pt"
