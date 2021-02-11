@@ -11,8 +11,10 @@ mod_plot_scenario_summary_ui <- function(id) {
   ns <- NS(id)
   tagList(
     plotly::plotlyOutput(ns("scenario_summary")),
-    plotly::plotlyOutput(ns("tma_summary"), width = "75%",
-                         height = "225px")
+    plotly::plotlyOutput(ns("tma_summary"),
+      width = "75%",
+      height = "225px"
+    )
   )
 }
 
@@ -34,8 +36,10 @@ mod_plot_scenario_summary_server <- function(
   })
 
   summary_tma_data <- reactive({
-    se_by_tma_long[scenario_id == slider_input$slider, ][item == "pop_total", ][service_type %in% c("High frequency",
-                                                                                                    "Local"),]
+    se_by_tma_long[scenario_id == slider_input$slider, ][item == "pop_total", ][service_type %in% c(
+      "High frequency",
+      "Local"
+    ), ]
   })
 
 
@@ -116,28 +120,37 @@ mod_plot_scenario_summary_server <- function(
     ggplotly(
       tooltip = "text",
       ggplot(data = summary_tma_data()) +
-        geom_col(aes(x = market_area,
-                     y = value,
-                     # group = service_type,
-                     text = hover_text,
-                     fill = service_type),
-                 width = -1,
-                 # fill = "#542c40",
-                 position = position_identity()) +
+        geom_col(aes(
+          x = market_area,
+          y = value,
+          # group = service_type,
+          text = hover_text,
+          fill = service_type
+        ),
+        width = -1,
+        # fill = "#542c40",
+        position = position_identity()
+        ) +
         scale_fill_manual(values = c(
-          "#964f74","#542c40")) +
-        labs(x = "Transit market area",
-             y = "",
-             # title = "Scenario 1",
-             fill = "Service level") +
+          "#964f74", "#542c40"
+        )) +
+        labs(
+          x = "Transit market area",
+          y = "",
+          # title = "Scenario 1",
+          fill = "Service level"
+        ) +
         theme(
           # legend.position = "bottom",
-              axis.text.x = element_text(size = font_sizes$font_size_axis_text,
-                                         family = font_families$font_family_base),
-              axis.title = element_text(
-                family = font_families$font_family_title,
-                size = font_sizes$font_size_axis_title
-              ))
+          axis.text.x = element_text(
+            size = font_sizes$font_size_axis_text,
+            family = font_families$font_family_base
+          ),
+          axis.title = element_text(
+            family = font_families$font_family_title,
+            size = font_sizes$font_size_axis_title
+          )
+        )
     ) %>%
       layout(
         # margin = list(l = 10, r = 10, b = 10, t = 10, pad = 10), # l = left; r = right; t = top; b = bottom
@@ -159,14 +172,14 @@ mod_plot_scenario_summary_server <- function(
         # hoveron = "fills",
         hoverdistance = "5",
         hoverlabel = list( #----
-                           font = list(
-                             size = 20,
-                             family = font_family_list,
-                             color = "black"
-                           ),
-                           bgcolor = "white",
-                           bordercolor = "white",
-                           padding = list(l = 10, r = 10, b = 10, t = 10)
+          font = list(
+            size = 20,
+            family = font_family_list,
+            color = "black"
+          ),
+          bgcolor = "white",
+          bordercolor = "white",
+          padding = list(l = 10, r = 10, b = 10, t = 10)
         )
       ) %>%
       plotly::config(
@@ -174,7 +187,6 @@ mod_plot_scenario_summary_server <- function(
         showSendToCloud = F,
         displayModeBar = F
       )
-
   })
 }
 

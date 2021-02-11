@@ -40,9 +40,11 @@ se_base <- read_xlsx(path = "data-raw/service_eval_base.xlsx") %>%
 
 se_all_day <- se_base %>%
   filter(time_type == "All day") %>%
-  select(-objectid,
-         -nn_id,
-         everything()) %>%
+  select(
+    -objectid,
+    -nn_id,
+    everything()
+  ) %>%
   group_by(
     scenario_short,
     time_type
@@ -63,21 +65,26 @@ se_all_day <- se_base %>%
   mutate(
     scenario_id = stringr::str_sub(scenario_short, start = -1L, end = -1L),
     service_type = factor(service_type,
-                          levels = c("Local",
-                                     "Basic",
-                                     "High frequency",
-                                     "Commuter express",
-                                     "Demand response",
-                                     NA)),
-    item_units = case_when(item == "seniors" ~ "people age 65+",
-                           item == "poc" ~ "people of color",
-                           item == "zero_car_hh" ~ "households without a car",
-                           item == "afford_hous_units" ~ "affordable housing units",
-                           item == "jobs" ~ "jobs",
-                           item == "hi_inc_job" ~ "high-wage jobs",
-                           item == "low_inc_job" ~ "low-wage jobs",
-                           item == "pop_total" ~ "people",
-                           item == "pov185" ~ "people with income under 185% federal poverty threshold"),
+      levels = c(
+        "Local",
+        "Basic",
+        "High frequency",
+        "Commuter express",
+        "Demand response",
+        NA
+      )
+    ),
+    item_units = case_when(
+      item == "seniors" ~ "people age 65+",
+      item == "poc" ~ "people of color",
+      item == "zero_car_hh" ~ "households without a car",
+      item == "afford_hous_units" ~ "affordable housing units",
+      item == "jobs" ~ "jobs",
+      item == "hi_inc_job" ~ "high-wage jobs",
+      item == "low_inc_job" ~ "low-wage jobs",
+      item == "pop_total" ~ "people",
+      item == "pov185" ~ "people with income under 185% federal poverty threshold"
+    ),
     hover_text = paste0(format(round(value), big.mark = ","), " ", item_units),
   )
 
@@ -145,26 +152,31 @@ se_by_tma_long <- se_by_tma %>%
     key = "item",
     value = "value"
   ) %>%
-mutate(
-  scenario_id = stringr::str_sub(scenario_short, start = -1L, end = -1L),
-  service_type = factor(service_type,
-                        levels = c("Local",
-                          "Basic",
-                          "High frequency",
-                          "Commuter express",
-                          "Demand response",
-                          NA)),
-  item_units = case_when(item == "seniors" ~ "people age 65+",
-                         item == "poc" ~ "people of color",
-                         item == "zero_car_hh" ~ "households without a car",
-                         item == "afford_hous_units" ~ "affordable housing units",
-                         item == "jobs" ~ "jobs",
-                         item == "hi_inc_job" ~ "high-wage jobs",
-                         item == "low_inc_job" ~ "low-wage jobs",
-                         item == "pop_total" ~ "people",
-                         item == "pov185" ~ "people with income under 185% federal poverty threshold"),
-  hover_text = paste0(service_type, ", ", format(round(value), big.mark = ","), " ", item_units),
-) %>%
+  mutate(
+    scenario_id = stringr::str_sub(scenario_short, start = -1L, end = -1L),
+    service_type = factor(service_type,
+      levels = c(
+        "Local",
+        "Basic",
+        "High frequency",
+        "Commuter express",
+        "Demand response",
+        NA
+      )
+    ),
+    item_units = case_when(
+      item == "seniors" ~ "people age 65+",
+      item == "poc" ~ "people of color",
+      item == "zero_car_hh" ~ "households without a car",
+      item == "afford_hous_units" ~ "affordable housing units",
+      item == "jobs" ~ "jobs",
+      item == "hi_inc_job" ~ "high-wage jobs",
+      item == "low_inc_job" ~ "low-wage jobs",
+      item == "pop_total" ~ "people",
+      item == "pov185" ~ "people with income under 185% federal poverty threshold"
+    ),
+    hover_text = paste0(service_type, ", ", format(round(value), big.mark = ","), " ", item_units),
+  ) %>%
   as.data.table()
 
 usethis::use_data(se_by_tma_long, overwrite = T)
@@ -258,12 +270,15 @@ se_population_type_long <- se_population_type %>%
       item_category == "lo_emp" ~ "low-wage jobs",
       item_category == "pop" ~ "people",
       item_category == "pov" ~ "people with income under 185% federal poverty threshold",
-      item_category == "pov185" ~ "people with income under 185% federal poverty threshold"),
+      item_category == "pov185" ~ "people with income under 185% federal poverty threshold"
+    ),
 
-    type = ifelse(item_category %in% c("emp",
-                                       "hi_emp",
-                                       "lo_emp",
-                                       "jobs"), "Jobs", "People"),
+    type = ifelse(item_category %in% c(
+      "emp",
+      "hi_emp",
+      "lo_emp",
+      "jobs"
+    ), "Jobs", "People"),
     item_unit_short = case_when(
       item_category == "seniors" ~ "Older Population",
       item_category == "senior" ~ "Older Population",
@@ -279,16 +294,19 @@ se_population_type_long <- se_population_type %>%
       item_category == "lo_emp" ~ "Low-Wage Jobs",
       item_category == "pop" ~ "People",
       item_category == "pov" ~ "Low-Income Population",
-      item_category == "pov185" ~ "Low-Income Population"),
+      item_category == "pov185" ~ "Low-Income Population"
+    ),
     lab = paste0(
       "+",
       round(pct * 100),
-      "% ", item_unit_short),
+      "% ", item_unit_short
+    ),
     hover_text = paste0(
-    "<b>", scenario_short, "</b>", " will ", expand_improve_sen, "<br>",
-    " an estimated ", "<b>", format(round(total), big.mark = ","), "</b> ",
-    item_unit
-  )) %>%
+      "<b>", scenario_short, "</b>", " will ", expand_improve_sen, "<br>",
+      " an estimated ", "<b>", format(round(total), big.mark = ","), "</b> ",
+      item_unit
+    )
+  ) %>%
   data.table::as.data.table()
 
 

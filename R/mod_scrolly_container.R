@@ -49,33 +49,32 @@ mod_scrolly_container_ui <- function(id) {
           HTML("<center>"),
           mod_table_ui("table_ui_1"),
           HTML("</center>")
+        ),
+        br(),
+        scrollytell::scrolly_section(
+          id = 2,
+          wellPanel(
+            h3("Wow another one"),
+            HTML(shinipsum::random_text(nwords = 40))
           ),
-          br(),
-          scrollytell::scrolly_section(
-            id = 2,
-            wellPanel(
-              h3("Wow another one"),
-              HTML(shinipsum::random_text(nwords = 40))
-            ),
-            HTML("<center>"),
-            mod_plot_ui("plot_ui_2"),
-            HTML("</center>")
-          ),
-          # br(),
-          br(),
-          scrollytell::scrolly_section(
-            id = 3,
-            HTML(shinipsum::random_text(nwords = 80))
-          ),
-          # br(),
-          br(),
-          # scrollytell::scrolly_section(id = 4, render_text(4)),
-          # scrollytell::scrolly_section(id = 5, render_text(5)),
+          HTML("<center>"),
+          mod_plot_ui("plot_ui_2"),
           HTML("</center>")
-        )
+        ),
+        # br(),
+        br(),
+        scrollytell::scrolly_section(
+          id = 3,
+          HTML(shinipsum::random_text(nwords = 80))
+        ),
+        # br(),
+        br(),
+        # scrollytell::scrolly_section(id = 4, render_text(4)),
+        # scrollytell::scrolly_section(id = 5, render_text(5)),
+        HTML("</center>")
       )
     )
-
+  )
 }
 
 #' scrolly_container Server Function
