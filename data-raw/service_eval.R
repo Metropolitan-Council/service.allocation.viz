@@ -87,7 +87,8 @@ se_by_tma_long <- se_by_tma %>%
     service_type,
     time_type
   ) %>%
-  gather(pop_total,
+  gather(
+    pop_total,
     pov185,
     poc,
     seniors,
@@ -141,7 +142,8 @@ se_population_type_long <-
     -emp_tma_5
   ) %>%
   group_by(scenario_short, expand_improve) %>%
-  tidyr::gather(pop_total,
+  tidyr::gather(
+    pop_total,
     pop_pct,
     emp_total,
     emp_pct,
@@ -163,7 +165,9 @@ se_population_type_long <-
   mutate(
     item_category = stringr::str_remove_all(item, "_total") %>%
       stringr::str_remove_all("_pct"),
-    item_unit = ifelse(stringr::str_detect(item, "pct"), "pct",
+    item_unit = ifelse(
+      stringr::str_detect(item, "pct"),
+      "pct",
       "total"
     )
   ) %>%
@@ -171,7 +175,9 @@ se_population_type_long <-
   spread(item_unit, value) %>%
   mutate(
     lab = paste0(
-      "+", round(pct * 100), "% ",
+      "+",
+      round(pct * 100),
+      "% ",
       format(round(total), big.mark = ",")
     ),
     scenario_id = stringr::str_sub(scenario_short, start = -1L, end = -1L)

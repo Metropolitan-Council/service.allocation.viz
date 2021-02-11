@@ -8,11 +8,14 @@ library(data.table)
 
 # Scenario def ------------------------------------------------------------
 
-scenario_def <- read_xlsx(path = "data-raw/scenario_def.xlsx", col_types = c(
-  "text",
-  rep("numeric", 7),
-  "text"
-)) %>%
+scenario_def <- read_xlsx(
+  path = "data-raw/scenario_def.xlsx",
+  col_types = c(
+    "text",
+    rep("numeric", 7),
+    "text"
+  )
+) %>%
   clean_names() %>%
   rename(scenario = x1) %>%
   rowwise() %>%
@@ -42,7 +45,8 @@ scenario_def$ridership_increase_percent <- scenario_rdrshp$ridership_increase_pe
 
 scenario_def_long <- scenario_def %>%
   # group_by(scenario) %>%
-  tidyr::gather(high_frequency_routes_improved,
+  tidyr::gather(
+    high_frequency_routes_improved,
     local_routes_improved_to_high_frequency,
     basic_routes_improved_to_local,
     commuter_routes_improved,

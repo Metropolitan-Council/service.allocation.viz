@@ -11,7 +11,8 @@
 mod_table_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    DT::DTOutput(ns("table"),
+    DT::DTOutput(
+      ns("table"),
       width = "58%",
       height = "400px"
     )

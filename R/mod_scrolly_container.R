@@ -12,7 +12,6 @@ mod_scrolly_container_ui <- function(id) {
   tagList(
     scrollytell::scrolly_container(
       outputId = ns("scr"),
-
       scrollytell::scrolly_graph(
         HTML("<center>"),
         textOutput(ns("section")),
@@ -23,13 +22,11 @@ mod_scrolly_container_ui <- function(id) {
         # br(),
         HTML("</center>")
       ),
-
       scrollytell::scrolly_sections(
         scrollytell::scrolly_section(
           id = 00,
           h3("Choose your scenario and scroll down for more")
         ),
-
         scrollytell::scrolly_section(
           id = 0,
           wellPanel(
@@ -42,42 +39,36 @@ mod_scrolly_container_ui <- function(id) {
         ),
         # br(),
         br(),
-
         scrollytell::scrolly_section(
           id = 1,
           wellPanel(
             h3("Scenario Summary"),
             HTML(shinipsum::random_text(nwords = 40))
           ),
-
           HTML("<center>"),
           mod_plot_scenario_summary_ui("plot_scenario_summary_ui_1"),
           HTML("</center>")
         ),
         # br(),
         br(),
-
         scrollytell::scrolly_section(
           id = 2,
           wellPanel(
             h3("Wow another one"),
             HTML(shinipsum::random_text(nwords = 40))
           ),
-
           HTML("<center>"),
           mod_plot_ui("plot_ui_2"),
           HTML("</center>")
         ),
         # br(),
         br(),
-
         scrollytell::scrolly_section(
           id = 3,
           HTML(shinipsum::random_text(nwords = 80))
         ),
         # br(),
         br(),
-
         # scrollytell::scrolly_section(id = 4, render_text(4)),
         # scrollytell::scrolly_section(id = 5, render_text(5)),
         HTML("</center>")

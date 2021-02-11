@@ -20,8 +20,12 @@ mod_plot_scenario_summary_ui <- function(id) {
 #' @import ggplot2
 #' @import plotly
 #' @importFrom stringr str_wrap
-mod_plot_scenario_summary_server <- function(input, output, session,
-                                             slider_input = slider_input) {
+mod_plot_scenario_summary_server <- function(
+  input,
+  output,
+  session,
+  slider_input = slider_input
+) {
   ns <- session$ns
 
   summary_data <- reactive({
@@ -33,25 +37,28 @@ mod_plot_scenario_summary_server <- function(input, output, session,
     ggplotly(
       tooltip = "label",
       ggplot(data = summary_data()) +
-        geom_tile(aes(
-          x = c(1, 0, 1, 0),
-          y = 1,
-          fill = item_category
-        ),
-        show.legend = F
+        geom_tile(
+          aes(
+            x = c(1, 0, 1, 0),
+            y = 1,
+            fill = item_category
+          ),
+          show.legend = F
         ) +
-        facet_wrap(~expand_improve,
+        facet_wrap(
+          ~expand_improve,
           labeller = labeller(expand_improve = c(
             Expand = "Expand Access",
             Improve = "Improved Transit Service"
           ))
         ) +
-        geom_text(aes(
-          x = c(1, 0, 1, 0),
-          y = 1,
-          label = stringr::str_wrap(lab, width = 9)
-        ),
-        position = position_dodge(width = 0)
+        geom_text(
+          aes(
+            x = c(1, 0, 1, 0),
+            y = 1,
+            label = stringr::str_wrap(lab, width = 9)
+          ),
+          position = position_dodge(width = 0)
         ) +
         scale_fill_manual(
           labels = c(
