@@ -1,8 +1,8 @@
 ---
-title: "Scenario summary"
+title: "Scenario plots"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{scenario_summary}
+  %\VignetteIndexEntry{scenario_plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -22,13 +22,14 @@ library(dplyr)
 library(extrafont)
 library(ggimage)
 library(png)
-library(hrbrthemes)
 # devtools::install_github("hrbrmstr/waffle")
 # devtools::install_github("hrbrmstr/hrbrthemes")
-
+library(hrbrthemes)  
 library(waffle)
+library(stringr)
 
-ggplot2::theme_set(councilR::council_theme(use_showtext = TRUE))
+ggplot2::theme_set(service.allocation.viz::app_theme())
+source("../R/golem_utils_server.R")
 ```
 
 ```{r}
@@ -45,27 +46,26 @@ se_population_type_sample <- se_population_type_long %>%
   filter(scenario_short == "Scenario 1")
 ```
 
-
 ```{r}
-se_population_type_sample %>% 
-         filter(item_category %in% c("pop",
-                            "hi_emp"
-                            # "lo_emp_pct"
-                            )) 
+axis_options = list(
+  zeroline = FALSE,
+  showline = FALSE,
+  showgrid = FALSE,
+  visible = FALSE
+)
 ```
 
 
-```{r}
+```{r warning=FALSE}
 plot <- ggplot(data = se_population_type_sample %>% 
          filter(item_category %in% c("pop",
                             "emp"
                             # "lo_emp_pct"
-                            )) %>% 
-         mutate(lab = paste0("+",round(pct * 100), "% ",
-                               format(round(total), big.mark = ",")))) +
+                            ))) +
   geom_tile(aes(x = c(1,0,1,0),
                 y = 1,
-                fill = item_category),
+                fill = item_category,
+                text = hover_text),
             show.legend = F) +
   facet_wrap(~expand_improve,
              labeller = labeller(expand_improve = c(Expand = "Expand Access",
@@ -77,14 +77,49 @@ plot <- ggplot(data = se_population_type_sample %>%
   scale_fill_manual(labels = c("Jobs",
                                  "People"),
                       values = c("#E2F0D9",
-                                  "#DAE3F3")) +
-  theme(axis.text.x = element_blank(),
-        axis.text.y = element_blank(),
-        axis.title.x = element_blank(),
-        axis.title.y = element_blank())
+                                  "#DAE3F3")) 
+ggplotly(plot, tooltip = "text") %>% 
+    layout(
+    # margin = list(l = 10, r = 10, b = 10, t = 10, pad = 10), # l = left; r = right; t = top; b = bottom
+    xaxis = axis_options,
+    yaxis = axis_options,
+    showlegend = FALSE,
+    
+    title = list(
+      text = "Scenario Summary",
+      pad = list(
+        t = 10,
+        r = 10,
+        b = 20,
+        l = 10
+      ),
+      font = list(family = font_family_list,
+                  size = 30,
+                  color = councilR::colors$suppBlack)
+    ),
+    hovermode = "closest",
+    hoverdistance = "20",
+    hoverlabel = list( #----
+                       font = list(
+                         size = 20,
+                         family = font_family_list,
+                         color = "black"
+                       ),
+                       bgcolor = "white",
+                       bordercolor = "white",
+                       padding = list(l = 10, r = 10, b = 10, t = 10)
+    )
+    ) %>% 
+  plotly::config(
+    displaylogo = F,
+    showSendToCloud = F,
+    displayModeBar = F
+  ) 
 
-ggplotly(plot)
 ```
+
+
+
 ```{r}
 savings <- c(
   `Mortgage\n($84,911)` = 84911, `Auto and\ntuition loans\n($14,414)` = 14414,
