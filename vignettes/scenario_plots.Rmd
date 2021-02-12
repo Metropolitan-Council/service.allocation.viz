@@ -29,7 +29,7 @@ library(hrbrthemes)
 library(waffle)
 library(stringr)
 
-# ggplot2::theme_set(service.allocation.viz::app_theme())
+ggplot2::theme_set(service.allocation.viz::app_theme())
 source("../R/golem_utils_server.R")
 ```
 

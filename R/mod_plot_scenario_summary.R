@@ -67,7 +67,7 @@ mod_plot_scenario_summary_server <- function(
           label = str_wrap(lab, width = 4)
         ),
         position = position_dodge(width = 0),
-        # family = font_families$font_family_title,
+        family = font_families$font_family_title,
         size = font_sizes$font_size_axis_title
         ) +
         scale_fill_manual(
@@ -144,10 +144,10 @@ mod_plot_scenario_summary_server <- function(
           # legend.position = "bottom",
           axis.text.x = element_text(
             size = font_sizes$font_size_axis_text,
-            # family = font_families$font_family_base
+            family = font_families$font_family_base
           ),
           axis.title = element_text(
-            # family = font_families$font_family_title,
+            family = font_families$font_family_title,
             size = font_sizes$font_size_axis_title
           )
         )
