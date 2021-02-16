@@ -51,6 +51,8 @@ mod_plot_scenario_tma_server <- function(input, output, session,
         scale_fill_manual(values = c(
           "#964f74", "#542c40"
         )) +
+        scale_y_continuous(labels = scales::comma,
+                           name = "People") +
         labs(
           x = "Transit market area",
           y = "",
