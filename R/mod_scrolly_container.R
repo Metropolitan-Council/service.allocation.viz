@@ -70,8 +70,8 @@ mod_scrolly_container_ui <- function(id) {
           HTML("<center>"),
           mod_plot_scenario_summary_ui("plot_scenario_summary_ui_expand_all_day"),
           fluidRow(
-            column(width = 6),
-            column(width = 6)
+            column(width = 6, mod_plot_scenario_detail_ui("mod_plot_scenario_detail_ui_expand_people")),
+            column(width = 6, mod_plot_scenario_detail_ui("mod_plot_scenario_detail_ui_expand_jobs"))
           ),
           HTML("</center>")
         ),
@@ -87,8 +87,8 @@ mod_scrolly_container_ui <- function(id) {
           HTML("<center>"),
           mod_plot_scenario_summary_ui("plot_scenario_summary_ui_improve_all"),
           fluidRow(
-            column(width = 6),
-            column(width = 6)
+            column(width = 6, mod_plot_scenario_detail_ui("mod_plot_scenario_detail_ui_improve_people")),
+            column(width = 6, mod_plot_scenario_detail_ui("mod_plot_scenario_detail_ui_improve_jobs"))
           ),
           HTML("</center>")
 

@@ -60,6 +60,21 @@ app_server <- function(input, output, session) {
     plot_type = "Expand"
   )
 
+  callModule(mod_plot_scenario_detail_server,
+             "mod_plot_scenario_detail_ui_expand_people",
+             slider_input = slider_input,
+             plot_type = "Expand",
+             unit_type = "People")
+
+  callModule(mod_plot_scenario_detail_server,
+             "mod_plot_scenario_detail_ui_expand_jobs",
+             slider_input = slider_input,
+             plot_type = "Expand",
+             unit_type = "Jobs")
+
+
+
+
 # New improved transit
 
   callModule(
@@ -68,5 +83,17 @@ app_server <- function(input, output, session) {
     slider_input = slider_input,
     plot_type = "Improve"
   )
+
+  callModule(mod_plot_scenario_detail_server,
+             "mod_plot_scenario_detail_ui_improve_people",
+             slider_input = slider_input,
+             plot_type = "Improve",
+             unit_type = "People")
+
+  callModule(mod_plot_scenario_detail_server,
+             "mod_plot_scenario_detail_ui_improve_jobs",
+             slider_input = slider_input,
+             plot_type = "Improve",
+             unit_type = "Jobs")
 
 }
