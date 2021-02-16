@@ -13,6 +13,8 @@ test_that("app server", {
 })
 
 # Configure this test to fit your need
+
+testthat::skip_on_ci()
 test_that(
   "app launches",
   {
