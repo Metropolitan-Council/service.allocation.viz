@@ -60,5 +60,13 @@ app_server <- function(input, output, session) {
     plot_type = "Expand"
   )
 
+# New improved transit
+
+  callModule(
+    mod_plot_scenario_summary_server,
+    "plot_scenario_summary_ui_improve_all",
+    slider_input = slider_input,
+    plot_type = "Improve"
+  )
 
 }
