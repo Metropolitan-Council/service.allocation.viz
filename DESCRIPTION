@@ -32,6 +32,7 @@ Imports:
     sysfonts (>= 0.8.3)
 Suggests: 
     dplyr (>= 1.0.3),
+    here (>= 1.0.1),
     knitr (>= 1.31),
     rmarkdown (>= 2.6),
     testthat (>= 3.0.0),

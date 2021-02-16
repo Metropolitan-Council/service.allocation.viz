@@ -29,6 +29,9 @@ library(hrbrthemes)
 library(waffle)
 library(stringr)
 
+requireNamespace("here", quietly = TRUE)
+here::here()
+
 ggplot2::theme_set(service.allocation.viz::app_theme())
 source("../R/golem_utils_server.R")
 ```
@@ -194,13 +197,15 @@ ggplotly(p2,tooltip = "text") %>%
                         type == "People",
                         !item_category %in% c("pop"))) +
   geom_tile(
-    aes(x = c(0,1,0,1),
-        y = c(0,1,1,0),
-        fill = item_category,
+    aes(x = c(0,0,1,1),
+                y = c(0,1,1,0),
+        fill = item_unit_factor,
         text = hover_text),
     show.legend = F,
-    width = 1) +
-  geom_text(aes(x = c(0,1,0,1),
+    width = 1,
+    color = "white",
+    lwd =10) +
+  geom_text(aes(x = c(0,0,1,1),
                 y = c(0,1,1,0),
                 label = str_wrap(lab, width = 9)),
             position = position_dodge(width = 0)) 
@@ -213,4 +218,24 @@ ggplotly(p2,tooltip = "text") %>%
 
 ```
 
+
+```{r}
+ggplot(data = se_population_type_sample %>% 
+                 filter(expand_improve == "Expand",
+                        type == "Jobs",
+                        !item_category %in% c("emp"))) +
+  geom_tile(
+    aes(x = c(1,0),
+        y = c(0,0),
+        fill = item_unit_factor,
+        text = hover_text),
+    show.legend = F,
+    width = 1,
+    color = "white",
+    lwd =10) +
+  geom_text(aes(x = c(1,0),
+                y = c(0,0),
+                label = str_wrap(lab, width = 9)),
+            position = position_dodge(width = 0)) 
+```
 
