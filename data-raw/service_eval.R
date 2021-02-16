@@ -288,9 +288,9 @@ se_population_type_long <- se_population_type %>%
       item_category == "aff_hu" ~ "Affordable Housing Units",
       item_category == "jobs" ~ "Jobs",
       item_category == "emp" ~ "Jobs",
-      item_category == "hi_inc_job" ~ "High-Wage jobs",
-      item_category == "hi_emp" ~ "High-Wage jobs",
-      item_category == "low_inc_job" ~ "Low-Wage jobs",
+      item_category == "hi_inc_job" ~ "High-Wage Jobs",
+      item_category == "hi_emp" ~ "High-Wage Jobs",
+      item_category == "low_inc_job" ~ "Low-Wage Jobs",
       item_category == "lo_emp" ~ "Low-Wage Jobs",
       item_category == "pop" ~ "People",
       item_category == "pov" ~ "Low-Income Population",
@@ -307,7 +307,17 @@ se_population_type_long <- se_population_type %>%
       item_unit
     ),
     summary_title = case_when(expand_improve == "Expand" ~ "Expanded Access",
-                              TRUE ~ "Improved Transit Service")
+                              TRUE ~ "Improved Transit Service"),
+    item_unit_factor = factor(item_unit_short,
+                             levels = c("People",
+                                        "Low-Income Population",
+                                        "BIPOC",
+                                        "Affordable Housing Units",
+                                        "Older Population",
+                                        "Jobs",
+                                        "High-Wage Jobs",
+                                        "Low-Wage Jobs"
+                                        ))
   ) %>%
   data.table::as.data.table()
 
