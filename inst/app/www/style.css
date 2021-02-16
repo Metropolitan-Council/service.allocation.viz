@@ -28,6 +28,12 @@ label {
 	max-width: 70%;
 }
 
+.shiny-input-container:not(.shiny-input-container-inline) {
+	width: 300px;
+	max-width: 100%;
+	background: white;
+	padding: 10px;
+}
 
 .well {
 	min-height: 20px;
