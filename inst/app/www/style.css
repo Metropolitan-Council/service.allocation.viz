@@ -33,8 +33,10 @@ label {
 	max-width: 100%;
 	background: white;
 	padding: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	/* margin: 0px; */
 }
-
 .well {
 	min-height: 20px;
 	padding: 19px;
@@ -90,13 +92,25 @@ label {
 
 .irs-from, .irs-to, .irs-single {
 	color: #fff;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 1.333;
 	text-shadow: none;
 	padding: 1px 3px;
 	background:var(--council-blue);
 	border-radius: 3px;
 	-moz-border-radius: 3px;
+}
+
+.irs-slider {
+	top: 17px;
+	width: 18px;
+	height: 18px;
+	border: 1px solid #AAA;
+	background: #DDD;
+	border-radius: 27px;
+	-moz-border-radius: 27px;
+	box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+	cursor: pointer;
 }
 
 thead { /* DT header row*/
