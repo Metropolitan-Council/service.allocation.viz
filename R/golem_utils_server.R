@@ -114,3 +114,7 @@ axis_options <- list(
   showgrid = FALSE,
   visible = FALSE
 )
+
+
+job_color <-   "#E2F0D9"
+people_color <-   "#DAE3F3"

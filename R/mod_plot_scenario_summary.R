@@ -45,7 +45,9 @@ mod_plot_scenario_summary_server <- function(
           fill = item_category,
           text = hover_text
         ),
-        show.legend = F
+        show.legend = F,
+        lwd = 5,
+        color = "white"
         ) +
         geom_text(
           aes(
@@ -63,15 +65,15 @@ mod_plot_scenario_summary_server <- function(
             "People"
           ),
           values = c(
-            "#E2F0D9",
-            "#DAE3F3"
+            job_color,
+            people_color
           )
         ) +
         labs(title = paste0(plot_data$summary_title[1])) +
         app_theme()
     ) %>%
       plotly::layout(
-        margin = list(l = 10, r = 10, b = 10, t = 50, pad = 10), # l = left; r = right; t = top; b = bottom
+        margin = list(l = 0, r = 0, b = 10, t = 50, pad = 10), # l = left; r = right; t = top; b = bottom
         xaxis = axis_options,
         yaxis = axis_options,
         showlegend = FALSE,
