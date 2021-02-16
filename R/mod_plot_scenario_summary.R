@@ -24,21 +24,16 @@ mod_plot_scenario_summary_server <- function(
   input,
   output,
   session,
-  slider_input = slider_input,
+  data_for_plotting = data_for_plotting,
   plot_type) {
   ns <- session$ns
-
-  summary_data <- reactive({
-    se_population_type_long[scenario_id == slider_input$slider, ][item_category %in% c("pop", "emp")][expand_improve == plot_type ]
-  })
 
 
 
   output$scenario_summary <- plotly::renderPlotly({
-    plot_data <- summary_data()
     ggplotly(
       tooltip = "text",
-      ggplot(data = plot_data) +
+      ggplot(data = data_for_plotting$summary_data[expand_improve == plot_type]) +
         geom_tile(aes(
           x = c(1, 0),
           y = 1,
@@ -69,7 +64,7 @@ mod_plot_scenario_summary_server <- function(
             people_color
           )
         ) +
-        labs(title = paste0(plot_data$summary_title[1])) +
+        labs(title = paste0(data_for_plotting$summary_data[expand_improve == plot_type][1,13])) +
         app_theme()
     ) %>%
       plotly::layout(

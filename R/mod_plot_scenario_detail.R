@@ -21,22 +21,14 @@ mod_plot_scenario_detail_server <- function(
                                            input,
                                            output,
                                            session,
-                                           slider_input = slider_input,
+                                           data_for_plotting = data_for_plotting,
                                            plot_type,
                                            unit_type) {
   ns <- session$ns
 
-  summary_data_all_day <- reactive({
-    se_population_type_long[scenario_id == slider_input$slider, ][!item_category %in% c("pop", "emp"),][expand_improve == plot_type,][type == unit_type,]
-  })
-
-
   output$new_all_day <- renderPlotly({
-    # browser()
 
-    plot_all_day_data <- summary_data_all_day()
-
-    if(nrow(plot_all_day_data) > 2){
+    if(nrow(data_for_plotting$detail_data[expand_improve == plot_type,][type == unit_type,]) > 2){
       coords_x <- c(0,0,1,1)
       coords_y <- c(0,1,1,0)
       plot_color <- rep(people_color, 4)
@@ -48,7 +40,7 @@ mod_plot_scenario_detail_server <- function(
 
     ggplotly(
       tooltip = "text",
-      ggplot(data = plot_all_day_data) +
+      ggplot(data = data_for_plotting$detail_data[!item_category %in% c("pop", "emp"),][expand_improve == plot_type,][type == unit_type,]) +
         geom_tile(
           aes(x = coords_x,
               y = coords_y,

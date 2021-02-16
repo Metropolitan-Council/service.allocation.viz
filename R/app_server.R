@@ -15,6 +15,13 @@ app_server <- function(input, output, session) {
 
   slider_input <- callModule(mod_slider_server, "slider_ui_1")
 
+  data_for_plotting <- callModule(mod_util_data_server, "util_data_ui_1",
+                                  slider_input = slider_input)
+
+
+
+
+
   callModule(
     mod_plot_server,
     "plot_ui_1",
@@ -26,15 +33,16 @@ app_server <- function(input, output, session) {
   callModule(
     mod_plot_scenario_summary_server,
     "plot_scenario_summary_ui_expand",
-    slider_input = slider_input,
-    plot_type = "Expand"
+    plot_type = "Expand",
+    data_for_plotting = data_for_plotting
   )
 
   callModule(
     mod_plot_scenario_summary_server,
     "plot_scenario_summary_ui_improve",
-    slider_input = slider_input,
-    plot_type = "Improve"
+    plot_type = "Improve",
+    data_for_plotting = data_for_plotting
+
   )
 
 
@@ -56,19 +64,19 @@ app_server <- function(input, output, session) {
   callModule(
     mod_plot_scenario_summary_server,
     "plot_scenario_summary_ui_expand_all_day",
-    slider_input = slider_input,
-    plot_type = "Expand"
+    plot_type = "Expand",
+    data_for_plotting = data_for_plotting
   )
 
   callModule(mod_plot_scenario_detail_server,
              "mod_plot_scenario_detail_ui_expand_people",
-             slider_input = slider_input,
+             data_for_plotting = data_for_plotting,
              plot_type = "Expand",
              unit_type = "People")
 
   callModule(mod_plot_scenario_detail_server,
              "mod_plot_scenario_detail_ui_expand_jobs",
-             slider_input = slider_input,
+             data_for_plotting = data_for_plotting,
              plot_type = "Expand",
              unit_type = "Jobs")
 
@@ -80,20 +88,33 @@ app_server <- function(input, output, session) {
   callModule(
     mod_plot_scenario_summary_server,
     "plot_scenario_summary_ui_improve_all",
-    slider_input = slider_input,
-    plot_type = "Improve"
+    plot_type = "Improve",
+    data_for_plotting = data_for_plotting
+
   )
 
   callModule(mod_plot_scenario_detail_server,
              "mod_plot_scenario_detail_ui_improve_people",
-             slider_input = slider_input,
+             data_for_plotting = data_for_plotting,
              plot_type = "Improve",
              unit_type = "People")
 
   callModule(mod_plot_scenario_detail_server,
              "mod_plot_scenario_detail_ui_improve_jobs",
-             slider_input = slider_input,
+             data_for_plotting = data_for_plotting,
              plot_type = "Improve",
              unit_type = "Jobs")
+
+# increase by service type
+
+  callModule(
+    mod_plot_scenario_tma_server,
+    "plot_scenario_tma_ui_2",
+    slider_input = slider_input
+  )
+  callModule(mod_plot_service_type_server,
+             "plot_service_type_ui_1",
+             slider_input = slider_input)
+
 
 }
