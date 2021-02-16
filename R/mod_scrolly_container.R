@@ -64,7 +64,7 @@ mod_scrolly_container_ui <- function(id) {
         scrollytell::scrolly_section(
           id = 2,
           wellPanel(
-            h3("Wow another one"),
+            h3("New Access to All Day Transit"),
             HTML(shinipsum::random_text(nwords = 40))
           ),
           HTML("<center>"),
@@ -79,8 +79,62 @@ mod_scrolly_container_ui <- function(id) {
         br(),
         scrollytell::scrolly_section(
           id = 3,
-          HTML(shinipsum::random_text(nwords = 80))
+          wellPanel(
+            h3("New Improved Transit"),
+            HTML(shinipsum::random_text(nwords = 80))
+          ),
+
+          HTML("<center>"),
+          mod_plot_scenario_summary_ui("plot_scenario_summary_ui_improve_all"),
+          fluidRow(
+            column(width = 6),
+            column(width = 6)
+          ),
+          HTML("</center>")
+
         ),
+        scrollytell::scrolly_section(
+          id = 4,
+          wellPanel(
+            h3("Increase by service type"),
+            HTML(shinipsum::random_text(nwords = 80))
+          ),
+
+          HTML("<center>"),
+          fluidRow(
+            column(width = 4),
+            column(width = 8)
+          ),
+          fluidRow(
+            column(width = 4),
+            column(width = 8)
+          ),
+
+          HTML("</center>")
+
+        ),
+
+        scrollytell::scrolly_section(
+          id = 4,
+          wellPanel(
+            h3("Network Improvements"),
+            HTML(shinipsum::random_text(nwords = 80))
+          ),
+
+          HTML("<center>"),
+          fluidRow(
+            column(width = 4),
+            column(width = 8)
+          ),
+          fluidRow(
+            column(width = 4),
+            column(width = 8)
+          ),
+          HTML("</center>")
+        ),
+
+
+
         # br(),
         br(),
         # scrollytell::scrolly_section(id = 4, render_text(4)),
