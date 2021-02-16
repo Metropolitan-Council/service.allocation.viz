@@ -37,8 +37,14 @@ mod_scrolly_container_ui <- function(id) {
           ),
 
           HTML("<center>"),
-          mod_plot_scenario_summary_ui("plot_scenario_summary_ui_1"),
-          mod_plot_scenario_tma_ui("plot_scenario_tma_ui_1"),
+          fluidRow(
+            column(width = 6,
+                   mod_plot_scenario_summary_ui("plot_scenario_summary_ui_expand")),
+            column(width = 6,
+                   mod_plot_scenario_summary_ui("plot_scenario_summary_ui_improve"))),
+          br(),
+          fluidRow(
+            mod_plot_scenario_tma_ui("plot_scenario_tma_ui_1")),
           HTML("</center>")
         ),
         # br(),
@@ -62,7 +68,11 @@ mod_scrolly_container_ui <- function(id) {
             HTML(shinipsum::random_text(nwords = 40))
           ),
           HTML("<center>"),
-          mod_plot_ui("plot_ui_2"),
+          mod_plot_scenario_summary_ui("plot_scenario_summary_ui_expand_all_day"),
+          fluidRow(
+            column(width = 6),
+            column(width = 6)
+          ),
           HTML("</center>")
         ),
         # br(),
