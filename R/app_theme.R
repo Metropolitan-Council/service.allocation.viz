@@ -7,9 +7,10 @@
 #' @import councilR
 #'
 app_theme <- function(
-                      font_sizes_ = font_sizes,
-                      font_families_ = font_families,
-                      size_margin_ = size_margin) {
+  font_sizes_ = font_sizes,
+  font_families_ = font_families,
+  size_margin_ = size_margin) {
+
   base_size <- font_sizes_$font_size_base
   base_line_size <- base_size / 22
   base_rect_size <- base_size / 22
@@ -72,8 +73,7 @@ app_theme <- function(
     plot.margin = ggplot2::margin(size_margin_, size_margin_, size_margin_, size_margin_, "pt"),
     plot.title = element_text(
       size = font_sizes_$font_size_plot_title,
-      hjust = 1,
-      vjust = 0,
+      family = font_families_$font_family_title,
       margin = margin(t = half_line)
     ),
     plot.title.position = "plot",
