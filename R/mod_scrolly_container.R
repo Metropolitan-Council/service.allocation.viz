@@ -27,6 +27,7 @@ mod_scrolly_container_ui <- function(id) {
           id = 00,
           h3("Choose your scenario and scroll down for more")
         ),
+        # Scenario summary -----------------------------------------------------
         scrollytell::scrolly_section(
           id = 0,
 
@@ -34,12 +35,15 @@ mod_scrolly_container_ui <- function(id) {
             h3("Scenario Summary"),
             HTML(shinipsum::random_text(nwords = 40))
           ),
+
           HTML("<center>"),
           mod_plot_scenario_summary_ui("plot_scenario_summary_ui_1"),
+          mod_plot_scenario_tma_ui("plot_scenario_tma_ui_1"),
           HTML("</center>")
         ),
         # br(),
         br(),
+        # Proposed network table -----------------------------------------------
         scrollytell::scrolly_section(
           id = 1,
           wellPanel(
