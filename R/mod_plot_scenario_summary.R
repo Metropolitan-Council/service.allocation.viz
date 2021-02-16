@@ -10,12 +10,8 @@
 mod_plot_scenario_summary_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    plotly::plotlyOutput(ns("scenario_summary")),
-    plotly::plotlyOutput(ns("tma_summary"),
-      width = "75%",
-      height = "225px"
+    plotly::plotlyOutput(ns("scenario_summary"))
     )
-  )
 }
 
 #' plot_scenario_summary Server Function
@@ -25,22 +21,16 @@ mod_plot_scenario_summary_ui <- function(id) {
 #' @import plotly
 #' @importFrom stringr str_wrap
 mod_plot_scenario_summary_server <- function(
-                                             input,
-                                             output,
-                                             session,
-                                             slider_input = slider_input) {
+  input,
+  output,
+  session,
+  slider_input = slider_input) {
   ns <- session$ns
 
   summary_data <- reactive({
     se_population_type_long[scenario_id == slider_input$slider, ][item_category %in% c("pop", "emp")]
   })
 
-  summary_tma_data <- reactive({
-    se_by_tma_long[scenario_id == slider_input$slider, ][item == "pop_total", ][service_type %in% c(
-      "High frequency",
-      "Local"
-    ), ]
-  })
 
 
   output$scenario_summary <- plotly::renderPlotly({
@@ -56,10 +46,10 @@ mod_plot_scenario_summary_server <- function(
         show.legend = F
         ) +
         facet_wrap(~expand_improve,
-          labeller = labeller(expand_improve = c(
-            Expand = "Expand Access",
-            Improve = "Improved Transit Service"
-          ))
+                   labeller = labeller(expand_improve = c(
+                     Expand = "Expand Access",
+                     Improve = "Improved Transit Service"
+                   ))
         ) +
         geom_text(aes(
           x = c(1, 0, 1, 0),
@@ -68,7 +58,7 @@ mod_plot_scenario_summary_server <- function(
         ),
         position = position_dodge(width = 0),
         family = font_families$font_family_title,
-        size = font_sizes$font_size_axis_title
+        size = "10"
         ) +
         scale_fill_manual(
           labels = c(
@@ -79,16 +69,16 @@ mod_plot_scenario_summary_server <- function(
             "#E2F0D9",
             "#DAE3F3"
           )
-        )
+        ) +
+        app_theme()
     ) %>%
-      layout(
+      plotly::layout(
         # margin = list(l = 10, r = 10, b = 10, t = 10, pad = 10), # l = left; r = right; t = top; b = bottom
         xaxis = axis_options,
         yaxis = axis_options,
         showlegend = FALSE,
         annotations = list(
           visible = FALSE,
-
           font = list(
             family = font_family_list,
             size = 30,
@@ -99,14 +89,14 @@ mod_plot_scenario_summary_server <- function(
         # hoveron = "fills",
         hoverdistance = "5",
         hoverlabel = list( #----
-          font = list(
-            size = 20,
-            family = font_family_list,
-            color = "black"
-          ),
-          bgcolor = "white",
-          bordercolor = "white",
-          padding = list(l = 10, r = 10, b = 10, t = 10)
+                           font = list(
+                             size = font_sizes$font_size_strip_title,
+                             family = font_family_list,
+                             color = "black"
+                           ),
+                           bgcolor = "white",
+                           bordercolor = "white",
+                           padding = list(l = 10, r = 10, b = 10, t = 10)
         )
       ) %>%
       plotly::config(
@@ -116,82 +106,10 @@ mod_plot_scenario_summary_server <- function(
       )
   })
 
-  output$tma_summary <- plotly::renderPlotly({
-    ggplotly(
-      tooltip = "text",
-      ggplot(data = summary_tma_data()) +
-        geom_col(aes(
-          x = market_area,
-          y = value,
-          # group = service_type,
-          text = hover_text,
-          fill = service_type
-        ),
-        width = -1,
-        # fill = "#542c40",
-        position = position_identity()
-        ) +
-        scale_fill_manual(values = c(
-          "#964f74", "#542c40"
-        )) +
-        labs(
-          x = "Transit market area",
-          y = "",
-          # title = "Scenario 1",
-          fill = "Service level"
-        ) +
-        theme(
-          # legend.position = "bottom",
-          axis.text.x = element_text(
-            size = font_sizes$font_size_axis_text,
-            family = font_families$font_family_base
-          ),
-          axis.title = element_text(
-            family = font_families$font_family_title,
-            size = font_sizes$font_size_axis_title
-          )
-        )
-    ) %>%
-      layout(
-        # margin = list(l = 10, r = 10, b = 10, t = 10, pad = 10), # l = left; r = right; t = top; b = bottom
-        # xaxis = axis_options,
-        # yaxis = axis_options,
-        showlegend = TRUE,
-        legend = list(
-          orientation = "v"
-        ),
-        annotations = list(
-          visible = FALSE,
-          font = list(
-            family = font_family_list,
-            size = 30,
-            color = councilR::colors$suppBlack
-          )
-        ),
-        hovermode = "closest",
-        # hoveron = "fills",
-        hoverdistance = "5",
-        hoverlabel = list( #----
-          font = list(
-            size = 20,
-            family = font_family_list,
-            color = "black"
-          ),
-          bgcolor = "white",
-          bordercolor = "white",
-          padding = list(l = 10, r = 10, b = 10, t = 10)
-        )
-      ) %>%
-      plotly::config(
-        displaylogo = F,
-        showSendToCloud = F,
-        displayModeBar = F
-      )
-  })
 }
 
 ## To be copied in the UI
 # mod_plot_scenario_summary_ui("plot_scenario_summary_ui_1")
 
 ## To be copied in the server
-# callModule(mod_plot_scenario_summary_server, "plot_scenario_summary_ui_1")
+# callModule(mod_plot_scenario_summary_server, "plot_scenario_summary_ui_1", slider_input = slider_input)
