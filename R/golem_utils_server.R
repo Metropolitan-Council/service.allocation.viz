@@ -74,32 +74,34 @@ rvtl <- shiny::reactiveValuesToList
 showtext::showtext_auto()
 sysfonts::font_paths()
 files <- sysfonts::font_files()
-sysfonts::font_add("HelveticaNeueLT Std Cn", "HelveticaNeueLTStd-Cn.otf")
-sysfonts::font_add("HelveticaNeueLT Std Lt", "HelveticaNeueLTStd-Lt.otf")
-sysfonts::font_add("HelveticaNeueLT Std Med Cn", "HelveticaNeueLTStd-MdCn.otf")
-sysfonts::font_add("Arial Narrow", "ARIALN.TTF")
-sysfonts::font_add("Palatino Linotype", "pala.ttf")
-sysfonts::font_add("Arial", "arial.ttf")
+sysfonts::font_add("Condensed", "inst/app/www/helveticaneueltstd-cn-webfont.woff")
+sysfonts::font_add("Light", "inst/app/www/helveticaneueltstd-lt-webfont.woff")
+sysfonts::font_add("Medium-Condensed", "inst/app/www/helveticaneueltstd-mdcn-webfont.woff")
+sysfonts::font_add("Arial Narrow", "inst/app/www/ARIALN_0.TTF")
+sysfonts::font_add("Palatino Linotype", "inst/app/www/pala.ttf")
+sysfonts::font_add("Arial", "inst/app/www/arial.ttf")
 
 
 font_sizes <- list(
-  font_size_base = 12,
+  font_size_base = 13,
   font_size_plot_title = 22,
   font_size_axis_title = 14,
   font_size_legend_title = 14,
   font_size_strip_title = 16,
   font_size_axis_text = 11,
   font_size_legend_text = 10,
-  font_size_caption = 8,
+  font_size_caption = 9,
   font_size_margin = 10
 )
 
 font_families <- list(
   font_family_base = "Arial",
-  font_family_title = "HelveticaNeueLT Std Lt",
+  font_family_title = "Light",
   font_family_caption = "Palatino Linotype",
   font_family_subtitle = "Helvetica",
-  font_family_strip = "Arial Narrow"
+  font_family_strip = "Arial Narrow",
+  font_family_axis_title = "Condensed",
+  font_family_axis_text = "Helvetica"
 )
 
 size_margin <- 10
