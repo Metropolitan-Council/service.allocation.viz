@@ -49,12 +49,13 @@ golem_add_external_resources <- function() {
     "www",
     app_sys("app/www")
   )
+  suppressDependencies()
 
   tags$head(
     # favicon(),
     bundle_resources(
       path = app_sys("app/www"),
-      app_title = "service.allocation.viz"
+      app_title = "Service Allocation Study"
     )
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()
