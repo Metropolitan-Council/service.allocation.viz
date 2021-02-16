@@ -305,7 +305,9 @@ se_population_type_long <- se_population_type %>%
       "<b>", scenario_short, "</b>", " will ", expand_improve_sen, "<br>",
       " an estimated ", "<b>", format(round(total), big.mark = ","), "</b> ",
       item_unit
-    )
+    ),
+    summary_title = case_when(expand_improve == "Expand" ~ "Expanded Access",
+                              TRUE ~ "Improved Transit Service")
   ) %>%
   data.table::as.data.table()
 
