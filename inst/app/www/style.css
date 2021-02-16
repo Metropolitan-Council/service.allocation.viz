@@ -81,6 +81,13 @@ label {
 
 /* All other styling */
 
+.control-label {
+	font-size: 22px;
+	font-family: Light;
+	font-weight: 400;
+	margin-bottom: 0px;
+}
+
 .irs-from, .irs-to, .irs-single {
 	color: #fff;
 	font-size: 14px;
