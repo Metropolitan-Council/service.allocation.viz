@@ -102,8 +102,12 @@ mod_scrolly_container_ui <- function(id) {
 
           HTML("<center>"),
           fluidRow(
-            column(width = 4),
-            column(width = 8)
+            column(width = 6,
+                   mod_plot_service_type_ui("plot_service_type_ui_1")),
+
+            column(width = 6,
+                   mod_plot_scenario_tma_ui("plot_scenario_tma_ui_2"),
+            )
           ),
           fluidRow(
             column(width = 4),
