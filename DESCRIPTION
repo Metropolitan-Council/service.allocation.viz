@@ -21,6 +21,7 @@ Imports:
     golem (>= 0.2.1),
     htmltools (>= 0.5.1.1),
     magrittr (>= 2.0.1),
+    pkgload (>= 1.1.0),
     plotly (>= 4.9.3),
     processx (>= 3.4.5),
     scrollytell (>= 0.1.0.9000),
