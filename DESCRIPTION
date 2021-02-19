@@ -36,6 +36,7 @@ Suggests:
     here (>= 1.0.1),
     knitr (>= 1.31),
     rmarkdown (>= 2.6),
+    rsconnect (>= 0.8.16),
     testthat (>= 3.0.0),
     tidyr (>= 1.1.2)
 VignetteBuilder: 
