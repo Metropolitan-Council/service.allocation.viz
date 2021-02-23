@@ -27,9 +27,21 @@ mod_scrolly_container_ui <- function(id) {
           id = 00,
           h3("Choose your scenario and scroll down for more")
         ),
-        # Scenario summary -----------------------------------------------------
+        # Proposed network table -----------------------------------------------
         scrollytell::scrolly_section(
           id = 0,
+          wellPanel(
+            h3("Proposed network"),
+            tags$body("The following changes to the network are proposed for the selected scenario.")
+          ),
+          HTML("<center>"),
+          mod_table_ui("table_ui_1"),
+          HTML("</center>")
+        ),
+        br(),
+        # Scenario summary -----------------------------------------------------
+        scrollytell::scrolly_section(
+          id = 1,
 
           wellPanel(
             h3("Scenario Summary"),
@@ -49,18 +61,7 @@ mod_scrolly_container_ui <- function(id) {
         ),
         # br(),
         br(),
-        # Proposed network table -----------------------------------------------
-        scrollytell::scrolly_section(
-          id = 1,
-          wellPanel(
-            h3("Proposed network"),
-            tags$body("The following changes to the network are proposed for the selected scenario.")
-          ),
-          HTML("<center>"),
-          mod_table_ui("table_ui_1"),
-          HTML("</center>")
-        ),
-        br(),
+
         scrollytell::scrolly_section(
           id = 2,
           wellPanel(
