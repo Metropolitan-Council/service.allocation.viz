@@ -18,6 +18,7 @@ app_server <- function(input, output, session) {
   data_for_plotting <- callModule(mod_util_data_server, "util_data_ui_1",
                                   slider_input = slider_input)
 
+  callModule(mod_plot_scenario_spectrum_server, "plot_scenario_spectrum_ui_1")
 
 
 
