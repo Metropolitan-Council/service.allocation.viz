@@ -41,7 +41,7 @@ scenario_rdrshp <- read_xlsx(path = "data-raw/scenario_rdrshp.xlsx") %>%
   clean_names() %>%
   mutate(ridership_increase_percent = ridership_increase * 100)
 
-scenario_def$ridership_increase_percent <- scenario_rdrshp$ridership_increase_percent
+# scenario_def$ridership_increase_percent <- scenario_rdrshp$ridership_increase_percent
 
 scenario_def_long <- scenario_def %>%
   # group_by(scenario) %>%
@@ -55,7 +55,7 @@ scenario_def_long <- scenario_def %>%
     new_commuter_routes,
     expanded_on_demand_service,
     # scenario_rdrshp,
-    ridership_increase_percent,
+    # ridership_increase_percent,
     # scenario,
     key = "improvement_type",
     value = value
