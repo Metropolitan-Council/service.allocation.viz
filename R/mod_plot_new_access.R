@@ -61,10 +61,7 @@ mod_plot_new_access_server <- function(
           labels = scales::percent
         ) +
         scale_fill_manual(
-          values = c(
-            "#1b7837",
-            "darkseagreen3"
-          ),
+          values = expand_colors,
           labels = c(
             "Jobs",
             "People"
@@ -106,7 +103,8 @@ mod_plot_new_access_server <- function(
         # xaxis = axis_options,
         # yaxis = axis_options,
         showlegend = TRUE,
-        legend = list(orientation = "h"),
+        legend = list(orientation = "h",
+                      y = -0.12),
         annotations = list(
           visible = FALSE,
           font = list(

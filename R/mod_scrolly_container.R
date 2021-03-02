@@ -32,7 +32,7 @@ mod_scrolly_container_ui <- function(id) {
           id = 0.5,
           wellPanel(
             h3("How many more people would have access to all-day transit service?"),
-            tags$body("Each scenario provides an opportunity to extend all-day, local transit service to people and jobs that currently do not have access to the all-day, local transit network. Your selected scenario would expand access to the all-day transit network to the following number of people and jobs. For your reference 1.6 million people and 1.2 million jobs had access to the all-day, local transit network in early 2020 (pre-COVID 19).")
+            p("Each scenario provides an opportunity to extend all-day, local transit service to people and jobs that currently do not have access to the all-day, local transit network. Your selected scenario would expand access to the all-day transit network to the following number of people and jobs. For your reference 1.6 million people and 1.2 million jobs had access to the all-day, local transit network in early 2020 (pre-COVID 19).")
           ),
           HTML("<center>"),
           mod_plot_new_access_ui("plot_new_access_ui_1"),
@@ -42,18 +42,31 @@ mod_scrolly_container_ui <- function(id) {
           id = 0.8,
           wellPanel(
             h3("How many people would see improved transit service of any kind?"),
-            tags$body("Each scenario provides an opportunity to extend all-day, local transit service to people and jobs that currently do not have access to the all-day, local transit network. Your selected scenario would expand access to the all-day transit network to the following number of people and jobs. For your reference 1.6 million people and 1.2 million jobs had access to the all-day, local transit network in early 2020 (pre-COVID 19).")
+            p("Each scenario provides an opportunity to extend all-day, local transit service to people and jobs that currently do not have access to the all-day, local transit network. Your selected scenario would expand access to the all-day transit network to the following number of people and jobs. For your reference 1.6 million people and 1.2 million jobs had access to the all-day, local transit network in early 2020 (pre-COVID 19).")
           ),
           HTML("<center>"),
           mod_plot_improve_service_ui("plot_improve_service_ui_1"),
           HTML("</center>")
         ),
+
+        scrollytell::scrolly_section(
+          id = 0.9,
+          wellPanel(
+            h3("What types of transit service would be improved and for how many people?"),
+            p("In order to have a full understanding how your selected scenario is going to impact the region, it is important to understand how transit service is going to be improved at the various service thresholds described earlier. The chart below shows how many more people would have new access to high-frequency and local transit service. High-frequency is a service you can use for most or all of your daily needs while local is a service that you can rely on but generally need to plan ahead to use. For your reference, 645,000 people had access to high frequency services and 610,000 people had access to local bus service.")
+          ),
+          HTML("<center>"),
+          # mod_plot_improve_service_ui("plot_improve_service_ui_1"),
+          HTML("</center>")
+        ),
+
+
         # Proposed network table -----------------------------------------------
         scrollytell::scrolly_section(
           id = 0,
           wellPanel(
             h3("Proposed network"),
-            tags$body("The following changes to the network are proposed for the selected scenario.")
+            p("The following changes to the network are proposed for the selected scenario.")
           ),
           HTML("<center>"),
           mod_table_ui("table_ui_1"),
@@ -65,7 +78,7 @@ mod_scrolly_container_ui <- function(id) {
           id = 1,
           wellPanel(
             h3("Detailed Scenario Summary"),
-            tags$body("Each option on the slider bar presents an alternative strategy for allocating resources to expand the transit network. Scenario I prioritizes investments into transit services that are able to serve a wide variety of trips, these improvements are primarily in areas with the highest transit demand, Transit Market Areas 1 and 2; scenario II prioritizes investments in transit services that maximize the number of people in the region that have access to transit service. Along the spectrum are intermediate scenarios that combine the two strategies in different ratios.")
+            p("Each option on the slider bar presents an alternative strategy for allocating resources to expand the transit network. Scenario I prioritizes investments into transit services that are able to serve a wide variety of trips, these improvements are primarily in areas with the highest transit demand, Transit Market Areas 1 and 2; scenario II prioritizes investments in transit services that maximize the number of people in the region that have access to transit service. Along the spectrum are intermediate scenarios that combine the two strategies in different ratios.")
           ),
           HTML("<center>"),
           fluidRow(
@@ -90,7 +103,7 @@ mod_scrolly_container_ui <- function(id) {
           id = 2,
           wellPanel(
             h3("New Access to All Day Transit"),
-            tags$body("Each scenario would also improve the level of transit service in the region by improving the frequency of transit service available. The selected scenario would increase the frequency of transit service accessible to the following people and jobs.")
+            p("Each scenario would also improve the level of transit service in the region by improving the frequency of transit service available. The selected scenario would increase the frequency of transit service accessible to the following people and jobs.")
           ),
           HTML("<center>"),
           mod_plot_scenario_summary_ui("plot_scenario_summary_ui_expand_all_day"),
@@ -106,7 +119,7 @@ mod_scrolly_container_ui <- function(id) {
           id = 3,
           wellPanel(
             h3("New Improved Transit"),
-            tags$body("Each scenario would also improve the level of transit service in the region by improving the frequency of transit service available. The selected scenario would increase the frequency of transit service accessible to the following people and jobs.")
+            p("Each scenario would also improve the level of transit service in the region by improving the frequency of transit service available. The selected scenario would increase the frequency of transit service accessible to the following people and jobs.")
           ),
           HTML("<center>"),
           mod_plot_scenario_summary_ui("plot_scenario_summary_ui_improve_all"),
@@ -120,7 +133,7 @@ mod_scrolly_container_ui <- function(id) {
           id = 4,
           wellPanel(
             h3("Increase by service type"),
-            tags$body("The following provides greater detail as to how each scenario benefits the region. The chart on the left describes which level of transit service the scenario provides and the chart on the right shows how where in the region transit service is improved")
+            p("The following provides greater detail as to how each scenario benefits the region. The chart on the left describes which level of transit service the scenario provides and the chart on the right shows how where in the region transit service is improved")
           ),
           HTML("<center>"),
           fluidRow(
@@ -143,7 +156,7 @@ mod_scrolly_container_ui <- function(id) {
           id = 4,
           wellPanel(
             h3("Network Improvements"),
-            tags$body("At the high level the selected scenario would have the following impacts on system level ridership and on regional job accessibility.")
+            p("At the high level the selected scenario would have the following impacts on system level ridership and on regional job accessibility.")
           ),
           HTML("<center>"),
           fluidRow(
@@ -162,11 +175,9 @@ mod_scrolly_container_ui <- function(id) {
           id = 5,
           wellPanel(
             h3("What do you think?"),
-            tags$body("Which scenario best captures the strategy that you feel the region should engage when investing in expanding the transit system? Please let us know by completing the following survey: surveymonkey link")
+            p("Which scenario best captures the strategy that you feel the region should engage when investing in expanding the transit system? Please let us know by completing the following survey: surveymonkey link")
           )
         ),
-        # scrollytell::scrolly_section(id = 4, render_text(4)),
-        # scrollytell::scrolly_section(id = 5, render_text(5)),
         HTML("</center>")
       )
     )
