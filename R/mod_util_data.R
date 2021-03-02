@@ -7,18 +7,20 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_util_data_ui <- function(id){
+mod_util_data_ui <- function(id) {
   ns <- NS(id)
-  tagList(
-
-  )
+  tagList()
 }
 
 #' util_data Server Function
 #'
 #' @noRd
-mod_util_data_server <- function(input, output, session,
-                                 slider_input = slider_input){
+mod_util_data_server <- function(
+  input,
+  output,
+  session,
+  slider_input = slider_input
+) {
   ns <- session$ns
 
   summary_data <- reactive({
@@ -26,8 +28,13 @@ mod_util_data_server <- function(input, output, session,
   })
 
 
+  summary_context_data <- reactive({
+    se_summary_long[item_category %in% c("pop", "emp")][, selected := ifelse(scenario_id == slider_input$slider, 1, 0)]
+  })
+
+
   detail_data <- reactive({
-    se_summary_long[scenario_id == slider_input$slider, ][!item_category %in% c("pop", "emp"),]
+    se_summary_long[scenario_id == slider_input$slider, ][!item_category %in% c("pop", "emp"), ]
   })
 
   vals <- reactiveValues()
@@ -40,6 +47,9 @@ mod_util_data_server <- function(input, output, session,
     vals$detail_data <- detail_data()
   })
 
+  observe({
+    vals$summary_context_data <- summary_context_data()
+  })
 
   return(vals)
 }
@@ -49,4 +59,3 @@ mod_util_data_server <- function(input, output, session,
 
 ## To be copied in the server
 # callModule(mod_util_data_server, "util_data_ui_1")
-
