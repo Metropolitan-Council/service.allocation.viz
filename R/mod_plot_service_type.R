@@ -10,7 +10,7 @@
 mod_plot_service_type_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    plotlyOutput(ns("service_type"))
+    plotlyOutput(ns("service_type_plot"))
   )
 }
 
@@ -21,43 +21,55 @@ mod_plot_service_type_server <- function(
   input,
   output,
   session,
-  slider_input = slider_input
-) {
+  data_for_plotting = data_for_plotting
+  ) {
   ns <- session$ns
 
-  service_type_plot_data <- reactive({
-    se_service_type[scenario_id == slider_input$slider, ]
-  })
 
-  output$service_type <- plotly::renderPlotly({
-    # browser()
-    plot_service_data <- service_type_plot_data()
+  output$service_type_plot <- plotly::renderPlotly({
 
     ggplotly(
       tooltip = "text",
-      ggplot(data = plot_service_data) +
-        geom_col(aes(
-          y = service_type,
-          x = total_value,
-          text = hover_text
-        )) +
-        scale_x_continuous(labels = scales::comma) +
+      ggplot(data = data_for_plotting$service_type_by_tma[service_type %in% c("Local",
+                            "High frequency"),][item == "pop_total",]) +
+        geom_col(
+          mapping = aes(
+            x = scenario_short,
+            y = val_increase,
+            fill = service_type,
+            group = market_area,
+            text = hover_text
+          ),
+          color = "white",
+          lwd = 0.4) +
+        geom_col(data = data_for_plotting$service_type_by_tma[service_type %in% c("Local",
+                                                                                  "High frequency"),][item == "pop_total",][selected == 0,],
+          mapping = aes(
+            x = scenario_short,
+            y = val_increase,
+            group = market_area,
+            text = hover_text
+          ),
+          fill = "white",
+          alpha = 0.7) +
+        scale_y_continuous(labels = scales::comma) +
         labs(
           x = "People",
-          y = ""
+          y = "",
+          title = "Change in Acess to Transit by Service Level"
         ) +
         app_theme() +
-        ggplot2::theme(
-          axis.title.x = ggplot2::element_text(
-            vjust = -1,
-            family = font_families$font_family_axis_title,
-            size = font_sizes$font_size_axis_title
-          ),
-          axis.title.y = ggplot2::element_text(
-            vjust = 2,
-            family = font_families$font_family_axis_title,
-            size = font_sizes$font_size_axis_title
-          ),
+        theme(
+          # axis.title.x = ggplot2::element_text(
+          #   vjust = -1,
+          #   family = font_families$font_family_axis_title,
+          #   size = font_sizes$font_size_axis_title
+          # ),
+          # axis.title.y = ggplot2::element_text(
+          #   vjust = 2,
+          #   family = font_families$font_family_axis_title,
+          #   size = font_sizes$font_size_axis_title
+          # ),
           axis.text.x = ggplot2::element_text(
             family = font_families$font_family_axis_text,
             size = font_sizes$font_size_axis_text,
@@ -71,12 +83,14 @@ mod_plot_service_type_server <- function(
         )
     ) %>%
       plotly::layout(
-        # margin = list(l = 10, r = 10, b = 10, t = 10, pad = 10), # l = left; r = right; t = top; b = bottom
+        margin = list(l = 0, r = 0, b = 10, t = 50, pad = 10),
+        # l = left; r = right; t = top; b = bottom
         # xaxis = axis_options,
         # yaxis = axis_options,
         showlegend = TRUE,
         legend = list(
-          orientation = "v"
+          orientation = "h",
+          y = -0.12
         ),
         annotations = list(
           visible = FALSE,
@@ -86,8 +100,7 @@ mod_plot_service_type_server <- function(
             color = councilR::colors$suppBlack
           )
         ),
-        hovermode = "closest",
-        # hoveron = "fills",
+        # hovermode = "x-unified",
         hoverdistance = "5",
         hoverlabel = list(
           #----
