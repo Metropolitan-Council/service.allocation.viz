@@ -27,6 +27,19 @@ se_base <- read_xlsx(path = "data-raw/service_eval_base.xlsx") %>%
     )
   ) %>%
   mutate(
+    scenario_short = factor(
+      scenario_short,
+      levels = c(
+        "Scenario 1",
+        "Scenario A",
+        "Scenario B",
+        "Scenario C",
+        "Scenario D",
+        "Scenario E",
+        "Scenario 2",
+        "Base"
+      )
+    ),
     service_type = case_when(
       stringr::str_detect(buffer_name, "HFT") ~ "High frequency",
       stringr::str_detect(buffer_name, "Local") ~ "Local",
@@ -64,7 +77,8 @@ se_all_day <- se_base %>%
   ) %>%
   mutate(
     scenario_id = stringr::str_sub(scenario_short, start = -1L, end = -1L),
-    service_type = factor(service_type,
+    service_type = factor(
+      service_type,
       levels = c(
         "Local",
         "Basic",
@@ -154,7 +168,8 @@ se_by_tma_long <- se_by_tma %>%
   ) %>%
   mutate(
     scenario_id = stringr::str_sub(scenario_short, start = -1L, end = -1L),
-    service_type = factor(service_type,
+    service_type = factor(
+      service_type,
       levels = c(
         "Local",
         "Basic",
@@ -183,7 +198,7 @@ usethis::use_data(se_by_tma_long, overwrite = T)
 
 
 ## ----
-se_service_type <-se_by_tma %>%
+se_service_type <- se_by_tma %>%
   mutate(
     scenario_short = case_when(
       stringr::str_detect(buffer_name, "Base") ~ "Base",
@@ -237,15 +252,16 @@ se_service_type <-se_by_tma %>%
   ) %>%
   mutate(
     scenario_id = stringr::str_sub(scenario_short, start = -1L, end = -1L),
-    service_type = factor(service_type,
-                          levels = c(
-                            "Local",
-                            "Basic",
-                            "High frequency",
-                            "Commuter express",
-                            "Demand response",
-                            NA
-                          )
+    service_type = factor(
+      service_type,
+      levels = c(
+        "Local",
+        "Basic",
+        "High frequency",
+        "Commuter express",
+        "Demand response",
+        NA
+      )
     ),
     item_unit = case_when(
       item == "seniors" ~ "people age 65+",
@@ -260,21 +276,32 @@ se_service_type <-se_by_tma %>%
     ),
     hover_text = paste0(service_type, ", ", format(round(value), big.mark = ","), " ", item_unit),
   ) %>%
-  filter(!is.na(service_type),
-         item == "pop_total") %>%
+  filter(
+    !is.na(service_type),
+    item == "pop_total"
+  ) %>%
   ungroup() %>%
-  select(-expand_improve,
-         -time_type) %>%
+  select(
+    -expand_improve,
+    -time_type
+  ) %>%
   group_by(scenario_id, service_type, scenario_short, item, item_unit) %>%
   summarize(total_value = sum(value)) %>%
-  mutate(service_type = factor(service_type,
-                               levels = c("Commuter express",
-                                          "Basic",
-                                          "Local",
-                                          "High frequency")),
-         hover_text = paste0(
-           format(round(total_value), big.mark = ","), " ",
-           item_unit)
+  mutate(
+    service_type = factor(
+      service_type,
+      levels = c(
+        "Commuter express",
+        "Basic",
+        "Local",
+        "High frequency"
+      )
+    ),
+    hover_text = paste0(
+      format(round(total_value), big.mark = ","),
+      " ",
+      item_unit
+    )
   ) %>%
   filter(!is.na(service_type)) %>%
   as.data.table()
@@ -370,7 +397,6 @@ se_summary_long <- se_population_type %>%
       item_category == "pov" ~ "people with income under 185% federal poverty threshold",
       item_category == "pov185" ~ "people with income under 185% federal poverty threshold"
     ),
-
     type = ifelse(item_category %in% c(
       "emp",
       "hi_emp",
@@ -397,25 +423,51 @@ se_summary_long <- se_population_type %>%
     lab = paste0(
       "+",
       round(pct * 100),
-      "% ", item_unit_short
+      "% ",
+      item_unit_short
     ),
     hover_text = paste0(
-      "<b>", scenario_short, "</b>", " will ", expand_improve_sen, "<br>",
-      " an estimated ", "<b>", format(round(total), big.mark = ","), "</b> ",
+      "<b>",
+      scenario_short,
+      "</b>",
+      " will ",
+      expand_improve_sen,
+      "<br>",
+      " an additional ",
+      "<b>",
+      format(trunc(signif(total, digits = 3)), big.mark = ","),
+      "</b> ",
       item_unit
     ),
-    summary_title = case_when(expand_improve == "Expand" ~ "Expanded Access",
-                              TRUE ~ "Improved Transit Service"),
-    item_unit_factor = factor(item_unit_short,
-                             levels = c("People",
-                                        "Low-Income Population",
-                                        "BIPOC",
-                                        "Affordable Housing Units",
-                                        "Older Population",
-                                        "Jobs",
-                                        "High-Wage Jobs",
-                                        "Low-Wage Jobs"
-                                        ))
+    summary_title = case_when(
+      expand_improve == "Expand" ~ "Expanded Access",
+      TRUE ~ "Improved Transit Service"
+    ),
+    item_unit_factor = factor(
+      item_unit_short,
+      levels = c(
+        "People",
+        "Low-Income Population",
+        "BIPOC",
+        "Affordable Housing Units",
+        "Older Population",
+        "Jobs",
+        "High-Wage Jobs",
+        "Low-Wage Jobs"
+      )
+    ),
+    scenario_short = factor(
+      scenario_short,
+      levels = c(
+        "Scenario 1",
+        "Scenario A",
+        "Scenario B",
+        "Scenario C",
+        "Scenario D",
+        "Scenario E",
+        "Scenario 2"
+      )
+    )
   ) %>%
   data.table::as.data.table()
 
