@@ -22,16 +22,17 @@ mod_plot_service_type_server <- function(
   output,
   session,
   data_for_plotting = data_for_plotting
-  ) {
+) {
   ns <- session$ns
 
 
   output$service_type_plot <- plotly::renderPlotly({
-
     ggplotly(
       tooltip = "text",
-      ggplot(data = data_for_plotting$service_type_by_tma[service_type %in% c("Local",
-                            "High frequency"),][item == "pop_total",]) +
+      ggplot(data = data_for_plotting$service_type_by_tma[service_type %in% c(
+        "Local",
+        "High frequency"
+      ), ][item == "pop_total", ]) +
         geom_col(
           mapping = aes(
             x = scenario_short,
@@ -41,9 +42,13 @@ mod_plot_service_type_server <- function(
             text = hover_text
           ),
           color = "white",
-          lwd = 0.4) +
-        geom_col(data = data_for_plotting$service_type_by_tma[service_type %in% c("Local",
-                                                                                  "High frequency"),][item == "pop_total",][selected == 0,],
+          lwd = 0.4
+        ) +
+        geom_col(
+          data = data_for_plotting$service_type_by_tma[service_type %in% c(
+            "Local",
+            "High frequency"
+          ), ][item == "pop_total", ][selected == 0, ],
           mapping = aes(
             x = scenario_short,
             y = val_increase,
@@ -51,7 +56,8 @@ mod_plot_service_type_server <- function(
             text = hover_text
           ),
           fill = "white",
-          alpha = 0.7) +
+          alpha = 0.7
+        ) +
         scale_y_continuous(labels = scales::comma) +
         labs(
           x = "People",

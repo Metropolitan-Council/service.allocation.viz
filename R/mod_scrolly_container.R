@@ -38,7 +38,6 @@ mod_scrolly_container_ui <- function(id) {
           mod_plot_new_access_ui("plot_new_access_ui_1"),
           HTML("</center>")
         ),
-
         scrollytell::scrolly_section(
           id = "any_improvement",
           wellPanel(
@@ -59,8 +58,6 @@ mod_scrolly_container_ui <- function(id) {
           mod_plot_service_type_ui("plot_service_type_ui_1"),
           HTML("</center>")
         ),
-
-
         scrollytell::scrolly_section(
           id = 0.9,
           wellPanel(

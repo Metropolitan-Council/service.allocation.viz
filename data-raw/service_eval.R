@@ -134,8 +134,10 @@ se_by_tma_base <- se_by_tma %>%
     ),
     time_type = case_when(stringr::str_detect(buffer_name, "All Day") ~ "All day")
   ) %>%
-  filter(scenario_short == "Base",
-         is.na(time_type)) %>%
+  filter(
+    scenario_short == "Base",
+    is.na(time_type)
+  ) %>%
   select(
     market_area,
     service_type,
@@ -147,7 +149,6 @@ se_by_tma_base <- se_by_tma %>%
     -expand_improve,
     -time_type,
     -scenario_short
-
   ) %>%
   group_by(
     market_area,
@@ -256,39 +257,39 @@ se_by_tma_long <- se_by_tma %>%
 se_by_tma_long <- left_join(se_by_tma_long, se_by_tma_base) %>%
   mutate(val_increase = value - value_base) %>%
   filter(scenario_short != "Base") %>%
-  mutate(scenario_short = factor(
-    scenario_short,
-    levels = c(
-      "Scenario 1",
-      "Scenario A",
-      "Scenario B",
-      "Scenario C",
-      "Scenario D",
-      "Scenario E",
-      "Scenario 2"
+  mutate(
+    scenario_short = factor(
+      scenario_short,
+      levels = c(
+        "Scenario 1",
+        "Scenario A",
+        "Scenario B",
+        "Scenario C",
+        "Scenario D",
+        "Scenario E",
+        "Scenario 2"
+      )
+    ),
+    scenario_id = stringr::str_sub(scenario_short, start = -1L, end = -1L),
+    hover_text = paste0(
+      "<b>",
+      scenario_short,
+      "</b>",
+      " will increase ",
+      service_type,
+      " service ",
+      "<br>",
+      " in ",
+      "<b>",
+      " TMA ",
+      market_area,
+      "</b>",
+      " by ",
+      "<b>",
+      format(trunc(signif(val_increase, digits = 3)), big.mark = ","),
+      "</b> ",
+      item_units
     )
-  ),
-  scenario_id = stringr::str_sub(scenario_short, start = -1L, end = -1L),
-  hover_text = paste0(
-    "<b>",
-    scenario_short,
-    "</b>",
-    " will increase ",
-    service_type,
-    " service ",
-    "<br>",
-    " in ",
-    "<b>",
-    " TMA ",
-    market_area,
-    "</b>",
-    " by ",
-    "<b>",
-    format(trunc(signif(val_increase, digits = 3)), big.mark = ","),
-    "</b> ",
-    item_units
-  )
-
   ) %>%
   as.data.table()
 
@@ -396,7 +397,6 @@ se_service_type <- se_by_tma %>%
         "Basic",
         "High frequency",
         "Local"
-
       )
     ),
     hover_text = paste0(
