@@ -9,8 +9,8 @@
 app_theme <- function(
   font_sizes_ = font_sizes,
   font_families_ = font_families,
-  size_margin_ = size_margin) {
-
+  size_margin_ = size_margin
+) {
   base_size <- font_sizes_$font_size_base
   base_line_size <- base_size / 22
   base_rect_size <- base_size / 22

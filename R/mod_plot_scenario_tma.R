@@ -7,22 +7,26 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_plot_scenario_tma_ui <- function(id){
+mod_plot_scenario_tma_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    plotly::plotlyOutput(ns("tma_summary"),
-                         width = "75%",
-                         height = "225px"
+    plotly::plotlyOutput(
+      ns("tma_summary"),
+      width = "75%",
+      height = "225px"
     )
-
   )
 }
 
 #' plot_scenario_tma Server Function
 #'
 #' @noRd
-mod_plot_scenario_tma_server <- function(input, output, session,
-                                         slider_input = slider_input){
+mod_plot_scenario_tma_server <- function(
+  input,
+  output,
+  session,
+  slider_input = slider_input
+) {
   ns <- session$ns
 
   summary_tma_data <- reactive({
@@ -37,22 +41,26 @@ mod_plot_scenario_tma_server <- function(input, output, session,
     ggplotly(
       tooltip = "text",
       ggplot(data = summary_tma_data()) +
-        geom_col(aes(
-          x = market_area,
-          y = value,
-          # group = service_type,
-          text = hover_text,
-          fill = service_type
-        ),
-        width = -1,
-        # fill = "#542c40",
-        position = position_identity()
+        geom_col(
+          aes(
+            x = market_area,
+            y = value,
+            # group = service_type,
+            text = hover_text,
+            fill = service_type
+          ),
+          width = -1,
+          # fill = "#542c40",
+          position = position_identity()
         ) +
         scale_fill_manual(values = c(
-          "#964f74", "#542c40"
+          "#964f74",
+          "#542c40"
         )) +
-        scale_y_continuous(labels = scales::comma,
-                           name = "People") +
+        scale_y_continuous(
+          labels = scales::comma,
+          name = "People"
+        ) +
         labs(
           x = "Transit market area",
           y = "",
@@ -113,15 +121,16 @@ mod_plot_scenario_tma_server <- function(input, output, session,
         hovermode = "closest",
         # hoveron = "fills",
         hoverdistance = "5",
-        hoverlabel = list( #----
-                           font = list(
-                             size = font_sizes$font_size_strip_title,
-                             family = font_family_list,
-                             color = "black"
-                           ),
-                           bgcolor = "white",
-                           bordercolor = "white",
-                           padding = list(l = 10, r = 10, b = 10, t = 10)
+        hoverlabel = list(
+          #----
+          font = list(
+            size = font_sizes$font_size_strip_title,
+            family = font_family_list,
+            color = "black"
+          ),
+          bgcolor = "white",
+          bordercolor = "white",
+          padding = list(l = 10, r = 10, b = 10, t = 10)
         )
       ) %>%
       plotly::config(
@@ -130,8 +139,6 @@ mod_plot_scenario_tma_server <- function(input, output, session,
         displayModeBar = F
       )
   })
-
-
 }
 
 ## To be copied in the UI
@@ -139,4 +146,3 @@ mod_plot_scenario_tma_server <- function(input, output, session,
 
 ## To be copied in the server
 # callModule(mod_plot_scenario_tma_server, "plot_scenario_tma_ui_1", slider_input = slider_input)
-

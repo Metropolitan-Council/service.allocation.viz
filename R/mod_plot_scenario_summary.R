@@ -25,7 +25,8 @@ mod_plot_scenario_summary_server <- function(
   output,
   session,
   data_for_plotting = data_for_plotting,
-  plot_type) {
+  plot_type
+) {
   ns <- session$ns
 
 
@@ -34,15 +35,16 @@ mod_plot_scenario_summary_server <- function(
     ggplotly(
       tooltip = "text",
       ggplot(data = data_for_plotting$summary_data[expand_improve == plot_type]) +
-        geom_tile(aes(
-          x = c(1, 0),
-          y = 1,
-          fill = item_category,
-          text = hover_text
-        ),
-        show.legend = F,
-        lwd = 5,
-        color = "white"
+        geom_tile(
+          aes(
+            x = c(1, 0),
+            y = 1,
+            fill = item_category,
+            text = hover_text
+          ),
+          show.legend = F,
+          lwd = 5,
+          color = "white"
         ) +
         geom_text(
           aes(
@@ -64,11 +66,12 @@ mod_plot_scenario_summary_server <- function(
             people_color
           )
         ) +
-        labs(title = paste0(data_for_plotting$summary_data[expand_improve == plot_type][1,13])) +
+        labs(title = paste0(data_for_plotting$summary_data[expand_improve == plot_type][1, 13])) +
         app_theme()
     ) %>%
       plotly::layout(
-        margin = list(l = 0, r = 0, b = 10, t = 50, pad = 10), # l = left; r = right; t = top; b = bottom
+        margin = list(l = 0, r = 0, b = 10, t = 50, pad = 10),
+        # l = left; r = right; t = top; b = bottom
         xaxis = axis_options,
         yaxis = axis_options,
         showlegend = FALSE,
@@ -80,18 +83,19 @@ mod_plot_scenario_summary_server <- function(
             color = councilR::colors$suppBlack
           )
         ),
-        hovermode = "closest",
+        hovermode = "x-unified",
         # hoveron = "fills",
         hoverdistance = "5",
-        hoverlabel = list( #----
-                           font = list(
-                             size = font_sizes$font_size_strip_title,
-                             family = font_family_list,
-                             color = "black"
-                           ),
-                           bgcolor = "white",
-                           bordercolor = "white",
-                           padding = list(l = 10, r = 10, b = 10, t = 10)
+        hoverlabel = list(
+          #----
+          font = list(
+            size = font_sizes$font_size_strip_title,
+            family = font_family_list,
+            color = "black"
+          ),
+          bgcolor = "white",
+          bordercolor = "white",
+          padding = list(l = 10, r = 10, b = 10, t = 10)
         )
       ) %>%
       plotly::config(
@@ -100,7 +104,6 @@ mod_plot_scenario_summary_server <- function(
         displayModeBar = F
       )
   })
-
 }
 
 ## To be copied in the UI

@@ -1,6 +1,7 @@
 # Set options here
 options(golem.app.prod = FALSE,
-        scipen = 99999) # TRUE = production mode, FALSE = development mode
+        scipen = 99999,
+        warn = FALSE) # TRUE = production mode, FALSE = development mode
 
 # Detach all loaded packages and clean your environment
 golem::detach_all_attached()
@@ -11,3 +12,4 @@ golem::document_and_reload()
 
 # Run the application
 run_app()
+

@@ -15,7 +15,6 @@ app_ui <- function(request) {
       h2("Here is what you can expect from this viz"),
       tags$body("Welcome to the Metropolitan Council’s Scenario Analysis Tool for the Regional Transit Service Allocation Study. This tool will allow you to explore how different service allocation strategies for expanding transit service in the Twin Cities would impact the region."),
       mod_plot_scenario_spectrum_ui("plot_scenario_spectrum_ui_1"),
-
       br(),
       br(),
       br(),

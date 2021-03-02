@@ -18,38 +18,41 @@ mod_plot_scenario_detail_ui <- function(id) {
 #'
 #' @noRd
 mod_plot_scenario_detail_server <- function(
-                                           input,
-                                           output,
-                                           session,
-                                           data_for_plotting = data_for_plotting,
-                                           plot_type,
-                                           unit_type) {
+  input,
+  output,
+  session,
+  data_for_plotting = data_for_plotting,
+  plot_type,
+  unit_type
+) {
   ns <- session$ns
 
   output$new_all_day <- renderPlotly({
-
-    if(nrow(data_for_plotting$detail_data[expand_improve == plot_type,][type == unit_type,]) > 2){
-      coords_x <- c(0,0,1,1)
-      coords_y <- c(0,1,1,0)
+    if (nrow(data_for_plotting$detail_data[expand_improve == plot_type, ][type == unit_type, ]) > 2) {
+      coords_x <- c(0, 0, 1, 1)
+      coords_y <- c(0, 1, 1, 0)
       plot_color <- rep(people_color, 4)
     } else {
-      coords_x <- c(1,0)
-      coords_y <- c(0,0)
+      coords_x <- c(1, 0)
+      coords_y <- c(0, 0)
       plot_color <- rep(job_color, 2)
     }
 
     ggplotly(
       tooltip = "text",
-      ggplot(data = data_for_plotting$detail_data[!item_category %in% c("pop", "emp"),][expand_improve == plot_type,][type == unit_type,]) +
+      ggplot(data = data_for_plotting$detail_data[!item_category %in% c("pop", "emp"), ][expand_improve == plot_type, ][type == unit_type, ]) +
         geom_tile(
-          aes(x = coords_x,
-              y = coords_y,
-              fill = item_unit_factor,
-              text = hover_text),
+          aes(
+            x = coords_x,
+            y = coords_y,
+            fill = item_unit_factor,
+            text = hover_text
+          ),
           show.legend = F,
           width = 1,
           color = "white",
-          lwd = 5) +
+          lwd = 5
+        ) +
         geom_text(
           aes(
             x = coords_x,
@@ -65,7 +68,8 @@ mod_plot_scenario_detail_server <- function(
         app_theme()
     ) %>%
       plotly::layout(
-        margin = list(l = 0, r = 0, b = 10, t = 5, pad = 0), # l = left; r = right; t = top; b = bottom
+        margin = list(l = 0, r = 0, b = 10, t = 5, pad = 0),
+        # l = left; r = right; t = top; b = bottom
         xaxis = axis_options,
         yaxis = axis_options,
         showlegend = FALSE,
@@ -80,15 +84,16 @@ mod_plot_scenario_detail_server <- function(
         hovermode = "closest",
         # hoveron = "fills",
         hoverdistance = "5",
-        hoverlabel = list( #----
-                           font = list(
-                             size = font_sizes$font_size_strip_title,
-                             family = font_family_list,
-                             color = "black"
-                           ),
-                           bgcolor = "white",
-                           bordercolor = "white",
-                           padding = list(l = 10, r = 10, b = 10, t = 10)
+        hoverlabel = list(
+          #----
+          font = list(
+            size = font_sizes$font_size_strip_title,
+            family = font_family_list,
+            color = "black"
+          ),
+          bgcolor = "white",
+          bordercolor = "white",
+          padding = list(l = 10, r = 10, b = 10, t = 10)
         )
       ) %>%
       plotly::config(

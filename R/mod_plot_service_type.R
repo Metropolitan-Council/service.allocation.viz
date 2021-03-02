@@ -7,19 +7,22 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_plot_service_type_ui <- function(id){
+mod_plot_service_type_ui <- function(id) {
   ns <- NS(id)
   tagList(
     plotlyOutput(ns("service_type"))
-
   )
 }
 
 #' plot_service_type Server Function
 #'
 #' @noRd
-mod_plot_service_type_server <- function(input, output, session,
-                                         slider_input = slider_input){
+mod_plot_service_type_server <- function(
+  input,
+  output,
+  session,
+  slider_input = slider_input
+) {
   ns <- session$ns
 
   service_type_plot_data <- reactive({
@@ -33,12 +36,16 @@ mod_plot_service_type_server <- function(input, output, session,
     ggplotly(
       tooltip = "text",
       ggplot(data = plot_service_data) +
-        geom_col(aes(y = service_type,
-                     x = total_value,
-                     text = hover_text)) +
+        geom_col(aes(
+          y = service_type,
+          x = total_value,
+          text = hover_text
+        )) +
         scale_x_continuous(labels = scales::comma) +
-        labs(x = "People",
-             y = "") +
+        labs(
+          x = "People",
+          y = ""
+        ) +
         app_theme() +
         ggplot2::theme(
           axis.title.x = ggplot2::element_text(
@@ -62,7 +69,6 @@ mod_plot_service_type_server <- function(input, output, session,
             vjust = 1
           )
         )
-
     ) %>%
       plotly::layout(
         # margin = list(l = 10, r = 10, b = 10, t = 10, pad = 10), # l = left; r = right; t = top; b = bottom
@@ -83,15 +89,16 @@ mod_plot_service_type_server <- function(input, output, session,
         hovermode = "closest",
         # hoveron = "fills",
         hoverdistance = "5",
-        hoverlabel = list( #----
-                           font = list(
-                             size = font_sizes$font_size_strip_title,
-                             family = font_family_list,
-                             color = "black"
-                           ),
-                           bgcolor = "white",
-                           bordercolor = "white",
-                           padding = list(l = 10, r = 10, b = 10, t = 10)
+        hoverlabel = list(
+          #----
+          font = list(
+            size = font_sizes$font_size_strip_title,
+            family = font_family_list,
+            color = "black"
+          ),
+          bgcolor = "white",
+          bordercolor = "white",
+          padding = list(l = 10, r = 10, b = 10, t = 10)
         )
       ) %>%
       plotly::config(
@@ -99,9 +106,7 @@ mod_plot_service_type_server <- function(input, output, session,
         showSendToCloud = F,
         displayModeBar = F
       )
-
   })
-
 }
 
 ## To be copied in the UI
@@ -109,4 +114,3 @@ mod_plot_service_type_server <- function(input, output, session,
 
 ## To be copied in the server
 # callModule(mod_plot_service_type_server, "plot_service_type_ui_1", slider_input = slider_input)
-
