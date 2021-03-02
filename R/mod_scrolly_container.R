@@ -29,7 +29,7 @@ mod_scrolly_container_ui <- function(id) {
           h3("Choose your scenario and scroll down for more")
         ),
         scrollytell::scrolly_section(
-          id = 0.5,
+          id = "new_all_day",
           wellPanel(
             h3("How many more people would have access to all-day transit service?"),
             p("Each scenario provides an opportunity to extend all-day, local transit service to people and jobs that currently do not have access to the all-day, local transit network. Your selected scenario would expand access to the all-day transit network to the following number of people and jobs. For your reference 1.6 million people and 1.2 million jobs had access to the all-day, local transit network in early 2020 (pre-COVID 19).")
@@ -38,8 +38,9 @@ mod_scrolly_container_ui <- function(id) {
           mod_plot_new_access_ui("plot_new_access_ui_1"),
           HTML("</center>")
         ),
+
         scrollytell::scrolly_section(
-          id = 0.8,
+          id = "any_improvement",
           wellPanel(
             h3("How many people would see improved transit service of any kind?"),
             p("Each scenario provides an opportunity to extend all-day, local transit service to people and jobs that currently do not have access to the all-day, local transit network. Your selected scenario would expand access to the all-day transit network to the following number of people and jobs. For your reference 1.6 million people and 1.2 million jobs had access to the all-day, local transit network in early 2020 (pre-COVID 19).")
@@ -48,6 +49,18 @@ mod_scrolly_container_ui <- function(id) {
           mod_plot_improve_service_ui("plot_improve_service_ui_1"),
           HTML("</center>")
         ),
+        scrollytell::scrolly_section(
+          id = "service_type_changes",
+          wellPanel(
+            h3("What types of transit service would be improved and for how many people?"),
+            p("In order to have a full understanding how your selected scenario is going to impact the region, it is important to understand how transit service is going to be improved at the various service thresholds described earlier. The chart below shows how many more people would have new access to high-frequency and local transit service. High-frequency is a service you can use for most or all of your daily needs while local is a service that you can rely on but generally need to plan ahead to use. For your reference, 645,000 people had access to high frequency services and 610,000 people had access to local bus service.")
+          ),
+          HTML("<center>"),
+          mod_plot_service_type_ui("plot_service_type_ui_1"),
+          HTML("</center>")
+        ),
+
+
         scrollytell::scrolly_section(
           id = 0.9,
           wellPanel(
@@ -60,7 +73,7 @@ mod_scrolly_container_ui <- function(id) {
         ),
         # Proposed network table -----------------------------------------------
         scrollytell::scrolly_section(
-          id = "proposed_network",
+          id = "proposed_network_changes",
           wellPanel(
             h3("Proposed network"),
             p("The following changes to the network are proposed for the selected scenario.")
@@ -83,7 +96,7 @@ mod_scrolly_container_ui <- function(id) {
         br(),
         # Scenario summary -----------------------------------------------------
         scrollytell::scrolly_section(
-          id = 1,
+          id = "detailed_summary",
           wellPanel(
             h3("Detailed Scenario Summary"),
             p("Each option on the slider bar presents an alternative strategy for allocating resources to expand the transit network. Scenario I prioritizes investments into transit services that are able to serve a wide variety of trips, these improvements are primarily in areas with the highest transit demand, Transit Market Areas 1 and 2; scenario II prioritizes investments in transit services that maximize the number of people in the region that have access to transit service. Along the spectrum are intermediate scenarios that combine the two strategies in different ratios.")
@@ -145,10 +158,6 @@ mod_scrolly_container_ui <- function(id) {
           ),
           HTML("<center>"),
           fluidRow(
-            column(
-              width = 6,
-              mod_plot_service_type_ui("plot_service_type_ui_1")
-            ),
             column(
               width = 6,
               mod_plot_scenario_tma_ui("plot_scenario_tma_ui_2"),
