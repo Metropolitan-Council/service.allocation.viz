@@ -73,6 +73,20 @@ mod_scrolly_container_ui <- function(id) {
           HTML("</center>")
         ),
         br(),
+
+        scrollytell::scrolly_section(
+          id = "job_access",
+          wellPanel(
+            h3("How many more jobs will the average resident be able to reach when considering the entire transit network?"),
+            p("Investments in transit improvements make the system easier to use by providing better access to places people want to go. One of the primary places people want to go is their job. The chart below shows how your scenario will improve job accessibility for the average regional resident in the region; the figures are provided by how many jobs are accessible within a given time spent (e.g. 15 minutes, 30 minutes) traveling on the transit network. This measure provides a better assessment of how the scenarios would impact people’s ability to access jobs than previous measures because it considers where the routes go relative to people, not just whether they are nearby or not. ")
+          ),
+          HTML("<center>"),
+          mod_plot_job_access_ui("plot_job_access_ui_1"),
+          HTML("</center>")
+        ),
+        br(),
+
+
         # Scenario summary -----------------------------------------------------
         scrollytell::scrolly_section(
           id = 1,

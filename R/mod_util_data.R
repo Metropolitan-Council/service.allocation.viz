@@ -19,8 +19,7 @@ mod_util_data_server <- function(
   input,
   output,
   session,
-  slider_input = slider_input
-) {
+  slider_input = slider_input) {
   ns <- session$ns
 
   summary_data <- reactive({
@@ -30,6 +29,10 @@ mod_util_data_server <- function(
 
   summary_context_data <- reactive({
     se_summary_long[item_category %in% c("pop", "emp")][, selected := ifelse(scenario_id == slider_input$slider, 1, 0)]
+  })
+
+  job_access_data <- reactive({
+    service.allocation.viz::job_access[, selected := ifelse(scenario_id == slider_input$slider, 1, 0)]
   })
 
 
@@ -50,6 +53,11 @@ mod_util_data_server <- function(
   observe({
     vals$summary_context_data <- summary_context_data()
   })
+
+  observe({
+    vals$job_access_data <- job_access_data()
+  })
+
 
   return(vals)
 }

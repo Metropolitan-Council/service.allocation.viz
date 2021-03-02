@@ -567,4 +567,56 @@ usethis::use_data(se_summary_long, overwrite = T)
 # job access ------------------------------------------------------------
 #
 job_access <- readxl::read_xlsx("data-raw/job_access.xlsx") %>%
-  clean_names()
+  clean_names() %>%
+  mutate(
+    scenario = factor(
+      scenario,
+      levels = c(
+        "Scenario 1",
+        "Scenario A",
+        "Scenario B",
+        "Scenario C",
+        "Scenario D",
+        "Scenario E",
+        "Scenario 2"
+      )
+    ),
+    scenario_id = stringr::str_sub(scenario, start = -1L, end = -1L),
+  ) %>%
+  gather(x15_minutes,
+         x30_minutes,
+         x45_minutes,
+         x60_minutes,
+         key = "time",
+         value = "pct"
+  ) %>%
+  mutate(
+    minute_improvement = stringr::str_replace(time, "_", " ") %>%
+      stringr::str_remove("x") %>%
+      factor(levels = c(
+        "15 minutes",
+        "30 minutes",
+        "45 minutes",
+        "60 minutes"
+      )),
+    hover_text = paste0(
+      "<b>",
+      scenario,
+      "</b>",
+      " will increase the number of jobs",
+      "<br>",
+      " accessibile within ",
+      "<b>",
+      minute_improvement,
+      "</b>",
+      " by ",
+      "<b>",
+      round(pct * 100, digits = 1), "%",
+      "</b> "
+    )
+  ) %>%
+  as.data.table()
+
+# job_access %>% View
+
+usethis::use_data(job_access, overwrite = T)

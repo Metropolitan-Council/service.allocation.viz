@@ -39,6 +39,13 @@ app_server <- function(input, output, session) {
   )
 
 
+  callModule(
+    mod_plot_job_access_server,
+    "plot_job_access_ui_1",
+    data_for_plotting = data_for_plotting
+  )
+
+
   # Table scrolly ---------------------------------------------------------------
   callModule(
     mod_table_server,
