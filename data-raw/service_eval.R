@@ -583,12 +583,13 @@ job_access <- readxl::read_xlsx("data-raw/job_access.xlsx") %>%
     ),
     scenario_id = stringr::str_sub(scenario, start = -1L, end = -1L),
   ) %>%
-  gather(x15_minutes,
-         x30_minutes,
-         x45_minutes,
-         x60_minutes,
-         key = "time",
-         value = "pct"
+  gather(
+    x15_minutes,
+    x30_minutes,
+    x45_minutes,
+    x60_minutes,
+    key = "time",
+    value = "pct"
   ) %>%
   mutate(
     minute_improvement = stringr::str_replace(time, "_", " ") %>%
@@ -611,7 +612,8 @@ job_access <- readxl::read_xlsx("data-raw/job_access.xlsx") %>%
       "</b>",
       " by ",
       "<b>",
-      round(pct * 100, digits = 1), "%",
+      round(pct * 100, digits = 1),
+      "%",
       "</b> "
     )
   ) %>%

@@ -48,7 +48,6 @@ mod_scrolly_container_ui <- function(id) {
           mod_plot_improve_service_ui("plot_improve_service_ui_1"),
           HTML("</center>")
         ),
-
         scrollytell::scrolly_section(
           id = 0.9,
           wellPanel(
@@ -59,11 +58,9 @@ mod_scrolly_container_ui <- function(id) {
           # mod_plot_improve_service_ui("plot_improve_service_ui_1"),
           HTML("</center>")
         ),
-
-
         # Proposed network table -----------------------------------------------
         scrollytell::scrolly_section(
-          id = 0,
+          id = "proposed_network",
           wellPanel(
             h3("Proposed network"),
             p("The following changes to the network are proposed for the selected scenario.")
@@ -73,7 +70,6 @@ mod_scrolly_container_ui <- function(id) {
           HTML("</center>")
         ),
         br(),
-
         scrollytell::scrolly_section(
           id = "job_access",
           wellPanel(
@@ -85,8 +81,6 @@ mod_scrolly_container_ui <- function(id) {
           HTML("</center>")
         ),
         br(),
-
-
         # Scenario summary -----------------------------------------------------
         scrollytell::scrolly_section(
           id = 1,

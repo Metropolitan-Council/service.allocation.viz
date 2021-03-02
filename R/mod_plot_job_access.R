@@ -18,10 +18,11 @@ mod_plot_job_access_ui <- function(id) {
 #'
 #' @noRd
 mod_plot_job_access_server <- function(
-                                       input,
-                                       output,
-                                       session,
-                                       data_for_plotting = data_for_plotting) {
+  input,
+  output,
+  session,
+  data_for_plotting = data_for_plotting
+) {
   ns <- session$ns
 
   output$job_access_plot <- plotly::renderPlotly({
@@ -38,7 +39,8 @@ mod_plot_job_access_server <- function(
             group = minute_improvement
           ),
           position = position_dodge2(
-            padding = 0.1)
+            padding = 0.1
+          )
         ) +
         geom_col(
           data = data_for_plotting$job_access_data[selected == 0, ],

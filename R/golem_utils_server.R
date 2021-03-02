@@ -128,7 +128,7 @@ improve_colors <- c(
   "orchid3"
 )
 
-expand_colors <-  c(
+expand_colors <- c(
   spectrum_colors[[7]],
   "darkseagreen3"
 )

@@ -103,8 +103,10 @@ mod_plot_new_access_server <- function(
         # xaxis = axis_options,
         # yaxis = axis_options,
         showlegend = TRUE,
-        legend = list(orientation = "h",
-                      y = -0.12),
+        legend = list(
+          orientation = "h",
+          y = -0.12
+        ),
         annotations = list(
           visible = FALSE,
           font = list(

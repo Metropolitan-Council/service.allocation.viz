@@ -19,7 +19,8 @@ mod_util_data_server <- function(
   input,
   output,
   session,
-  slider_input = slider_input) {
+  slider_input = slider_input
+) {
   ns <- session$ns
 
   summary_data <- reactive({
