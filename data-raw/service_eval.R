@@ -113,6 +113,63 @@ se_all_day <- se_base %>%
 se_by_tma <- read_xlsx(path = "data-raw/service_eval_by_tma.xlsx") %>%
   clean_names()
 
+se_by_tma_base <- se_by_tma %>%
+  mutate(
+    scenario_short = case_when(
+      stringr::str_detect(buffer_name, "Base") ~ "Base",
+      TRUE ~ stringr::str_sub(buffer_name, end = 10L)
+    ),
+    expand_improve = case_when(
+      stringr::str_detect(buffer_name, "Expand") ~ "Expand",
+      stringr::str_detect(buffer_name, "Improve") ~ "Improve"
+    )
+  ) %>%
+  mutate(
+    service_type = case_when(
+      stringr::str_detect(buffer_name, "HFT") ~ "High frequency",
+      stringr::str_detect(buffer_name, "Local") ~ "Local",
+      stringr::str_detect(buffer_name, "Basic") ~ "Basic",
+      stringr::str_detect(buffer_name, "CE") ~ "Commuter express",
+      stringr::str_detect(buffer_name, "DR") ~ "Demand response"
+    ),
+    time_type = case_when(stringr::str_detect(buffer_name, "All Day") ~ "All day")
+  ) %>%
+  filter(scenario_short == "Base",
+         is.na(time_type)) %>%
+  select(
+    market_area,
+    service_type,
+    everything(),
+    -buffer_name,
+    -objectid,
+    -shape_length,
+    -shape_area,
+    -expand_improve,
+    -time_type,
+    -scenario_short
+
+  ) %>%
+  group_by(
+    market_area,
+    service_type
+  ) %>%
+  gather(
+    pop_total,
+    pov185,
+    poc,
+    seniors,
+    zero_car_hh,
+    afford_hous_units,
+    jobs,
+    low_inc_job,
+    hi_inc_job,
+    key = "item",
+    value = "value_base"
+  )
+
+
+
+
 se_by_tma_long <- se_by_tma %>%
   mutate(
     scenario_short = case_when(
@@ -189,10 +246,54 @@ se_by_tma_long <- se_by_tma %>%
       item == "low_inc_job" ~ "low-wage jobs",
       item == "pop_total" ~ "people",
       item == "pov185" ~ "people with income under 185% federal poverty threshold"
-    ),
-    hover_text = paste0(service_type, ", ", format(round(value), big.mark = ","), " ", item_units),
+    )
   ) %>%
   as.data.table()
+
+
+
+
+se_by_tma_long <- left_join(se_by_tma_long, se_by_tma_base) %>%
+  mutate(val_increase = value - value_base) %>%
+  filter(scenario_short != "Base") %>%
+  mutate(scenario_short = factor(
+    scenario_short,
+    levels = c(
+      "Scenario 1",
+      "Scenario A",
+      "Scenario B",
+      "Scenario C",
+      "Scenario D",
+      "Scenario E",
+      "Scenario 2"
+    )
+  ),
+  scenario_id = stringr::str_sub(scenario_short, start = -1L, end = -1L),
+  hover_text = paste0(
+    "<b>",
+    scenario_short,
+    "</b>",
+    " will increase ",
+    service_type,
+    " service ",
+    "<br>",
+    " in ",
+    "<b>",
+    " TMA ",
+    market_area,
+    "</b>",
+    " by ",
+    "<b>",
+    format(trunc(signif(val_increase, digits = 3)), big.mark = ","),
+    "</b> ",
+    item_units
+  )
+
+  ) %>%
+  as.data.table()
+
+
+
 
 usethis::use_data(se_by_tma_long, overwrite = T)
 
@@ -293,8 +394,9 @@ se_service_type <- se_by_tma %>%
       levels = c(
         "Commuter express",
         "Basic",
-        "Local",
-        "High frequency"
+        "High frequency",
+        "Local"
+
       )
     ),
     hover_text = paste0(
@@ -305,6 +407,7 @@ se_service_type <- se_by_tma %>%
   ) %>%
   filter(!is.na(service_type)) %>%
   as.data.table()
+
 
 usethis::use_data(se_service_type, overwrite = TRUE)
 

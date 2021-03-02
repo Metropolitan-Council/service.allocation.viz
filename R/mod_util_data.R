@@ -27,15 +27,17 @@ mod_util_data_server <- function(
     se_summary_long[scenario_id == slider_input$slider, ][item_category %in% c("pop", "emp")]
   })
 
-
   summary_context_data <- reactive({
     se_summary_long[item_category %in% c("pop", "emp")][, selected := ifelse(scenario_id == slider_input$slider, 1, 0)]
+  })
+
+  service_type_by_tma <- reactive({
+    service.allocation.viz::se_by_tma_long[, selected := ifelse(scenario_id == slider_input$slider, 1, 0)]
   })
 
   job_access_data <- reactive({
     service.allocation.viz::job_access[, selected := ifelse(scenario_id == slider_input$slider, 1, 0)]
   })
-
 
   detail_data <- reactive({
     se_summary_long[scenario_id == slider_input$slider, ][!item_category %in% c("pop", "emp"), ]
@@ -58,6 +60,10 @@ mod_util_data_server <- function(
   observe({
     vals$job_access_data <- job_access_data()
   })
+  observe({
+    vals$service_type_by_tma <- service_type_by_tma()
+  })
+
 
 
   return(vals)
