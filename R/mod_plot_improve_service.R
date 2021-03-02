@@ -56,7 +56,7 @@ mod_plot_improve_service_server <- function(
             padding = 0.1
           ),
           fill = "white",
-          alpha = 0.6
+          alpha = 0.7
         ) +
         scale_y_continuous(
           labels = scales::percent
