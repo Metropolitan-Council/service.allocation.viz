@@ -83,13 +83,13 @@ sysfonts::font_add("Arial", "inst/app/www/arial.ttf")
 
 
 font_sizes <- list(
-  font_size_base = 13,
-  font_size_plot_title = 22,
-  font_size_axis_title = 14,
-  font_size_legend_title = 14,
+  font_size_base = 14,
+  font_size_plot_title = 18,
+  font_size_axis_title = 16,
+  font_size_legend_title = 16,
   font_size_strip_title = 16,
   font_size_axis_text = 11,
-  font_size_legend_text = 10,
+  font_size_legend_text = 11,
   font_size_caption = 9,
   font_size_margin = 10
 )
@@ -116,5 +116,19 @@ axis_options <- list(
 )
 
 
-job_color <-   "#E2F0D9"
-people_color <-   "#DAE3F3"
+job_color <- "#E2F0D9"
+people_color <- "#DAE3F3"
+
+
+spectrum_colors <- RColorBrewer::brewer.pal(7, "PRGn")
+
+
+improve_colors <- c(
+  spectrum_colors[[1]],
+  "orchid3"
+)
+
+expand_colors <-  c(
+  spectrum_colors[[7]],
+  "darkseagreen3"
+)
