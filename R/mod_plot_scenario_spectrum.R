@@ -10,7 +10,7 @@
 mod_plot_scenario_spectrum_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    plotlyOutput(ns("scenario_spectrum"))
+    plotlyOutput(ns("scenario_spectrum"), height = "250px")
   )
 }
 
