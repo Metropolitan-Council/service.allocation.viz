@@ -62,7 +62,7 @@ mod_plot_improve_service_server <- function(
           labels = scales::percent
         ) +
         scale_fill_manual(
-          values = improve_colors,
+          values = convenient_colors,
           labels = c(
             "Jobs",
             "People"

@@ -61,7 +61,7 @@ mod_plot_new_access_server <- function(
           labels = scales::percent
         ) +
         scale_fill_manual(
-          values = expand_colors,
+          values = coverage_colors,
           labels = c(
             "Jobs",
             "People"

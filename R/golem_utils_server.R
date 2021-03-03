@@ -123,12 +123,12 @@ people_color <- "#DAE3F3"
 spectrum_colors <- RColorBrewer::brewer.pal(7, "PRGn")
 
 
-improve_colors <- c(
+convenient_colors <- c(
   spectrum_colors[[1]],
   "orchid3"
 )
 
-expand_colors <- c(
+coverage_colors <- c(
   spectrum_colors[[7]],
   "darkseagreen3"
 )
