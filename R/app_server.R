@@ -50,6 +50,13 @@ app_server <- function(input, output, session) {
     data_for_plotting = data_for_plotting
   )
 
+  callModule(
+    mod_plot_tma_service_type_server,
+    "plot_tma_service_type_ui_1",
+    data_for_plotting = data_for_plotting
+  )
+
+
 
   # Table scrolly ---------------------------------------------------------------
   callModule(
@@ -73,11 +80,6 @@ app_server <- function(input, output, session) {
     data_for_plotting = data_for_plotting
   )
 
-  callModule(
-    mod_plot_scenario_tma_server,
-    "plot_scenario_tma_ui_1",
-    slider_input = slider_input
-  )
 
 
 
@@ -137,8 +139,7 @@ app_server <- function(input, output, session) {
   # increase by service type
 
   callModule(
-    mod_plot_scenario_tma_server,
+    mod_plot_tma_service_type_server,
     "plot_scenario_tma_ui_2",
-    slider_input = slider_input
-  )
+    data_for_plotting = data_for_plotting)
 }

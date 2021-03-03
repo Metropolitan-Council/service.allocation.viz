@@ -25,8 +25,19 @@ mod_scrolly_container_ui <- function(id) {
       h2("Scenario Summaries"),
       scrollytell::scrolly_sections(
         scrollytell::scrolly_section(
-          id = 00,
+          id = 0,
           h3("Choose your scenario and scroll down for more")
+        ),
+        # Proposed network table -----------------------------------------------
+        scrollytell::scrolly_section(
+          id = "proposed_network_changes",
+          wellPanel(
+            h3("Proposed network"),
+            p("The following changes to the network are proposed for the selected scenario.")
+          ),
+          HTML("<center>"),
+          mod_table_ui("table_ui_1"),
+          HTML("</center>")
         ),
         scrollytell::scrolly_section(
           id = "new_all_day",
@@ -56,30 +67,16 @@ mod_scrolly_container_ui <- function(id) {
           ),
           HTML("<center>"),
           mod_plot_service_type_ui("plot_service_type_ui_1"),
-          HTML("</center>")
-        ),
-        scrollytell::scrolly_section(
-          id = 0.9,
-          wellPanel(
-            h3("What types of transit service would be improved and for how many people?"),
-            p("In order to have a full understanding how your selected scenario is going to impact the region, it is important to understand how transit service is going to be improved at the various service thresholds described earlier. The chart below shows how many more people would have new access to high-frequency and local transit service. High-frequency is a service you can use for most or all of your daily needs while local is a service that you can rely on but generally need to plan ahead to use. For your reference, 645,000 people had access to high frequency services and 610,000 people had access to local bus service.")
-          ),
+          HTML("</center>"),
+          br(),
+          h4("What market areas will be served by these improvements?"),
+          br(),
           HTML("<center>"),
-          # mod_plot_improve_service_ui("plot_improve_service_ui_1"),
+          mod_plot_tma_service_type_ui("plot_tma_service_type_ui_1"),
+
           HTML("</center>")
         ),
-        # Proposed network table -----------------------------------------------
-        scrollytell::scrolly_section(
-          id = "proposed_network_changes",
-          wellPanel(
-            h3("Proposed network"),
-            p("The following changes to the network are proposed for the selected scenario.")
-          ),
-          HTML("<center>"),
-          mod_table_ui("table_ui_1"),
-          HTML("</center>")
-        ),
-        br(),
+
         scrollytell::scrolly_section(
           id = "job_access",
           wellPanel(
@@ -90,6 +87,19 @@ mod_scrolly_container_ui <- function(id) {
           mod_plot_job_access_ui("plot_job_access_ui_1"),
           HTML("</center>")
         ),
+
+        scrollytell::scrolly_section(
+          id = "ridership_increase",
+          wellPanel(
+            h3("How many more people would use the transit system?"),
+            p("Measuring transit riders is a fundamental aspect of assessing a transit system’s impact. If the system is useful to people, more will likely ride it. While it is impossible to assess ridership potential perfectly, since many factors influence people’s choices, the following is an estimate of how each scenario’s improvements would impact regional transit ridership.")
+          ),
+          HTML("<center>"),
+          # mod_plot_job_access_ui("plot_job_access_ui_1"),
+          HTML("</center>")
+        ),
+
+
         br(),
         # Scenario summary -----------------------------------------------------
         scrollytell::scrolly_section(
@@ -110,9 +120,6 @@ mod_scrolly_container_ui <- function(id) {
             )
           ),
           br(),
-          fluidRow(
-            mod_plot_scenario_tma_ui("plot_scenario_tma_ui_1")
-          ),
           HTML("</center>")
         ),
         # br(),
@@ -144,42 +151,6 @@ mod_scrolly_container_ui <- function(id) {
           fluidRow(
             column(width = 6, mod_plot_scenario_detail_ui("mod_plot_scenario_detail_ui_improve_people")),
             column(width = 6, mod_plot_scenario_detail_ui("mod_plot_scenario_detail_ui_improve_jobs"))
-          ),
-          HTML("</center>")
-        ),
-        scrollytell::scrolly_section(
-          id = 4,
-          wellPanel(
-            h3("Increase by service type"),
-            p("The following provides greater detail as to how each scenario benefits the region. The chart on the left describes which level of transit service the scenario provides and the chart on the right shows how where in the region transit service is improved")
-          ),
-          HTML("<center>"),
-          fluidRow(
-            column(
-              width = 6,
-              mod_plot_scenario_tma_ui("plot_scenario_tma_ui_2"),
-            )
-          ),
-          fluidRow(
-            column(width = 4),
-            column(width = 8)
-          ),
-          HTML("</center>")
-        ),
-        scrollytell::scrolly_section(
-          id = 4,
-          wellPanel(
-            h3("Network Improvements"),
-            p("At the high level the selected scenario would have the following impacts on system level ridership and on regional job accessibility.")
-          ),
-          HTML("<center>"),
-          fluidRow(
-            column(width = 4),
-            column(width = 8)
-          ),
-          fluidRow(
-            column(width = 4),
-            column(width = 8)
           ),
           HTML("</center>")
         ),

@@ -38,8 +38,10 @@ mod_plot_service_type_server <- function(
             text = hover_text
           ),
           color = "white",
-          lwd = 0.4
+          lwd = 0.4,
+          position = "stack"
         ) +
+        scale_fill_manual(values = convenient_colors) +
         geom_col(
           data = data_for_plotting$service_type_by_tma$by_all[selected == 0, ],
           mapping = aes(
@@ -52,7 +54,7 @@ mod_plot_service_type_server <- function(
         ) +
         scale_y_continuous(labels = scales::comma) +
         labs(
-          x = "People",
+          x = "",
           y = "",
           title = "Change in Acess to Transit by Service Level"
         ) +
