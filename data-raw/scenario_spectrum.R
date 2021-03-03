@@ -15,7 +15,7 @@ scenario_spectrum <- tidyr::tibble(
   ),
   scenario_id = unique(scenario_def_long$scenario_id),
   scenario_priority = c(
-    "Convienent Transit Concept",
+    "Convenient Transit Concept",
     rep("", 5),
     "Coverage Concept"
   ),
