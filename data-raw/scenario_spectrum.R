@@ -15,9 +15,9 @@ scenario_spectrum <- tidyr::tibble(
   ),
   scenario_id = unique(scenario_def_long$scenario_id),
   scenario_priority = c(
-    "Improve service",
+    "Convienent Transit Concept",
     rep("", 5),
-    "Expand coverage"
+    "Coverage Concept"
   ),
   scenario_priority_desc = c(
     "Improving service serving all trip types, mostly in Transit Market Areas I & II",
@@ -31,22 +31,19 @@ scenario_spectrum <- tidyr::tibble(
   mix = paste0(as.character(mix_scenario_1), "/", as.character(mix_scenario_2)),
   mix_value = c(3, 2, 1, 0, -1, -2, -3),
   mix_text = c(
-    "100% Scenario I",
-    "80% Scenario I / 20% Scenario II",
-    "60% Scenario I / 40% Scenario II",
-    "50% Scenario I / 50% Scenario II",
-    "40% Scenario I / 60% Scenario II",
-    "20% Scenario I / 80% Scenario II",
-    "100% Scenario II"
+    "All improvements from Convenient Transit Concept",
+    "Mostly improvements from Convenient Transit Concept",
+    "Improvements lean towards Convenient Transit Concept",
+    "Half improvements from Convenient Transit Concept, half improvements from Coverage Concept",
+    "Improvements lean towards Coverage Concept",
+    "Mostly improvements from Coverage Concept",
+    "All improvements from Coverage Concept"
   ),
-  hover_text = c(
-    "<b> Scenario I </b> Improving service serving all trip types, mostly in Transit Market Areas I & II",
-    "<b> Scenario A </b> 80% Scenario I / 20% Scenario II",
-    "<b> Scenario B </b> 60% Scenario I / 40% Scenario II",
-    "<b> Scenario C </b> 50% Scenario I / 50% Scenario II",
-    "<b> Scenario D </b> 40% Scenario I / 60% Scenario II",
-    "<b> Scenario E </b> 20% Scenario I / 80% Scenario II",
-    "<b> Scenario II </b> Maximizes geographic coverage of transit service"
+  hover_text = paste0(
+    "<b>",
+    scenario,
+    "</b> ",
+    mix_text
   )
 )
 
