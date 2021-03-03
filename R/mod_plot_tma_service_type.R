@@ -37,40 +37,24 @@ data_for_plotting = data_for_plotting
         geom_col(
           aes(
             x = market_area,
-            y = value,
+            y = val_increase,
             # group = service_type,
             text = hover_text,
             fill = service_type
           ),
-          width = -1,
-          # fill = "#542c40",
-          position = position_stack()
+          color = "white",
+          lwd = 0.4,
+          position = "stack"
         ) +
-        scale_fill_manual(values = c(
-          "#542c40",
-          "#964f74"
-
-        )) +
+        scale_fill_manual(values = convenient_colors) +
         scale_y_continuous(
-          labels = scales::comma,
-          name = "People"
+          labels = scales::comma
         ) +
         labs(
           x = "Transit market area",
           y = "",
           # title = "Scenario 1",
           fill = "Service level"
-        ) +
-        theme(
-          # legend.position = "bottom",
-          axis.text.x = element_text(
-            size = font_sizes$font_size_axis_text,
-            family = font_families$font_family_base
-          ),
-          axis.title = element_text(
-            family = font_families$font_family_title,
-            size = font_sizes$font_size_axis_title
-          )
         ) +
         app_theme() +
         ggplot2::theme(
