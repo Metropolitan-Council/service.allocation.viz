@@ -7,13 +7,13 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_plot_scenario_tma_ui <- function(id) {
+mod_plot_tma_service_type_ui <- function(id) {
   ns <- NS(id)
   tagList(
     plotly::plotlyOutput(
-      ns("tma_summary"),
-      width = "75%",
-      height = "225px"
+      ns("tma_service_type_summary"),
+      # width = "75%",
+      # height = "225px"
     )
   )
 }
@@ -21,26 +21,19 @@ mod_plot_scenario_tma_ui <- function(id) {
 #' plot_scenario_tma Server Function
 #'
 #' @noRd
-mod_plot_scenario_tma_server <- function(
+mod_plot_tma_service_type_server <- function(
   input,
   output,
   session,
-  slider_input = slider_input
-) {
+data_for_plotting = data_for_plotting
+  ) {
   ns <- session$ns
 
-  summary_tma_data <- reactive({
-    se_by_tma_long[scenario_id == slider_input$slider, ][item == "pop_total", ][service_type %in% c(
-      "High frequency",
-      "Local"
-    ), ]
-  })
 
-
-  output$tma_summary <- plotly::renderPlotly({
+  output$tma_service_type_summary <- plotly::renderPlotly({
     ggplotly(
       tooltip = "text",
-      ggplot(data = summary_tma_data()) +
+      ggplot(data = data_for_plotting$service_type_by_tma$by_tma) +
         geom_col(
           aes(
             x = market_area,
@@ -51,11 +44,12 @@ mod_plot_scenario_tma_server <- function(
           ),
           width = -1,
           # fill = "#542c40",
-          position = position_identity()
+          position = position_stack()
         ) +
         scale_fill_manual(values = c(
-          "#964f74",
-          "#542c40"
+          "#542c40",
+          "#964f74"
+
         )) +
         scale_y_continuous(
           labels = scales::comma,
@@ -103,12 +97,14 @@ mod_plot_scenario_tma_server <- function(
         )
     ) %>%
       layout(
-        # margin = list(l = 10, r = 10, b = 10, t = 10, pad = 10), # l = left; r = right; t = top; b = bottom
+        margin = list(l = 0, r = 0, b = 10, t = 50, pad = 10),
+        # l = left; r = right; t = top; b = bottom
         # xaxis = axis_options,
         # yaxis = axis_options,
         showlegend = TRUE,
         legend = list(
-          orientation = "v"
+          orientation = "h",
+          y = -0.12
         ),
         annotations = list(
           visible = FALSE,
@@ -118,8 +114,7 @@ mod_plot_scenario_tma_server <- function(
             color = councilR::colors$suppBlack
           )
         ),
-        hovermode = "closest",
-        # hoveron = "fills",
+        # hovermode = "x-unified",
         hoverdistance = "5",
         hoverlabel = list(
           #----
@@ -142,7 +137,7 @@ mod_plot_scenario_tma_server <- function(
 }
 
 ## To be copied in the UI
-# mod_plot_scenario_tma_ui("plot_scenario_tma_ui_1")
+# mod_plot_tma_service_type_ui("plot_tma_service_type_ui_1")
 
 ## To be copied in the server
-# callModule(mod_plot_scenario_tma_server, "plot_scenario_tma_ui_1", slider_input = slider_input)
+# callModule(mod_plot_tma_service_type_server, "plot_tma_service_type_ui_1")
