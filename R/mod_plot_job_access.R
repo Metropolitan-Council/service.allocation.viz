@@ -60,10 +60,10 @@ mod_plot_job_access_server <- function(
           labels = scales::percent
         ) +
         scale_fill_manual(values = c(
-          "#FF00FF",
-          "#D10ED6",
-          "#A41CAC",
-          spectrum_colors[[1]]
+          "#3CB371",
+          "#319F5D",
+          "#268B4A",
+          spectrum_colors[[7]]
         )) +
         labs(
           title = "Job Accessibility",
