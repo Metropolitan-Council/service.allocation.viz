@@ -10,7 +10,7 @@
 mod_plot_scenario_spectrum_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    plotlyOutput(ns("scenario_spectrum"), height = "250px")
+    plotlyOutput(ns("scenario_spectrum"))
   )
 }
 
@@ -44,15 +44,16 @@ mod_plot_scenario_spectrum_server <- function(input, output, session) {
           ),
           show.legend = F
         ) +
-        geom_text(mapping = aes(
-          x = scenario,
-          y = y + 0.6,
-          label = scenario_priority
-        )) +
+        geom_text(
+          mapping = aes(
+            x = scenario,
+            y = y + 0.6,
+            label = scenario_priority
+          )) +
         geom_text(mapping = aes(
           x = scenario,
           y = y,
-          label = mix
+          label = stringr::str_wrap(hover_text, 20),
         )) +
         scale_fill_distiller(type = "div", palette = "PRGn") +
         scale_x_discrete(labels = scenario_spectrum$scenario) +
