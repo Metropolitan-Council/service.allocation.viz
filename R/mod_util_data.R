@@ -32,7 +32,12 @@ mod_util_data_server <- function(
   })
 
   service_type_by_tma <- reactive({
-    service.allocation.viz::se_by_tma_long[, selected := ifelse(scenario_id == slider_input$slider, 1, 0)]
+    list(
+    by_tma = service.allocation.viz::se_by_tma_long[scenario_id == slider_input$slider, ][item == "pop_total", ][service_type %in% c(
+      "High frequency",
+      "Local"
+    ), ],
+    by_all = service.allocation.viz::se_high_low_freq_summary[, selected := ifelse(scenario_id == slider_input$slider, 1, 0)])
   })
 
   job_access_data <- reactive({

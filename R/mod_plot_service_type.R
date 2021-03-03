@@ -29,30 +29,22 @@ mod_plot_service_type_server <- function(
   output$service_type_plot <- plotly::renderPlotly({
     ggplotly(
       tooltip = "text",
-      ggplot(data = data_for_plotting$service_type_by_tma[service_type %in% c(
-        "Local",
-        "High frequency"
-      ), ][item == "pop_total", ]) +
+      ggplot(data = data_for_plotting$service_type_by_tma$by_all) +
         geom_col(
           mapping = aes(
             x = scenario_short,
-            y = val_increase,
+            y = total_increase,
             fill = service_type,
-            group = market_area,
             text = hover_text
           ),
           color = "white",
           lwd = 0.4
         ) +
         geom_col(
-          data = data_for_plotting$service_type_by_tma[service_type %in% c(
-            "Local",
-            "High frequency"
-          ), ][item == "pop_total", ][selected == 0, ],
+          data = data_for_plotting$service_type_by_tma$by_all[selected == 0, ],
           mapping = aes(
             x = scenario_short,
-            y = val_increase,
-            group = market_area,
+            y = total_increase,
             text = hover_text
           ),
           fill = "white",
@@ -66,16 +58,16 @@ mod_plot_service_type_server <- function(
         ) +
         app_theme() +
         theme(
-          # axis.title.x = ggplot2::element_text(
-          #   vjust = -1,
-          #   family = font_families$font_family_axis_title,
-          #   size = font_sizes$font_size_axis_title
-          # ),
-          # axis.title.y = ggplot2::element_text(
-          #   vjust = 2,
-          #   family = font_families$font_family_axis_title,
-          #   size = font_sizes$font_size_axis_title
-          # ),
+          axis.title.x = ggplot2::element_text(
+            vjust = -1,
+            family = font_families$font_family_axis_title,
+            size = font_sizes$font_size_axis_title
+          ),
+          axis.title.y = ggplot2::element_text(
+            vjust = 2,
+            family = font_families$font_family_axis_title,
+            size = font_sizes$font_size_axis_title
+          ),
           axis.text.x = ggplot2::element_text(
             family = font_families$font_family_axis_text,
             size = font_sizes$font_size_axis_text,
@@ -85,7 +77,7 @@ mod_plot_service_type_server <- function(
             family = font_families$font_family_axis_text,
             size = font_sizes$font_size_axis_text,
             vjust = 1
-          )
+          ),
         )
     ) %>%
       plotly::layout(
