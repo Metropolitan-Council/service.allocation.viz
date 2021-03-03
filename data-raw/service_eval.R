@@ -276,7 +276,9 @@ se_by_tma_long <- left_join(se_by_tma_long, se_by_tma_base) %>%
       scenario_short,
       "</b>",
       " will increase ",
-      service_type,
+      "<b>",
+      stringr::str_to_lower(service_type),
+      "</b>",
       " service ",
       "<br>",
       " in ",
@@ -294,12 +296,36 @@ se_by_tma_long <- left_join(se_by_tma_long, se_by_tma_base) %>%
   as.data.table()
 
 
-
+se_high_low_freq_summary <- se_by_tma_long %>%
+  filter(item_units == "people",
+         item == "pop_total",
+         service_type %in% c("High frequency",
+                             "Local")) %>%
+  select(-market_area) %>%
+  group_by(scenario_short, service_type, item, scenario_id, item_units) %>%
+  summarize(total_increase = sum(val_increase, na.rm = T)) %>%
+  mutate(    hover_text = paste0(
+    "<b>",
+    scenario_short,
+    "</b>",
+    " will increase ",
+    "<b>",
+    stringr::str_to_lower(service_type),
+    "</b>",
+    " service ",
+    " by ",
+    "<b>",
+    format(trunc(signif(total_increase, digits = 3)), big.mark = ","),
+    "</b> ",
+    item_units
+  )
+  ) %>%
+  as.data.table()
 
 usethis::use_data(se_by_tma_long, overwrite = T)
+usethis::use_data(se_high_low_freq_summary, overwrite = T)
 
-
-## ----
+## service type  ----
 se_service_type <- se_by_tma %>%
   mutate(
     scenario_short = case_when(
