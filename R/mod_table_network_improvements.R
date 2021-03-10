@@ -8,7 +8,7 @@
 #'
 #' @importFrom shiny NS tagList
 #' @importFrom DT DTOutput renderDT
-mod_table_ui <- function(id) {
+mod_table_network_improvements_ui <- function(id) {
   ns <- NS(id)
   tagList(
     DT::DTOutput(
@@ -22,7 +22,7 @@ mod_table_ui <- function(id) {
 #' table Server Function
 #'
 #' @noRd
-mod_table_server <- function(input, output, session, slider_input) {
+mod_table_network_improvements_server <- function(input, output, session, slider_input) {
   ns <- session$ns
 
   table_data <- reactive({
@@ -43,21 +43,22 @@ mod_table_server <- function(input, output, session, slider_input) {
         dom = "t",
         columnDefs = list(list(className = "dt-center", targets = 1))
       )
-    ) %>%
-      DT::formatStyle(
-        columns = "value",
-        color = "black",
-        backgroundColor = "pink",
-        borderColor = "white",
-        borderTop = "2px",
-        borderTopStyle = "solid",
-        borderTopColor = "white"
-      )
+    )
+    # %>%
+    #   DT::formatStyle(
+    #     columns = "value",
+    #     # color = "black",
+    #     # backgroundColor = "pink",
+    #     borderColor = "white",
+    #     borderTop = "2px",
+    #     borderTopStyle = "solid",
+    #     borderTopColor = "white"
+    #   )
   })
 }
 
 ## To be copied in the UI
-# mod_table_ui("table_ui_1")
+# mod_table_network_improvements_ui("table_ui_1")
 
 ## To be copied in the server
-# callModule(mod_table_server, "table_ui_1")
+# callModule(mod_table_network_improvements_server, "table_ui_1")
