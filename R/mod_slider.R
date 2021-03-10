@@ -17,13 +17,13 @@ mod_slider_ui <- function(id) {
       grid = TRUE,
       force_edges = TRUE,
       choices = c(
-        "1",
         "A",
         "B",
         "C",
         "D",
         "E",
-        "2"
+        "F",
+        "G"
       ),
     )
   )

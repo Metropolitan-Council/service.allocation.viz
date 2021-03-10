@@ -25,22 +25,22 @@ mod_scrolly_container_ui <- function(id) {
       h2("Scenario Summaries"),
       scrollytell::scrolly_sections(
         scrollytell::scrolly_section(
-          id = 0,
+          id = "0_summaries",
           h3("Choose your scenario and scroll down for more")
         ),
         # Proposed network table -----------------------------------------------
         scrollytell::scrolly_section(
-          id = "proposed_network_changes",
+          id = "01_proposed_network_changes",
           wellPanel(
             h3("Proposed network"),
             p("The following changes to the network are proposed for the selected scenario.")
           ),
           HTML("<center>"),
-          mod_table_ui("table_ui_1"),
+          mod_table_network_improvements_ui("table_ui_1"),
           HTML("</center>")
         ),
         scrollytell::scrolly_section(
-          id = "new_all_day",
+          id = "02_new_all_day",
           wellPanel(
             h3("How many more people would have access to all-day transit service?"),
             p("Each scenario provides an opportunity to extend all-day, local transit service to people and jobs that currently do not have access to the all-day, local transit network. Your selected scenario would expand access to the all-day transit network to the following number of people and jobs. For your reference 1.6 million people and 1.2 million jobs had access to the all-day, local transit network in early 2020 (pre-COVID 19).")
@@ -50,7 +50,7 @@ mod_scrolly_container_ui <- function(id) {
           HTML("</center>")
         ),
         scrollytell::scrolly_section(
-          id = "any_improvement",
+          id = "03_any_improvement",
           wellPanel(
             h3("How many people would see improved transit service of any kind?"),
             p("Each scenario provides an opportunity to extend all-day, local transit service to people and jobs that currently do not have access to the all-day, local transit network. Your selected scenario would expand access to the all-day transit network to the following number of people and jobs. For your reference 1.6 million people and 1.2 million jobs had access to the all-day, local transit network in early 2020 (pre-COVID 19).")
@@ -60,7 +60,7 @@ mod_scrolly_container_ui <- function(id) {
           HTML("</center>")
         ),
         scrollytell::scrolly_section(
-          id = "service_type_changes",
+          id = "04_service_type_changes",
           wellPanel(
             h3("What types of transit service would be improved and for how many people?"),
             p("In order to have a full understanding how your selected scenario is going to impact the region, it is important to understand how transit service is going to be improved at the various service thresholds described earlier. The chart below shows how many more people would have new access to high-frequency and local transit service. High-frequency is a service you can use for most or all of your daily needs while local is a service that you can rely on but generally need to plan ahead to use. For your reference, 645,000 people had access to high frequency services and 610,000 people had access to local bus service.")
@@ -78,7 +78,7 @@ mod_scrolly_container_ui <- function(id) {
         ),
 
         scrollytell::scrolly_section(
-          id = "job_access",
+          id = "05_job_access",
           wellPanel(
             h3("How many more jobs will the average resident be able to reach when considering the entire transit network?"),
             p("Investments in transit improvements make the system easier to use by providing better access to places people want to go. One of the primary places people want to go is their job. The chart below shows how your scenario will improve job accessibility for the average regional resident in the region; the figures are provided by how many jobs are accessible within a given time spent (e.g. 15 minutes, 30 minutes) traveling on the transit network. This measure provides a better assessment of how the scenarios would impact people’s ability to access jobs than previous measures because it considers where the routes go relative to people, not just whether they are nearby or not. ")
@@ -89,7 +89,7 @@ mod_scrolly_container_ui <- function(id) {
         ),
 
         scrollytell::scrolly_section(
-          id = "ridership_increase",
+          id = "06_ridership_increase",
           wellPanel(
             h3("How many more people would use the transit system?"),
             p("Measuring transit riders is a fundamental aspect of assessing a transit system’s impact. If the system is useful to people, more will likely ride it. While it is impossible to assess ridership potential perfectly, since many factors influence people’s choices, the following is an estimate of how each scenario’s improvements would impact regional transit ridership.")
@@ -103,7 +103,7 @@ mod_scrolly_container_ui <- function(id) {
         br(),
         # Scenario summary -----------------------------------------------------
         scrollytell::scrolly_section(
-          id = "detailed_summary",
+          id = "07_detailed_summary",
           wellPanel(
             h3("Detailed Scenario Summary"),
             p("Each option on the slider bar presents an alternative strategy for allocating resources to expand the transit network. Scenario I prioritizes investments into transit services that are able to serve a wide variety of trips, these improvements are primarily in areas with the highest transit demand, Transit Market Areas 1 and 2; scenario II prioritizes investments in transit services that maximize the number of people in the region that have access to transit service. Along the spectrum are intermediate scenarios that combine the two strategies in different ratios.")

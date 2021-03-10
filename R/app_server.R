@@ -60,7 +60,7 @@ app_server <- function(input, output, session) {
 
   # Table scrolly ---------------------------------------------------------------
   callModule(
-    mod_table_server,
+    mod_table_network_improvements_server,
     "table_ui_1",
     slider_input = slider_input
   )

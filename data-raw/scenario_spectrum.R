@@ -4,13 +4,13 @@ scenario_spectrum <- tidyr::tibble(
   scenario = factor(
     unique(scenario_def$scenario),
     levels = c(
-      "Scenario 1",
       "Scenario A",
       "Scenario B",
       "Scenario C",
       "Scenario D",
       "Scenario E",
-      "Scenario 2"
+      "Scenario F",
+      "Scenario G"
     )
   ),
   scenario_id = unique(scenario_def_long$scenario_id),

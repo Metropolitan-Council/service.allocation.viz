@@ -35,8 +35,8 @@ mod_plot_new_access_server <- function(
           aes(
             x = scenario_short,
             y = pct,
-            fill = reorder(type, dplyr::desc(type)),
-            group = reorder(type, dplyr::desc(type)),
+            fill = type,
+            group = type,
             text = hover_text
           ),
           position = position_dodge2(
@@ -48,7 +48,7 @@ mod_plot_new_access_server <- function(
           mapping = aes(
             x = scenario_short,
             y = pct,
-            group = reorder(type, dplyr::desc(type)),
+            group = type,
             text = hover_text
           ),
           position = position_dodge2(

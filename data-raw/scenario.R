@@ -18,6 +18,7 @@ scenario_def <- read_xlsx(
 ) %>%
   clean_names() %>%
   rename(scenario = x1) %>%
+  mutate(scenario = paste0("Scenario ", LETTERS[1:7])) %>%
   rowwise() %>%
   mutate(
     expanded_on_demand_service =

@@ -129,6 +129,14 @@ se_by_tma_base <- se_by_tma %>%
       stringr::str_detect(buffer_name, "Base") ~ "Base",
       TRUE ~ stringr::str_sub(buffer_name, end = 10L)
     ),
+    scenario_short = case_when(scenario_short == "Base" ~ "Base",
+                               scenario_short == "Scenario 1" ~ "Scenario A",
+                               scenario_short == "Scenario A" ~ "Scenario B",
+                               scenario_short == "Scenario B" ~ "Scenario C",
+                               scenario_short == "Scenario C" ~ "Scenario D",
+                               scenario_short == "Scenario D" ~ "Scenario E",
+                               scenario_short == "Scenario E" ~ "Scenario F",
+                               scenario_short == "Scenario 2" ~ "Scenario G"),
     expand_improve = case_when(
       stringr::str_detect(buffer_name, "Expand") ~ "Expand",
       stringr::str_detect(buffer_name, "Improve") ~ "Improve"
@@ -187,6 +195,14 @@ se_by_tma_long <- se_by_tma %>%
       stringr::str_detect(buffer_name, "Base") ~ "Base",
       TRUE ~ stringr::str_sub(buffer_name, end = 10L)
     ),
+    scenario_short = case_when(scenario_short == "Base" ~ "Base",
+                               scenario_short == "Scenario 1" ~ "Scenario A",
+                               scenario_short == "Scenario A" ~ "Scenario B",
+                               scenario_short == "Scenario B" ~ "Scenario C",
+                               scenario_short == "Scenario C" ~ "Scenario D",
+                               scenario_short == "Scenario D" ~ "Scenario E",
+                               scenario_short == "Scenario E" ~ "Scenario F",
+                               scenario_short == "Scenario 2" ~ "Scenario G"),
     expand_improve = case_when(
       stringr::str_detect(buffer_name, "Expand") ~ "Expand",
       stringr::str_detect(buffer_name, "Improve") ~ "Improve"
@@ -282,13 +298,13 @@ se_by_tma_long <- left_join(se_by_tma_long, se_by_tma_base) %>%
     scenario_short = factor(
       scenario_short,
       levels = c(
-        "Scenario 1",
         "Scenario A",
         "Scenario B",
         "Scenario C",
         "Scenario D",
         "Scenario E",
-        "Scenario 2"
+        "Scenario F",
+        "Scenario G"
       )
     ),
     scenario_id = stringr::str_sub(scenario_short, start = -1L, end = -1L),
@@ -353,6 +369,14 @@ se_service_type <- se_by_tma %>%
       stringr::str_detect(buffer_name, "Base") ~ "Base",
       TRUE ~ stringr::str_sub(buffer_name, end = 10L)
     ),
+    scenario_short = case_when(scenario_short == "Base" ~ "Base",
+                               scenario_short == "Scenario 1" ~ "Scenario A",
+                               scenario_short == "Scenario A" ~ "Scenario B",
+                               scenario_short == "Scenario B" ~ "Scenario C",
+                               scenario_short == "Scenario C" ~ "Scenario D",
+                               scenario_short == "Scenario D" ~ "Scenario E",
+                               scenario_short == "Scenario E" ~ "Scenario F",
+                               scenario_short == "Scenario 2" ~ "Scenario G"),
     expand_improve = case_when(
       stringr::str_detect(buffer_name, "Expand") ~ "Expand",
       stringr::str_detect(buffer_name, "Improve") ~ "Improve"
@@ -472,19 +496,25 @@ usethis::use_data(se_service_type, overwrite = TRUE)
 
 se_population_type <- read_xlsx("data-raw/service_eval_clean.xlsx") %>%
   clean_names() %>%
-  rename(scenario = x1) %>%
+  rename(scenario_long = x1) %>%
   mutate(
-    scenario_short = case_when(
-      stringr::str_detect(scenario, "Base") ~ "Base",
-      TRUE ~ stringr::str_sub(scenario, end = 10L)
-    ),
-    expand_improve = case_when(
-      stringr::str_detect(scenario, "Expand") ~ "Expand",
-      stringr::str_detect(scenario, "Improve") ~ "Improve"
-    ),
+    scenario = stringr::str_sub(scenario_long, end = 10L),
+
+      scenario_short = case_when(scenario == "Base" ~ "Base",
+                           scenario == "Scenario 1" ~ "Scenario A",
+                           scenario == "Scenario A" ~ "Scenario B",
+                           scenario == "Scenario B" ~ "Scenario C",
+                           scenario == "Scenario C" ~ "Scenario D",
+                           scenario == "Scenario D" ~ "Scenario E",
+                           scenario == "Scenario E" ~ "Scenario F",
+                           scenario == "Scenario 2" ~ "Scenario G"),
+      expand_improve = case_when(
+        stringr::str_detect(scenario_long, "Expand") ~ "Expand",
+        stringr::str_detect(scenario_long, "Improve") ~ "Improve"
+      ),
     expand_improve_sen = case_when(
-      stringr::str_detect(scenario, "Expand") ~ "expand acess to",
-      stringr::str_detect(scenario, "Improve") ~ "improve service for"
+      stringr::str_detect(expand_improve, "Expand") ~ "expand acess to",
+      stringr::str_detect(expand_improve, "Improve") ~ "improve service for"
     ),
   )
 
@@ -632,16 +662,17 @@ se_summary_long <- se_population_type %>%
     scenario_short = factor(
       scenario_short,
       levels = c(
-        "Scenario 1",
         "Scenario A",
         "Scenario B",
         "Scenario C",
         "Scenario D",
         "Scenario E",
-        "Scenario 2"
+        "Scenario F",
+        "Scenario G"
       )
     )
   ) %>%
+  select(-scenario_long) %>%
   data.table::as.data.table()
 
 
@@ -742,16 +773,17 @@ usethis::use_data(se_summary_long, overwrite = T)
 job_access <- readxl::read_xlsx("data-raw/job_access.xlsx") %>%
   clean_names() %>%
   mutate(
+    scenario = paste0("Scenario ", LETTERS[1:7]),
     scenario = factor(
       scenario,
       levels = c(
-        "Scenario 1",
         "Scenario A",
         "Scenario B",
         "Scenario C",
         "Scenario D",
         "Scenario E",
-        "Scenario 2"
+        "Scenario F",
+        "Scenario G"
       )
     ),
     scenario_id = stringr::str_sub(scenario, start = -1L, end = -1L),
