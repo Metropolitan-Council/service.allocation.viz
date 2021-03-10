@@ -35,7 +35,7 @@ mod_plot_improve_service_server <- function(
         geom_col(
           aes(
             x = scenario_short,
-            y = pct,
+            y = total,
             fill = type,
             group = type,
             text = hover_text
@@ -48,7 +48,7 @@ mod_plot_improve_service_server <- function(
           data_for_plotting$summary_context_data[expand_improve == "Improve", ][selected == 0, ],
           mapping = aes(
             x = scenario_short,
-            y = pct,
+            y = total,
             group = type,
             text = hover_text
           ),
@@ -59,7 +59,7 @@ mod_plot_improve_service_server <- function(
           alpha = 0.7
         ) +
         scale_y_continuous(
-          labels = scales::percent
+          labels = scales::label_comma(prefix = "+")
         ) +
         scale_fill_manual(
           values = convenient_colors,
