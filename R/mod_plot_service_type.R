@@ -34,7 +34,7 @@ mod_plot_service_type_server <- function(
           mapping = aes(
             x = scenario_short,
             y = total_increase,
-            fill = service_type,
+            fill = reorder(service_type, dplyr::desc(service_type)),
             text = hover_text
           ),
           color = "white",

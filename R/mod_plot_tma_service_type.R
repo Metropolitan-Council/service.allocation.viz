@@ -40,7 +40,7 @@ data_for_plotting = data_for_plotting
             y = val_increase,
             # group = service_type,
             text = hover_text,
-            fill = service_type
+            fill = reorder(service_type, dplyr::desc(service_type))
           ),
           color = "white",
           lwd = 0.4,
