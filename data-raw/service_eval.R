@@ -640,7 +640,10 @@ se_summary_long <- se_population_type %>%
       "<b>",
       format(trunc(signif(total, digits = 3)), big.mark = ","),
       "</b> ",
-      item_unit
+      item_unit,
+      " (+",
+      format(trunc(signif(pct * 100, digits = 3))),
+      "%)"
     ),
     summary_title = case_when(
       expand_improve == "Expand" ~ "Expanded Access",
