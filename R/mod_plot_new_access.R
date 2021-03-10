@@ -35,8 +35,8 @@ mod_plot_new_access_server <- function(
           aes(
             x = scenario_short,
             y = pct,
-            fill = type,
-            group = type,
+            fill = reorder(type, dplyr::desc(type)),
+            group = reorder(type, dplyr::desc(type)),
             text = hover_text
           ),
           position = position_dodge2(
@@ -48,7 +48,7 @@ mod_plot_new_access_server <- function(
           mapping = aes(
             x = scenario_short,
             y = pct,
-            group = type,
+            group = reorder(type, dplyr::desc(type)),
             text = hover_text
           ),
           position = position_dodge2(
@@ -63,8 +63,8 @@ mod_plot_new_access_server <- function(
         scale_fill_manual(
           values = coverage_colors,
           labels = c(
-            "Jobs",
-            "People"
+            "People",
+            "Jobs"
           ),
           name = ""
         ) +
@@ -105,7 +105,8 @@ mod_plot_new_access_server <- function(
         showlegend = TRUE,
         legend = list(
           orientation = "h",
-          y = -0.12
+          y = -0.12,
+          traceorder = "normal"
         ),
         annotations = list(
           visible = FALSE,
