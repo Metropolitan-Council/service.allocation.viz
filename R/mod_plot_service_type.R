@@ -52,11 +52,16 @@ mod_plot_service_type_server <- function(
           fill = "white",
           alpha = 0.7
         ) +
-        scale_y_continuous(labels = scales::comma) +
+        scale_y_continuous(
+          labels = scales::label_comma(prefix = "+"),
+          breaks = c(200000,
+                     400000,
+                     600000)
+        ) +
         labs(
           x = "",
           y = "",
-          title = "Change in Acess to Transit by Service Level"
+          title = "Change in Access to Transit by Service Level"
         ) +
         app_theme() +
         theme(

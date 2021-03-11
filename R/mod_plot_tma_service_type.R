@@ -48,7 +48,11 @@ data_for_plotting = data_for_plotting
         ) +
         scale_fill_manual(values = convenient_colors) +
         scale_y_continuous(
-          labels = scales::comma
+          labels = scales::label_comma(prefix = "+"),
+          limits = c(0, 350000),
+          breaks = c(100*1000,
+                     200*1000,
+                     300*1000)
         ) +
         labs(
           x = "Transit market area",

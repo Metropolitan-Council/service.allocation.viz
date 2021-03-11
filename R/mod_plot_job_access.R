@@ -57,7 +57,11 @@ mod_plot_job_access_server <- function(
           alpha = 0.7
         ) +
         scale_y_continuous(
-          labels = scales::percent
+          labels = scales::label_percent(prefix = "+"),
+          breaks = c(0.025,
+                     0.050,
+                     0.075,
+                     0.100)
         ) +
         scale_fill_manual(values = c(
           "#3CB371",
