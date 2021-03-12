@@ -132,3 +132,8 @@ coverage_colors <- c(
   spectrum_colors[[7]],
   "darkseagreen3"
 )
+
+tooltip_text <- list(
+  high_frequency = "<strong>High frequency transit service </strong> includes buses or trains that come at least every 15-30 minutes. You can use for most or all of your daily needs.",
+  local = "<strong>Local transit service </strong> includes buses or trains that come at least every 15-30 minutes. Service is reliable, but you may have to plan ahead to use."
+)
