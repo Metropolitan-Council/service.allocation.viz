@@ -47,8 +47,12 @@ mod_scrolly_container_ui <- function(id) {
           ),
           HTML("<center>"),
           mod_plot_new_access_ui("plot_new_access_ui_1"),
+          br(),
           fluidRow(
-            mod_plot_people_jobs_detail_ui("plot_people_expand_detail_ui_1")
+            column(width = 6,
+                   mod_plot_people_jobs_detail_ui("plot_people_expand_detail_ui_1")),
+            column(width = 6,
+                   mod_plot_people_jobs_detail_ui("plot_jobs_expand_detail_ui_1"))
           ),
           HTML("</center>")
         ),
@@ -60,6 +64,13 @@ mod_scrolly_container_ui <- function(id) {
           ),
           HTML("<center>"),
           mod_plot_improve_service_ui("plot_improve_service_ui_1"),
+          br(),
+          fluidRow(
+            column(width = 6,
+                   mod_plot_people_jobs_detail_ui("plot_people_improve_detail_ui_1")),
+            column(width = 6,
+                   mod_plot_people_jobs_detail_ui("plot_jobs_improve_detail_ui_1"))
+          ),
           HTML("</center>")
         ),
         scrollytell::scrolly_section(

@@ -26,17 +26,47 @@ app_server <- function(input, output, session) {
 
 
   # Scenario summary in context ----------------------------------------------
+  ## expand access -----
   callModule(
     mod_plot_new_access_server,
     "plot_new_access_ui_1",
     data_for_plotting = data_for_plotting
   )
 
+  callModule(mod_plot_people_jobs_detail_server,
+             "plot_people_expand_detail_ui_1",
+             data_for_plotting = data_for_plotting,
+             plot_expand_improve = "Expand",
+             plot_type = "People")
+
+  callModule(mod_plot_people_jobs_detail_server,
+             "plot_jobs_expand_detail_ui_1",
+             data_for_plotting = data_for_plotting,
+             plot_expand_improve = "Expand",
+             plot_type = "Jobs")
+
+
+  ## improve service -----
   callModule(
     mod_plot_improve_service_server,
     "plot_improve_service_ui_1",
     data_for_plotting = data_for_plotting
   )
+
+
+  callModule(mod_plot_people_jobs_detail_server,
+             "plot_people_improve_detail_ui_1",
+             data_for_plotting = data_for_plotting,
+             plot_expand_improve = "Improve",
+             plot_type = "People")
+
+  callModule(mod_plot_people_jobs_detail_server,
+             "plot_jobs_improve_detail_ui_1",
+             data_for_plotting = data_for_plotting,
+             plot_expand_improve = "Improve",
+             plot_type = "Jobs")
+
+
 
 
   callModule(
