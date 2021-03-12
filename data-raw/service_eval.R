@@ -99,16 +99,20 @@ se_all_day <- se_base %>%
       item == "pop_total" ~ "people",
       item == "pov185" ~ "people with income under 185% federal poverty threshold"
     ),
-    item_unit = factor(item_unit,
-                           levels = c("people",
-                                      "people of color",
-                                      "households without a car",
-                                      "people with income under 185% federal poverty threshold",
-                                      "people age 65+",
-                                      "affordable housing units",
-                                      "jobs",
-                                      "high-wage jobs",
-                                      "low-wage jobs")),
+    item_unit = factor(
+      item_unit,
+      levels = c(
+        "people",
+        "people of color",
+        "households without a car",
+        "people with income under 185% federal poverty threshold",
+        "people age 65+",
+        "affordable housing units",
+        "jobs",
+        "high-wage jobs",
+        "low-wage jobs"
+      )
+    ),
     hover_text = paste0(format(round(value), big.mark = ","), " ", item_unit),
   )
 
@@ -129,14 +133,16 @@ se_by_tma_base <- se_by_tma %>%
       stringr::str_detect(buffer_name, "Base") ~ "Base",
       TRUE ~ stringr::str_sub(buffer_name, end = 10L)
     ),
-    scenario_short = case_when(scenario_short == "Base" ~ "Base",
-                               scenario_short == "Scenario 1" ~ "Scenario A",
-                               scenario_short == "Scenario A" ~ "Scenario B",
-                               scenario_short == "Scenario B" ~ "Scenario C",
-                               scenario_short == "Scenario C" ~ "Scenario D",
-                               scenario_short == "Scenario D" ~ "Scenario E",
-                               scenario_short == "Scenario E" ~ "Scenario F",
-                               scenario_short == "Scenario 2" ~ "Scenario G"),
+    scenario_short = case_when(
+      scenario_short == "Base" ~ "Base",
+      scenario_short == "Scenario 1" ~ "Scenario A",
+      scenario_short == "Scenario A" ~ "Scenario B",
+      scenario_short == "Scenario B" ~ "Scenario C",
+      scenario_short == "Scenario C" ~ "Scenario D",
+      scenario_short == "Scenario D" ~ "Scenario E",
+      scenario_short == "Scenario E" ~ "Scenario F",
+      scenario_short == "Scenario 2" ~ "Scenario G"
+    ),
     expand_improve = case_when(
       stringr::str_detect(buffer_name, "Expand") ~ "Expand",
       stringr::str_detect(buffer_name, "Improve") ~ "Improve"
@@ -195,14 +201,16 @@ se_by_tma_long <- se_by_tma %>%
       stringr::str_detect(buffer_name, "Base") ~ "Base",
       TRUE ~ stringr::str_sub(buffer_name, end = 10L)
     ),
-    scenario_short = case_when(scenario_short == "Base" ~ "Base",
-                               scenario_short == "Scenario 1" ~ "Scenario A",
-                               scenario_short == "Scenario A" ~ "Scenario B",
-                               scenario_short == "Scenario B" ~ "Scenario C",
-                               scenario_short == "Scenario C" ~ "Scenario D",
-                               scenario_short == "Scenario D" ~ "Scenario E",
-                               scenario_short == "Scenario E" ~ "Scenario F",
-                               scenario_short == "Scenario 2" ~ "Scenario G"),
+    scenario_short = case_when(
+      scenario_short == "Base" ~ "Base",
+      scenario_short == "Scenario 1" ~ "Scenario A",
+      scenario_short == "Scenario A" ~ "Scenario B",
+      scenario_short == "Scenario B" ~ "Scenario C",
+      scenario_short == "Scenario C" ~ "Scenario D",
+      scenario_short == "Scenario D" ~ "Scenario E",
+      scenario_short == "Scenario E" ~ "Scenario F",
+      scenario_short == "Scenario 2" ~ "Scenario G"
+    ),
     expand_improve = case_when(
       stringr::str_detect(buffer_name, "Expand") ~ "Expand",
       stringr::str_detect(buffer_name, "Improve") ~ "Improve"
@@ -274,17 +282,20 @@ se_by_tma_long <- se_by_tma %>%
       item == "pop_total" ~ "people",
       item == "pov185" ~ "people with income under 185% federal poverty threshold"
     ),
-    item_unit = factor(item_unit,
-                       levels = c("people",
-                                  "people of color",
-                                  "households without a car",
-                                  "people with income under 185% federal poverty threshold",
-                                  "people age 65+",
-                                  "affordable housing units",
-                                  "jobs",
-                                  "high-wage jobs",
-                                  "low-wage jobs"))
-
+    item_unit = factor(
+      item_unit,
+      levels = c(
+        "people",
+        "people of color",
+        "households without a car",
+        "people with income under 185% federal poverty threshold",
+        "people age 65+",
+        "affordable housing units",
+        "jobs",
+        "high-wage jobs",
+        "low-wage jobs"
+      )
+    )
   ) %>%
   as.data.table()
 
@@ -334,14 +345,18 @@ se_by_tma_long <- left_join(se_by_tma_long, se_by_tma_base) %>%
 
 
 se_high_low_freq_summary <- se_by_tma_long %>%
-  filter(item_unit == "people",
-         item == "pop_total",
-         service_type %in% c("High frequency",
-                             "Local")) %>%
+  filter(
+    item_unit == "people",
+    item == "pop_total",
+    service_type %in% c(
+      "High frequency",
+      "Local"
+    )
+  ) %>%
   select(-market_area) %>%
   group_by(scenario_short, service_type, item, scenario_id, item_unit) %>%
   summarize(total_increase = sum(val_increase, na.rm = T)) %>%
-  mutate(    hover_text = paste0(
+  mutate(hover_text = paste0(
     "<b>",
     scenario_short,
     "</b>",
@@ -355,8 +370,7 @@ se_high_low_freq_summary <- se_by_tma_long %>%
     format(trunc(signif(total_increase, digits = 3)), big.mark = ","),
     "</b> ",
     item_unit
-  )
-  ) %>%
+  )) %>%
   as.data.table()
 
 usethis::use_data(se_by_tma_long, overwrite = T)
@@ -369,14 +383,16 @@ se_service_type <- se_by_tma %>%
       stringr::str_detect(buffer_name, "Base") ~ "Base",
       TRUE ~ stringr::str_sub(buffer_name, end = 10L)
     ),
-    scenario_short = case_when(scenario_short == "Base" ~ "Base",
-                               scenario_short == "Scenario 1" ~ "Scenario A",
-                               scenario_short == "Scenario A" ~ "Scenario B",
-                               scenario_short == "Scenario B" ~ "Scenario C",
-                               scenario_short == "Scenario C" ~ "Scenario D",
-                               scenario_short == "Scenario D" ~ "Scenario E",
-                               scenario_short == "Scenario E" ~ "Scenario F",
-                               scenario_short == "Scenario 2" ~ "Scenario G"),
+    scenario_short = case_when(
+      scenario_short == "Base" ~ "Base",
+      scenario_short == "Scenario 1" ~ "Scenario A",
+      scenario_short == "Scenario A" ~ "Scenario B",
+      scenario_short == "Scenario B" ~ "Scenario C",
+      scenario_short == "Scenario C" ~ "Scenario D",
+      scenario_short == "Scenario D" ~ "Scenario E",
+      scenario_short == "Scenario E" ~ "Scenario F",
+      scenario_short == "Scenario 2" ~ "Scenario G"
+    ),
     expand_improve = case_when(
       stringr::str_detect(buffer_name, "Expand") ~ "Expand",
       stringr::str_detect(buffer_name, "Improve") ~ "Improve"
@@ -447,16 +463,20 @@ se_service_type <- se_by_tma %>%
       item == "pop_total" ~ "people",
       item == "pov185" ~ "people with income under 185% federal poverty threshold"
     ),
-    item_unit = factor(item_unit,
-                       levels = c("people",
-                                  "people of color",
-                                  "households without a car",
-                                  "people with income under 185% federal poverty threshold",
-                                  "people age 65+",
-                                  "affordable housing units",
-                                  "jobs",
-                                  "high-wage jobs",
-                                  "low-wage jobs")),
+    item_unit = factor(
+      item_unit,
+      levels = c(
+        "people",
+        "people of color",
+        "households without a car",
+        "people with income under 185% federal poverty threshold",
+        "people age 65+",
+        "affordable housing units",
+        "jobs",
+        "high-wage jobs",
+        "low-wage jobs"
+      )
+    ),
     hover_text = paste0(service_type, ", ", format(round(value), big.mark = ","), " ", item_unit),
   ) %>%
   filter(
@@ -499,19 +519,20 @@ se_population_type <- read_xlsx("data-raw/service_eval_clean.xlsx") %>%
   rename(scenario_long = x1) %>%
   mutate(
     scenario = stringr::str_sub(scenario_long, end = 10L),
-
-      scenario_short = case_when(scenario == "Base" ~ "Base",
-                           scenario == "Scenario 1" ~ "Scenario A",
-                           scenario == "Scenario A" ~ "Scenario B",
-                           scenario == "Scenario B" ~ "Scenario C",
-                           scenario == "Scenario C" ~ "Scenario D",
-                           scenario == "Scenario D" ~ "Scenario E",
-                           scenario == "Scenario E" ~ "Scenario F",
-                           scenario == "Scenario 2" ~ "Scenario G"),
-      expand_improve = case_when(
-        stringr::str_detect(scenario_long, "Expand") ~ "Expand",
-        stringr::str_detect(scenario_long, "Improve") ~ "Improve"
-      ),
+    scenario_short = case_when(
+      scenario == "Base" ~ "Base",
+      scenario == "Scenario 1" ~ "Scenario A",
+      scenario == "Scenario A" ~ "Scenario B",
+      scenario == "Scenario B" ~ "Scenario C",
+      scenario == "Scenario C" ~ "Scenario D",
+      scenario == "Scenario D" ~ "Scenario E",
+      scenario == "Scenario E" ~ "Scenario F",
+      scenario == "Scenario 2" ~ "Scenario G"
+    ),
+    expand_improve = case_when(
+      stringr::str_detect(scenario_long, "Expand") ~ "Expand",
+      stringr::str_detect(scenario_long, "Improve") ~ "Improve"
+    ),
     expand_improve_sen = case_when(
       stringr::str_detect(expand_improve, "Expand") ~ "expand acess to",
       stringr::str_detect(expand_improve, "Improve") ~ "improve service for"
@@ -587,25 +608,33 @@ se_summary_long <- se_population_type %>%
       item_category == "pov" ~ "people with income under 185% federal poverty threshold",
       item_category == "pov185" ~ "people with income under 185% federal poverty threshold"
     ),
-    item_unit = factor(item_unit,
-                       levels = c("people",
-                                  "people of color",
-                                  "households without a car",
-                                  "people with income under 185% federal poverty threshold",
-                                  "people age 65+",
-                                  "affordable housing units",
-                                  "jobs",
-                                  "high-wage jobs",
-                                  "low-wage jobs")),
+    item_unit = factor(
+      item_unit,
+      levels = c(
+        "people",
+        "people of color",
+        "households without a car",
+        "people with income under 185% federal poverty threshold",
+        "people age 65+",
+        "affordable housing units",
+        "jobs",
+        "high-wage jobs",
+        "low-wage jobs"
+      )
+    ),
     type = ifelse(item_category %in% c(
       "emp",
       "hi_emp",
       "lo_emp",
       "jobs"
     ), "Jobs", "People"),
-    type = factor(type,
-                  levels = c("People",
-                             "Jobs")),
+    type = factor(
+      type,
+      levels = c(
+        "People",
+        "Jobs"
+      )
+    ),
     item_unit_label = case_when(
       item_category == "seniors" ~ "Older Population",
       item_category == "senior" ~ "Older Population",
@@ -683,8 +712,10 @@ usethis::use_data(se_summary_long, overwrite = T)
 
 
 se_detail_long <- se_summary_long %>%
-  filter(!item_unit_label %in% c("People",
-                           "Jobs")) %>%
+  filter(!item_unit_label %in% c(
+    "People",
+    "Jobs"
+  )) %>%
   mutate(plot_data_type = type) %>%
   select(-type) %>%
   as.data.table()

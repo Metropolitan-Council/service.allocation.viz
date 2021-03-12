@@ -49,7 +49,8 @@ mod_plot_scenario_spectrum_server <- function(input, output, session) {
             x = scenario,
             y = y + 0.6,
             label = scenario_priority
-          )) +
+          )
+        ) +
         geom_text(mapping = aes(
           x = scenario,
           y = y,

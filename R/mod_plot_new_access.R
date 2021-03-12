@@ -59,10 +59,11 @@ mod_plot_new_access_server <- function(
         ) +
         scale_y_continuous(
           labels = scales::label_comma(prefix = "+"),
-          breaks = c(50*1000,
-                     100*1000,
-                     150*1000)
-
+          breaks = c(
+            50 * 1000,
+            100 * 1000,
+            150 * 1000
+          )
         ) +
         scale_fill_manual(
           values = coverage_colors,

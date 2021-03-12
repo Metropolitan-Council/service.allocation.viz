@@ -30,7 +30,8 @@ Imports:
     shinyWidgets (>= 0.5.6),
     showtext (>= 0.9.2),
     stringr (>= 1.4.0),
-    sysfonts (>= 0.8.3)
+    sysfonts (>= 0.8.3),
+    tippy (>= 0.1.0)
 Suggests: 
     dplyr (>= 1.0.3),
     here (>= 1.0.1),

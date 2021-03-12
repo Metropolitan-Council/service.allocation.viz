@@ -43,26 +43,37 @@ mod_scrolly_container_ui <- function(id) {
           id = "02_new_all_day",
           wellPanel(
             h3("How many more people would have access to all-day transit service?"),
-            p("Each scenario provides an opportunity to extend all-day, ",
-              my_tippy(text = " local transit ",
-                       tooltip = tooltip_text$local
+            p(
+              "Each scenario provides an opportunity to extend all-day, ",
+              my_tippy(
+                text = " local transit ",
+                tooltip = tooltip_text$local
               ),
               "service to people and jobs that currently do not have access to the all-day,",
-              my_tippy(" local transit",
-                       tooltip = tooltip_text$local),
+              my_tippy(
+                " local transit",
+                tooltip = tooltip_text$local
+              ),
               " network. Your selected scenario would expand access to the all-day transit network to the following number of people and jobs. For your reference 1.6 million people and 1.2 million jobs had access to the all-day,",
-              my_tippy(" local transit ",
-                       tooltip = tooltip_text$local),
-              "network in early 2020 (pre-COVID 19).")
+              my_tippy(
+                " local transit ",
+                tooltip = tooltip_text$local
+              ),
+              "network in early 2020 (pre-COVID 19)."
+            )
           ),
           HTML("<center>"),
           mod_plot_new_access_ui("plot_new_access_ui_1"),
           br(),
           fluidRow(
-            column(width = 6,
-                   mod_plot_people_jobs_detail_ui("plot_people_expand_detail_ui_1")),
-            column(width = 6,
-                   mod_plot_people_jobs_detail_ui("plot_jobs_expand_detail_ui_1"))
+            column(
+              width = 6,
+              mod_plot_people_jobs_detail_ui("plot_people_expand_detail_ui_1")
+            ),
+            column(
+              width = 6,
+              mod_plot_people_jobs_detail_ui("plot_jobs_expand_detail_ui_1")
+            )
           ),
           HTML("</center>")
         ),
@@ -76,10 +87,14 @@ mod_scrolly_container_ui <- function(id) {
           mod_plot_improve_service_ui("plot_improve_service_ui_1"),
           br(),
           fluidRow(
-            column(width = 6,
-                   mod_plot_people_jobs_detail_ui("plot_people_improve_detail_ui_1")),
-            column(width = 6,
-                   mod_plot_people_jobs_detail_ui("plot_jobs_improve_detail_ui_1"))
+            column(
+              width = 6,
+              mod_plot_people_jobs_detail_ui("plot_people_improve_detail_ui_1")
+            ),
+            column(
+              width = 6,
+              mod_plot_people_jobs_detail_ui("plot_jobs_improve_detail_ui_1")
+            )
           ),
           HTML("</center>")
         ),
@@ -87,13 +102,19 @@ mod_scrolly_container_ui <- function(id) {
           id = "04_service_type_changes",
           wellPanel(
             h3("What types of transit service would be improved and for how many people?"),
-            p("In order to have a full understanding how your selected scenario is going to impact the region, it is important to understand how transit service is going to be improved at the various service thresholds described earlier. The chart below shows how many more people would have new access to",
-              my_tippy(" high-frequency ",
-                       tooltip = tooltip_text$high_frequency),
+            p(
+              "In order to have a full understanding how your selected scenario is going to impact the region, it is important to understand how transit service is going to be improved at the various service thresholds described earlier. The chart below shows how many more people would have new access to",
+              my_tippy(
+                " high-frequency ",
+                tooltip = tooltip_text$high_frequency
+              ),
               " and ",
-              my_tippy("local transit service",
-                       tooltip = tooltip_text$local),
-              ". For your reference, 645,000 people had access to high frequency services and 610,000 people had access to local bus service.")
+              my_tippy(
+                "local transit service",
+                tooltip = tooltip_text$local
+              ),
+              ". For your reference, 645,000 people had access to high frequency services and 610,000 people had access to local bus service."
+            )
           ),
           HTML("<center>"),
           mod_plot_service_type_ui("plot_service_type_ui_1"),
@@ -103,10 +124,8 @@ mod_scrolly_container_ui <- function(id) {
           br(),
           HTML("<center>"),
           mod_plot_tma_service_type_ui("plot_tma_service_type_ui_1"),
-
           HTML("</center>")
         ),
-
         scrollytell::scrolly_section(
           id = "05_job_access",
           wellPanel(
@@ -117,7 +136,6 @@ mod_scrolly_container_ui <- function(id) {
           mod_plot_job_access_ui("plot_job_access_ui_1"),
           HTML("</center>")
         ),
-
         scrollytell::scrolly_section(
           id = "06_ridership_increase",
           wellPanel(
@@ -128,8 +146,6 @@ mod_scrolly_container_ui <- function(id) {
           # mod_plot_job_access_ui("plot_job_access_ui_1"),
           HTML("</center>")
         ),
-
-
         br(),
         scrollytell::scrolly_section(
           id = 5,

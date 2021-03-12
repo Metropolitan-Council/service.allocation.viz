@@ -69,15 +69,19 @@ scenario_def_long <- scenario_def %>%
 
 # Save final data ---------------------------------------------------------
 
-improvement_examples <- tibble(improvement_type = unique(scenario_def_long$improvement_type),
-                               improvement_example = c("Route that was already high frequency provided with even higher frequency (e.g. 15 minute service to 10 minute service)",
-                                                       "Route with service between every 15 to 30 minutes increased to service at least every 15 minutes",
-                                                       "Route with service frequencies greater than every 30 minutes improved to service frequencies between every 15 to 30 minutes",
-                                                       "Increased number of trips on commuter routes",
-                                                       "New routes that provide service to suburban job centers and new routes that operate entirely outside of Transit Market Areas 1 and 2",
-                                                       "New local routes",
-                                                       "New commuter routes",
-                                                       "Additional resources dedicated to on-demand, flexible service to serve low ridership demand areas"))
+improvement_examples <- tibble(
+  improvement_type = unique(scenario_def_long$improvement_type),
+  improvement_example = c(
+    "Route that was already high frequency provided with even higher frequency (e.g. 15 minute service to 10 minute service)",
+    "Route with service between every 15 to 30 minutes increased to service at least every 15 minutes",
+    "Route with service frequencies greater than every 30 minutes improved to service frequencies between every 15 to 30 minutes",
+    "Increased number of trips on commuter routes",
+    "New routes that provide service to suburban job centers and new routes that operate entirely outside of Transit Market Areas 1 and 2",
+    "New local routes",
+    "New commuter routes",
+    "Additional resources dedicated to on-demand, flexible service to serve low ridership demand areas"
+  )
+)
 
 
 scenario_def_long <- scenario_def_long %>%

@@ -7,7 +7,7 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_plot_people_jobs_detail_ui <- function(id){
+mod_plot_people_jobs_detail_ui <- function(id) {
   ns <- NS(id)
   tagList(
     plotly::plotlyOutput(ns("scenario_detail"))
@@ -24,7 +24,7 @@ mod_plot_people_jobs_detail_server <- function(
   data_for_plotting = data_for_plotting,
   plot_expand_improve = c("Expand", "Improve"),
   plot_type = c("People", "Jobs")
-){
+) {
   ns <- session$ns
 
   output$scenario_detail <- plotly::renderPlotly({
@@ -137,8 +137,6 @@ mod_plot_people_jobs_detail_server <- function(
         displayModeBar = F
       )
   })
-
-
 }
 
 ## To be copied in the UI
@@ -148,4 +146,3 @@ mod_plot_people_jobs_detail_server <- function(
 # callModule(mod_plot_people_jobs_detail_server, "plot_people_jobs_detail_ui_1", data_for_plotting = data_for_plotting,
 # plot_expand_improve = c("Expand", "Improve"),
 # plot_type = c("People", "Jobs"))
-

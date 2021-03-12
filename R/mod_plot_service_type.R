@@ -54,9 +54,11 @@ mod_plot_service_type_server <- function(
         ) +
         scale_y_continuous(
           labels = scales::label_comma(prefix = "+"),
-          breaks = c(200000,
-                     400000,
-                     600000)
+          breaks = c(
+            200000,
+            400000,
+            600000
+          )
         ) +
         labs(
           x = "",

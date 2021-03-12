@@ -25,8 +25,8 @@ mod_plot_tma_service_type_server <- function(
   input,
   output,
   session,
-data_for_plotting = data_for_plotting
-  ) {
+  data_for_plotting = data_for_plotting
+) {
   ns <- session$ns
 
 
@@ -50,9 +50,11 @@ data_for_plotting = data_for_plotting
         scale_y_continuous(
           labels = scales::label_comma(prefix = "+"),
           limits = c(0, 350000),
-          breaks = c(100*1000,
-                     200*1000,
-                     300*1000)
+          breaks = c(
+            100 * 1000,
+            200 * 1000,
+            300 * 1000
+          )
         ) +
         labs(
           x = "Transit market area",

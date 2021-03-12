@@ -16,9 +16,13 @@ app_ui <- function(request) {
       p("As you explore this tool, keep in mind that resources for transit have always been limited, creating a need to consider how investments might achieve different and sometimes competing values for transit’s role for people in the region. Expanding the transit network has to consider the different values inherent in transit planning; Do we plan for future investments that expand geographic access (e.g. coverage) to the transit network with a basic level of service; or Do we plan for future investments  that will create a network of frequent service people can plan all their daily travel needs around?. It is difficult to plan for both adequately with limited resources, so how do you assess this problem? We’ve created a tool with analysis to help demonstrate to you the outcomes associated with hypothetical transit expansion scenarios."),
       br(),
       h3("How did we look at the problem of competing transit system investment values for this study?"),
-      p("To help us understand the outcomes of different ways of investing transit expansion resources, we developed scenarios that represent a spectrum of possible strategies for distributing transit investments across the region. The spectrum represents strategies ranging from a",
-        strong("Coverage Concept"), " maximizing geographic access to transit on one end to a",
-        strong(" Convenient Transit Concept")," maximizing a network of frequent service people can plan all their daily travel needs around on the other end. The intermediate scenarios are a mix of the hypothetical improvements included in these concepts. "),
+      p(
+        "To help us understand the outcomes of different ways of investing transit expansion resources, we developed scenarios that represent a spectrum of possible strategies for distributing transit investments across the region. The spectrum represents strategies ranging from a",
+        strong("Coverage Concept"),
+        " maximizing geographic access to transit on one end to a",
+        strong(" Convenient Transit Concept"),
+        " maximizing a network of frequent service people can plan all their daily travel needs around on the other end. The intermediate scenarios are a mix of the hypothetical improvements included in these concepts. "
+      ),
       mod_plot_scenario_spectrum_ui("plot_scenario_spectrum_ui_1"),
       br(),
       br(),
