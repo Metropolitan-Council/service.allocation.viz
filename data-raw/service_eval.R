@@ -681,6 +681,17 @@ se_summary_long <- se_population_type %>%
 
 usethis::use_data(se_summary_long, overwrite = T)
 
+
+se_detail_long <- se_summary_long %>%
+  filter(!item_unit_label %in% c("People",
+                           "Jobs")) %>%
+  mutate(plot_data_type = type) %>%
+  select(-type) %>%
+  as.data.table()
+
+
+usethis::use_data(se_detail_long, overwrite = T)
+
 # # level of service -------------------------------------------------------------
 #
 # se_level_of_service <- read_xlsx("data-raw/service_eval_clean.xlsx") %>%

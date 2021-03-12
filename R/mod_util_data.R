@@ -27,6 +27,10 @@ mod_util_data_server <- function(
     se_summary_long[scenario_id == slider_input$slider, ][item_category %in% c("pop", "emp")]
   })
 
+  detail_data <- reactive({
+    se_detail_long[scenario_id == slider_input$slider, ]
+  })
+
   summary_context_data <- reactive({
     se_summary_long[item_category %in% c("pop", "emp")][, selected := ifelse(scenario_id == slider_input$slider, 1, 0)]
   })
@@ -62,6 +66,9 @@ mod_util_data_server <- function(
     vals$service_type_by_tma <- service_type_by_tma()
   })
 
+  observe({
+    vals$detail_data <- detail_data()
+  })
 
 
   return(vals)
