@@ -54,8 +54,8 @@ mod_plot_new_access_server <- function(
           position = position_dodge2(
             padding = 0.1
           ),
-          fill = "white",
-          alpha = 0.7
+          fill = "gray",
+          alpha = 1
         ) +
         scale_y_continuous(
           labels = scales::label_comma(prefix = "+"),
