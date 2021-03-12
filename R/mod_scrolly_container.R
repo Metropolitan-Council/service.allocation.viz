@@ -47,6 +47,9 @@ mod_scrolly_container_ui <- function(id) {
           ),
           HTML("<center>"),
           mod_plot_new_access_ui("plot_new_access_ui_1"),
+          fluidRow(
+            mod_plot_people_jobs_detail_ui("plot_people_expand_detail_ui_1")
+          ),
           HTML("</center>")
         ),
         scrollytell::scrolly_section(
@@ -100,61 +103,6 @@ mod_scrolly_container_ui <- function(id) {
         ),
 
 
-        br(),
-        # Scenario summary -----------------------------------------------------
-        scrollytell::scrolly_section(
-          id = "07_detailed_summary",
-          wellPanel(
-            h3("Detailed Scenario Summary"),
-            p("Each option on the slider bar presents an alternative strategy for allocating resources to expand the transit network. Scenario I prioritizes investments into transit services that are able to serve a wide variety of trips, these improvements are primarily in areas with the highest transit demand, Transit Market Areas 1 and 2; scenario II prioritizes investments in transit services that maximize the number of people in the region that have access to transit service. Along the spectrum are intermediate scenarios that combine the two strategies in different ratios.")
-          ),
-          HTML("<center>"),
-          fluidRow(
-            column(
-              width = 6,
-              mod_plot_scenario_summary_ui("plot_scenario_summary_ui_expand")
-            ),
-            column(
-              width = 6,
-              mod_plot_scenario_summary_ui("plot_scenario_summary_ui_improve")
-            )
-          ),
-          br(),
-          HTML("</center>")
-        ),
-        # br(),
-        br(),
-        scrollytell::scrolly_section(
-          id = 2,
-          wellPanel(
-            h3("New Access to All Day Transit"),
-            p("Each scenario would also improve the level of transit service in the region by improving the frequency of transit service available. The selected scenario would increase the frequency of transit service accessible to the following people and jobs.")
-          ),
-          HTML("<center>"),
-          mod_plot_scenario_summary_ui("plot_scenario_summary_ui_expand_all_day"),
-          fluidRow(
-            column(width = 6, mod_plot_scenario_detail_ui("mod_plot_scenario_detail_ui_expand_people")),
-            column(width = 6, mod_plot_scenario_detail_ui("mod_plot_scenario_detail_ui_expand_jobs"))
-          ),
-          HTML("</center>")
-        ),
-        # br(),
-        br(),
-        scrollytell::scrolly_section(
-          id = 3,
-          wellPanel(
-            h3("New Improved Transit"),
-            p("Each scenario would also improve the level of transit service in the region by improving the frequency of transit service available. The selected scenario would increase the frequency of transit service accessible to the following people and jobs.")
-          ),
-          HTML("<center>"),
-          mod_plot_scenario_summary_ui("plot_scenario_summary_ui_improve_all"),
-          fluidRow(
-            column(width = 6, mod_plot_scenario_detail_ui("mod_plot_scenario_detail_ui_improve_people")),
-            column(width = 6, mod_plot_scenario_detail_ui("mod_plot_scenario_detail_ui_improve_jobs"))
-          ),
-          HTML("</center>")
-        ),
-        # br(),
         br(),
         scrollytell::scrolly_section(
           id = 5,
