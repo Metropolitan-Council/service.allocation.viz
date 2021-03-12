@@ -13,7 +13,7 @@ mod_table_network_improvements_ui <- function(id) {
   tagList(
     DT::DTOutput(
       ns("table"),
-      width = "58%",
+      width = "60%",
       height = "400px"
     )
   )
@@ -31,11 +31,12 @@ mod_table_network_improvements_server <- function(input, output, session, slider
 
   output$table <- renderDT({
     DT::datatable(
-      data = table_data()[, .(scenario_text, value)],
+      data = table_data()[, .(scenario_text, value, improvement_example)],
       rownames = FALSE,
       colnames = c(
         "Improvement Type",
-        paste0("Scenario ", slider_input$slider)
+        paste0("Scenario ", slider_input$slider),
+        "Example"
       ),
       fillContainer = FALSE,
       filter = "none",
