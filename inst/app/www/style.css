@@ -1,4 +1,38 @@
 
+.tippy-box {
+  font-size: 15px !important;
+}
+
+.tippy {
+  text-decoration: underline;
+}
+
+.tippy-content{
+	transition-duration: 325ms;
+	transition-delay: 54ms;
+	background: var(--council-white) none repeat scroll 0% 0%;
+	border-style: solid;
+	border-width: 0.5px;
+	border-color: gray;
+	padding: 4px;
+	text-align: left;
+
+}
+
+.tippy-popper {
+  font-size: 15px !important;
+}
+
+.tippy-tooltip{
+    font-size: 15px !important;
+    color: var(--council-black) !important;
+    background-color: var(--council-white) !important;
+}
+
+.tippy-backdrop {
+  background-color: var(--council-white);
+
+}
 /* Scrolly styling */
 
 
