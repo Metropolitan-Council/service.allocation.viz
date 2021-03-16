@@ -57,7 +57,7 @@ mod_plot_tma_service_type_server <- function(
           )
         ) +
         labs(
-          x = "Transit market area",
+          x = "Transit Market Area",
           y = "",
           # title = "Scenario 1",
           fill = "Service level"
