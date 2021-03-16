@@ -47,10 +47,14 @@ mod_plot_service_type_server <- function(
           mapping = aes(
             x = scenario_short,
             y = total_increase,
-            text = hover_text
+            text = hover_text,
+            fill = reorder(service_type, dplyr::desc(service_type))
           ),
-          fill = "white",
-          alpha = 0.7
+          fill = "gray",
+          alpha = 1,
+          # lwd = 0.4,
+          # color = "white",
+          position = "stack"
         ) +
         scale_y_continuous(
           labels = scales::label_comma(prefix = "+"),
