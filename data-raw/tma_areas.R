@@ -29,7 +29,7 @@ tma_areas <- st_sfc(list(st_polygon(p2[1]),
                          st_polygon(p2[3]),
                          st_polygon(p2[4]))) %>%
   st_as_sf() %>%
-  mutate(tma_area = c(4,3,2,1))
+  mutate(market_area = c(4,3,2,1))
 
 plot(tma_areas)
 
@@ -43,7 +43,7 @@ bo[4] <- st_bbox(tma_areas)[4] + 10
 
 tma5 <-st_as_sfc(bo) %>%
   st_as_sf() %>%
-  mutate(tma_area = 5) %>%
+  mutate(market_area = 5) %>%
   st_difference(tma_areas$x[4]) %>%
   st_difference(tma_areas$x[3]) %>%
   st_difference(tma_areas$x[2]) %>%
@@ -54,20 +54,20 @@ plot(tma5)
 
 tma_area_abstract <- rbind(tma_areas, tma5) %>%
   rename(geometry = x) %>%
-  mutate(tma_area = as.factor(tma_area)) %>%
-  arrange(tma_area)
+  mutate(market_area = as.factor(market_area)) %>%
+  arrange(market_area)
 
 # make sure areas nest neatly -----
 plot(tma_area_abstract[3,])
 
 tma_area_abstract[4,] <- st_difference(tma_area_abstract[4,], tma_area_abstract[3,]) %>%
-  select(-tma_area.1)
+  select(-market_area.1)
 
 tma_area_abstract[3,] <- st_difference(tma_area_abstract[3,], tma_area_abstract[2,]) %>%
-  select(-tma_area.1)
+  select(-market_area.1)
 
 tma_area_abstract[2,] <- st_difference(tma_area_abstract[2,], tma_area_abstract[1,]) %>%
-  select(-tma_area.1)
+  select(-market_area.1)
 
 # final touches -----
 
@@ -87,7 +87,7 @@ library(plotly)
 
 p <-ggplot() +
   geom_sf(data = tma_area_abstract,
-          aes(fill = tma_area,
+          aes(fill = market_area,
               # color = tma_area,
               text = stringr::str_wrap(tma_desc_short))) +
   theme_void()
