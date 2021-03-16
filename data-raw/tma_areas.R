@@ -52,7 +52,47 @@ tma5 <-st_as_sfc(bo) %>%
 plot(tma5)
 
 
-tma_area_abstract <- rbind(tma_areas, tma5)
-plot(tma_area_abstract)
+tma_area_abstract <- rbind(tma_areas, tma5) %>%
+  rename(geometry = x) %>%
+  mutate(tma_area = as.factor(tma_area)) %>%
+  arrange(tma_area)
+
+# make sure areas nest neatly -----
+plot(tma_area_abstract[3,])
+
+tma_area_abstract[4,] <- st_difference(tma_area_abstract[4,], tma_area_abstract[3,]) %>%
+  select(-tma_area.1)
+
+tma_area_abstract[3,] <- st_difference(tma_area_abstract[3,], tma_area_abstract[2,]) %>%
+  select(-tma_area.1)
+
+tma_area_abstract[2,] <- st_difference(tma_area_abstract[2,], tma_area_abstract[1,]) %>%
+  select(-tma_area.1)
+
+# final touches -----
+
+tma_area_abstract <- tma_area_abstract %>%
+  mutate(tma_area_numeral = c("I", "II", "III", "IV", "V"),
+         tma_desc_short = c(
+           "Transit Market Area I has the highest density of population, employment, and lowest automobile availability. These are typically Urban Center communities and have a more traditional urban form with a street network laid out in grid form.",
+           "Transit Market Area II has high to moderately high population and employment densities and typically has a traditional street grid comparable to Market Area I.",
+         "Transit Market Area III has moderate density but tends to have a less traditional street grid that can limit the effectiveness of transit. It is typically Urban with large portions of Suburban and Suburban Edge communities.",
+         "Transit Market Area IV has lower concentrations of population and employment and a higher rate of auto ownership. It is primarily composed of Suburban Edge and Emerging Suburban Edge communities.",
+         "Transit Market Area V has very low population and employment densities and tends to be primarily Rural communities and Agricultural uses."))
 
 usethis::use_data(tma_area_abstract, overwrite = T)
+
+
+library(plotly)
+
+p <-ggplot() +
+  geom_sf(data = tma_area_abstract,
+          aes(fill = tma_area,
+              # color = tma_area,
+              text = stringr::str_wrap(tma_desc_short))) +
+  theme_void()
+
+ggplotly(p,
+         tooltip = "text",
+         hoveron = "fill")
+
