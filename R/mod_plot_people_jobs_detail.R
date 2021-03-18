@@ -60,7 +60,7 @@ mod_plot_people_jobs_detail_server <- function(
         # ) +
         scale_y_continuous(
           labels = scales::label_comma(prefix = "+"),
-          limits = if(plot_expand_improve == "Expand"){
+          limits = if (plot_expand_improve == "Expand") {
             c(0, 70000)
           } else {
             c(0, 500000)
@@ -73,12 +73,13 @@ mod_plot_people_jobs_detail_server <- function(
         #   spectrum_colors[[7]]
         # )) +
         labs(
-          title = paste0(plot_type),
+          title = "",
           x = "",
           y = ""
         ) +
         app_theme() +
         theme(
+          title = element_blank(),
           # axis.title.x = ggplot2::element_text(
           #   vjust = -1,
           #   family = font_families$font_family_axis_title,

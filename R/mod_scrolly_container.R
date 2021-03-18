@@ -41,7 +41,6 @@ mod_scrolly_container_ui <- function(id) {
         ),
         br(),
         br(),
-
         scrollytell::scrolly_section(
           id = "02_new_all_day",
           wellPanel(
@@ -68,13 +67,29 @@ mod_scrolly_container_ui <- function(id) {
           HTML("<center>"),
           mod_plot_new_access_ui("plot_new_access_ui_1"),
           br(),
+          br(),
           fluidRow(
             column(
               width = 6,
+              with_my_tippy(
+                h4("People", icon(name = "question-circle"),
+                   class = "my-plot-title"),
+                tooltip = tooltip_text$people,
+
+                placement = "right-end",
+                interactive = "true",
+                allowHTML = "true"
+
+              ),
               mod_plot_people_jobs_detail_ui("plot_people_expand_detail_ui_1")
             ),
             column(
               width = 6,
+              with_my_tippy(
+                h4("Jobs", icon(name = "question-circle"),
+                   class = "my-plot-title"),
+                tooltip = tooltip_text$jobs
+              ),
               mod_plot_people_jobs_detail_ui("plot_jobs_expand_detail_ui_1")
             )
           ),
@@ -92,10 +107,27 @@ mod_scrolly_container_ui <- function(id) {
           fluidRow(
             column(
               width = 6,
+              with_my_tippy(
+                h4("People", icon(name = "question-circle"),
+                   class = "my-plot-title"),
+                tooltip = tooltip_text$people,
+                placement = "right-end",
+                interactive = "true",
+                allowHTML = "true"
+
+              ),
               mod_plot_people_jobs_detail_ui("plot_people_improve_detail_ui_1")
             ),
             column(
               width = 6,
+              with_my_tippy(
+                h4("Jobs", icon(name = "question-circle"),
+                   class = "my-plot-title"),
+                tooltip = tooltip_text$jobs,
+                placement = "right-end",
+                interactive = "true",
+                allowHTML = "true"
+              ),
               mod_plot_people_jobs_detail_ui("plot_jobs_improve_detail_ui_1")
             )
           ),
@@ -124,14 +156,20 @@ mod_scrolly_container_ui <- function(id) {
           HTML("</center>"),
           br(),
           h4("What market areas will be served by these improvements?"),
-          p("The region is divided into five distinct Transit Market Areas (TMAs). TMAs are a tool used to guide transit planning decisions. TMAs are determined by a combination of measures, including population and employment density, automobile availability, and intersection density. You can read more about TMAs in",
-            a("Appendix G of the Transportation Policy Plan.", icon(name = "external-link-alt"),
-               href = "https://metrocouncil.org/Transportation/Publications-And-Resources/Planning/2040-TRANSPORTATION-POLICY-PLAN-(2020-version)/Appendices/Appendix-G.aspx",
-              target = "_blank"),
-            .noWS = "inside"),
+          p(
+            "The region is divided into five distinct Transit Market Areas (TMAs). TMAs are a tool used to guide transit planning decisions. TMAs are determined by a combination of measures, including population and employment density, automobile availability, and intersection density. You can read more about TMAs in",
+            a(
+              "Appendix G of the Transportation Policy Plan.",
+              icon(name = "external-link-alt"),
+              href = "https://metrocouncil.org/Transportation/Publications-And-Resources/Planning/2040-TRANSPORTATION-POLICY-PLAN-(2020-version)/Appendices/Appendix-G.aspx",
+              target = "_blank"
+            ),
+            .noWS = "inside"
+          ),
           br(),
           HTML("<center>"),
           mod_plot_tma_service_type_ui("plot_tma_service_type_ui_1"),
+          # mod_plot_tma_abstract_ui("plot_tma_abstract_ui_1"),
           HTML("</center>")
         ),
         scrollytell::scrolly_section(

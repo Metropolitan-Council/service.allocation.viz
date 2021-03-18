@@ -135,5 +135,7 @@ coverage_colors <- c(
 
 tooltip_text <- list(
   high_frequency = "<strong>High frequency transit service </strong> includes buses or trains that come at least every 15-30 minutes. You can use for most or all of your daily needs.",
-  local = "<strong>Local transit service </strong> includes buses or trains that come at least every 15-30 minutes. Service is reliable, but you may have to plan ahead to use."
+  local = "<strong>Local transit service </strong> includes buses or trains that come at least every 15-30 minutes. Service is reliable, but you may have to plan ahead to use.",
+  people = "<strong>Affordable Housing Units</strong> Housing units for households with an income below 30% of the Area Median Income. <br>  <strong>Low-Income</strong> Individuals with an individual or family income below 185% of the federal poverty threshold",
+  jobs = "<strong>High-Wage jobs</strong> Jobs earning more than $40,000 per year. <br> <strong>Low-wage jobs </strong> Jobs earning less than $40,000 per year"
 )
