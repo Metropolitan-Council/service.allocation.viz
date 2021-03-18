@@ -59,7 +59,12 @@ mod_plot_people_jobs_detail_server <- function(
         #   alpha = 0.7
         # ) +
         scale_y_continuous(
-          labels = scales::label_comma(prefix = "+")
+          labels = scales::label_comma(prefix = "+"),
+          limits = if(plot_expand_improve == "Expand"){
+            c(0, 70000)
+          } else {
+            c(0, 500000)
+          }
         ) +
         # scale_fill_manual(values = c(
         #   "#3CB371",
