@@ -636,8 +636,8 @@ se_summary_long <- se_population_type %>%
       )
     ),
     item_unit_label = case_when(
-      item_category == "seniors" ~ "Older Population",
-      item_category == "senior" ~ "Older Population",
+      item_category == "seniors" ~ "Elderly",
+      item_category == "senior" ~ "Elderly",
       item_category == "poc" ~ "BIPOC",
       item_category == "zero_car_hh" ~ "households without a car",
       item_category == "afford_hous_units" ~ "Affordable Housing Units",
@@ -649,8 +649,8 @@ se_summary_long <- se_population_type %>%
       item_category == "low_inc_job" ~ "Low-Wage Jobs",
       item_category == "lo_emp" ~ "Low-Wage Jobs",
       item_category == "pop" ~ "People",
-      item_category == "pov" ~ "Low-Income Population",
-      item_category == "pov185" ~ "Low-Income Population"
+      item_category == "pov" ~ "Low-Income",
+      item_category == "pov185" ~ "Low-Income"
     ),
     lab = paste0(
       "+",
@@ -682,10 +682,10 @@ se_summary_long <- se_population_type %>%
       item_unit_label,
       levels = c(
         "People",
-        "Low-Income Population",
+        "Low-Income",
         "BIPOC",
         "Affordable Housing Units",
-        "Older Population",
+        "Elderly ",
         "Jobs",
         "High-Wage Jobs",
         "Low-Wage Jobs"
