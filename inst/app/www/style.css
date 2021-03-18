@@ -1,4 +1,11 @@
 
+.my-plot-title {
+	z-index: 100;
+	position: inherit;
+	margin-bottom: -3.5rem;
+	margin-top: 0px;
+}
+
 .tippy-box {
   font-size: 15px !important;
 }
