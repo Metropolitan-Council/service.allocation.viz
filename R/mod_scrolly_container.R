@@ -71,23 +71,27 @@ mod_scrolly_container_ui <- function(id) {
           fluidRow(
             column(
               width = 6,
-              with_my_tippy(
-                h4("People", icon(name = "question-circle"),
-                   class = "my-plot-title"),
+              tippy::with_tippy(
+                h4(
+                  "People",
+                  icon(name = "question-circle"),
+                  class = "my-plot-title"
+                ),
                 tooltip = tooltip_text$people,
-
                 placement = "right-end",
                 interactive = "true",
                 allowHTML = "true"
-
               ),
               mod_plot_people_jobs_detail_ui("plot_people_expand_detail_ui_1")
             ),
             column(
               width = 6,
-              with_my_tippy(
-                h4("Jobs", icon(name = "question-circle"),
-                   class = "my-plot-title"),
+              tippy::with_tippy(
+                h4(
+                  "Jobs",
+                  icon(name = "question-circle"),
+                  class = "my-plot-title"
+                ),
                 tooltip = tooltip_text$jobs
               ),
               mod_plot_people_jobs_detail_ui("plot_jobs_expand_detail_ui_1")
@@ -107,22 +111,27 @@ mod_scrolly_container_ui <- function(id) {
           fluidRow(
             column(
               width = 6,
-              with_my_tippy(
-                h4("People", icon(name = "question-circle"),
-                   class = "my-plot-title"),
+              tippy::with_tippy(
+                h4(
+                  "People",
+                  icon(name = "question-circle"),
+                  class = "my-plot-title"
+                ),
                 tooltip = tooltip_text$people,
                 placement = "right-end",
                 interactive = "true",
                 allowHTML = "true"
-
               ),
               mod_plot_people_jobs_detail_ui("plot_people_improve_detail_ui_1")
             ),
             column(
               width = 6,
-              with_my_tippy(
-                h4("Jobs", icon(name = "question-circle"),
-                   class = "my-plot-title"),
+              tippy::with_tippy(
+                h4(
+                  "Jobs",
+                  icon(name = "question-circle"),
+                  class = "my-plot-title"
+                ),
                 tooltip = tooltip_text$jobs,
                 placement = "right-end",
                 interactive = "true",
