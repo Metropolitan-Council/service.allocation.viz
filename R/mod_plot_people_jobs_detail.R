@@ -63,7 +63,7 @@ mod_plot_people_jobs_detail_server <- function(
           limits = if (plot_expand_improve == "Expand") {
             c(0, 70000)
           } else {
-            c(0, 500000)
+            c(0, 600000)
           }
         ) +
         # scale_fill_manual(values = c(

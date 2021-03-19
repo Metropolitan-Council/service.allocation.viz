@@ -61,11 +61,15 @@ scenario_def_long <- scenario_def %>%
     key = "improvement_type",
     value = value
   ) %>%
-  mutate(scenario_text = stringr::str_replace_all(improvement_type, "_", " ") %>%
-    stringr::str_to_sentence(),
-    value = case_when(improvement_type %in% c("expanded_on_demand_service") & value == 0 ~ "No",
-                      improvement_type %in% c("expanded_on_demand_service") & value == 1 ~ "Yes",
-                      TRUE ~ as.character(value))) %>%
+  mutate(
+    scenario_text = stringr::str_replace_all(improvement_type, "_", " ") %>%
+      stringr::str_to_sentence(),
+    value = case_when(
+      improvement_type %in% c("expanded_on_demand_service") & value == 0 ~ "No",
+      improvement_type %in% c("expanded_on_demand_service") & value == 1 ~ "Yes",
+      TRUE ~ as.character(value)
+    )
+  ) %>%
   as.data.table()
 
 
