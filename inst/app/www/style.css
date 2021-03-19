@@ -1,4 +1,45 @@
 
+.my-plot-title {
+	z-index: 100;
+	position: inherit;
+	margin-bottom: -3.5rem;
+	margin-top: 0px;
+}
+
+.tippy-box {
+  font-size: 15px !important;
+}
+
+.tippy {
+  text-decoration: underline;
+}
+
+.tippy-content{
+	transition-duration: 325ms;
+	transition-delay: 54ms;
+	background: var(--council-white) none repeat scroll 0% 0%;
+	border-style: solid;
+	border-width: 0.5px;
+	border-color: gray;
+	padding: 4px;
+	text-align: left;
+
+}
+
+.tippy-popper {
+  font-size: 15px !important;
+}
+
+.tippy-tooltip{
+    font-size: 15px !important;
+    color: var(--council-black) !important;
+    background-color: var(--council-white) !important;
+}
+
+.tippy-backdrop {
+  background-color: var(--council-white);
+
+}
 /* Scrolly styling */
 
 
@@ -127,11 +168,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 { font-size: 36px; line-height: 1.2;  letter-spacing: -.1rem;}
-h2 { font-size: 24px; line-height: 1.25; letter-spacing: -.1rem; }
-h3 { font-size: 22px; line-height: 1.3;  letter-spacing: -.1rem; }
-h4 { font-size: 18px; line-height: 1.35; letter-spacing: -.08rem; }
-h5 { font-size: 16px; line-height: 1.3;  letter-spacing: -.05rem; }
-h6 { font-size: 14px; line-height: 1.6;  letter-spacing: 0; }
+h2 { font-size: 26px; line-height: 1.25; letter-spacing: -.1rem; }
+h3 { font-size: 22px; line-height: 1.3;  letter-spacing: -.05rem; }
+h4 { font-size: 20px; line-height: 1.35; letter-spacing: -.08rem; }
+h5 { font-size: 18px; line-height: 1.3;  letter-spacing: -.05rem; }
+h6 { font-size: 16px; line-height: 1.6;  letter-spacing: 0; }
 
 body {
 	font-size: 15px;
@@ -144,8 +185,11 @@ body {
 }
 
 p {
-	margin: 0 0 10px;
-	font-size: 13px;
+	font-size: 15px;
+	font-family: Helvetica, Tahoma, Geneva, Arial, sans-serif;
+	background-color: var(--council-white);
+	color: var(--council-black);
+	max-width: 100%;
 }
 
 b, strong {

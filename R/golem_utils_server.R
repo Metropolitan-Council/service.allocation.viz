@@ -83,13 +83,13 @@ sysfonts::font_add("Arial", "inst/app/www/arial.ttf")
 
 
 font_sizes <- list(
-  font_size_base = 13,
-  font_size_plot_title = 22,
-  font_size_axis_title = 14,
-  font_size_legend_title = 14,
+  font_size_base = 14,
+  font_size_plot_title = 18,
+  font_size_axis_title = 16,
+  font_size_legend_title = 16,
   font_size_strip_title = 16,
   font_size_axis_text = 11,
-  font_size_legend_text = 10,
+  font_size_legend_text = 11,
   font_size_caption = 9,
   font_size_margin = 10
 )
@@ -116,5 +116,26 @@ axis_options <- list(
 )
 
 
-job_color <-   "#E2F0D9"
-people_color <-   "#DAE3F3"
+job_color <- "#E2F0D9"
+people_color <- "#DAE3F3"
+
+
+spectrum_colors <- RColorBrewer::brewer.pal(7, "PRGn")
+
+
+convenient_colors <- c(
+  spectrum_colors[[1]],
+  "orchid3"
+)
+
+coverage_colors <- c(
+  spectrum_colors[[7]],
+  "darkseagreen3"
+)
+
+tooltip_text <- list(
+  high_frequency = "<strong>High frequency transit service </strong> includes buses or trains that come at least every 15-30 minutes. You can use for most or all of your daily needs.",
+  local = "<strong>Local transit service </strong> includes buses or trains that come at least every 15-30 minutes. Service is reliable, but you may have to plan ahead to use.",
+  people = "<strong>Affordable Housing Units</strong> Housing units for households with an income below 30% of the Area Median Income. <br>  <strong>Low-Income</strong> Individuals with an individual or family income below 185% of the federal poverty threshold",
+  jobs = "<strong>High-Wage jobs</strong> Jobs earning more than $40,000 per year. <br> <strong>Low-wage jobs </strong> Jobs earning less than $40,000 per year"
+)

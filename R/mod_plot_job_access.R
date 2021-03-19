@@ -1,4 +1,4 @@
-#' plot_service_type UI Function
+#' plot_job_access UI Function
 #'
 #' @description A shiny Module.
 #'
@@ -7,17 +7,17 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_plot_service_type_ui <- function(id) {
+mod_plot_job_access_ui <- function(id) {
   ns <- NS(id)
-  tagList(
-    plotlyOutput(ns("service_type_plot"))
-  )
+  tagList((
+    plotlyOutput(ns("job_access_plot"))
+  ))
 }
 
-#' plot_service_type Server Function
+#' plot_job_access Server Function
 #'
 #' @noRd
-mod_plot_service_type_server <- function(
+mod_plot_job_access_server <- function(
   input,
   output,
   session,
@@ -25,62 +25,69 @@ mod_plot_service_type_server <- function(
 ) {
   ns <- session$ns
 
-
-  output$service_type_plot <- plotly::renderPlotly({
+  output$job_access_plot <- plotly::renderPlotly({
+    # browser()
     ggplotly(
       tooltip = "text",
-      ggplot(data = data_for_plotting$service_type_by_tma$by_all) +
+      ggplot(data_for_plotting$job_access_data) +
         geom_col(
           mapping = aes(
-            x = scenario_short,
-            y = total_increase,
-            fill = reorder(service_type, dplyr::desc(service_type)),
-            text = hover_text
-          ),
-          color = "white",
-          lwd = 0.4,
-          position = "stack"
-        ) +
-        scale_fill_manual(values = convenient_colors) +
-        geom_col(
-          data = data_for_plotting$service_type_by_tma$by_all[selected == 0, ],
-          mapping = aes(
-            x = scenario_short,
-            y = total_increase,
+            x = scenario,
+            y = pct,
+            fill = minute_improvement,
             text = hover_text,
-            fill = reorder(service_type, dplyr::desc(service_type))
+            group = minute_improvement
           ),
-          fill = "gray",
-          alpha = 1,
-          # lwd = 0.4,
-          # color = "white",
-          position = "stack"
-        ) +
-        scale_y_continuous(
-          labels = scales::label_comma(prefix = "+"),
-          breaks = c(
-            200000,
-            400000,
-            600000
+          position = position_dodge2(
+            padding = 0.1
           )
         ) +
+        geom_col(
+          data = data_for_plotting$job_access_data[selected == 0, ],
+          mapping = aes(
+            x = scenario,
+            y = pct,
+            group = minute_improvement,
+            text = hover_text
+          ),
+          position = position_dodge2(
+            padding = 0.1
+          ),
+          fill = "gray",
+          alpha = 1
+        ) +
+        scale_y_continuous(
+          labels = scales::label_percent(prefix = "+"),
+          breaks = c(
+            0.025,
+            0.050,
+            0.075,
+            0.100
+          )
+        ) +
+        scale_fill_manual(values = c(
+          "#3CB371",
+          "#319F5D",
+          "#268B4A",
+          spectrum_colors[[7]]
+        )) +
         labs(
+          title = "Job Accessibility",
           x = "",
-          y = "",
-          title = "Change in Access to Transit by Service Level"
+          y = ""
         ) +
         app_theme() +
         theme(
-          axis.title.x = ggplot2::element_text(
-            vjust = -1,
-            family = font_families$font_family_axis_title,
-            size = font_sizes$font_size_axis_title
-          ),
-          axis.title.y = ggplot2::element_text(
-            vjust = 2,
-            family = font_families$font_family_axis_title,
-            size = font_sizes$font_size_axis_title
-          ),
+          # axis.title.x = ggplot2::element_text(
+          #   vjust = -1,
+          #   family = font_families$font_family_axis_title,
+          #   size = font_sizes$font_size_axis_title
+          # ),
+          # axis.title.y = ggplot2::element_text(
+          #   vjust = 2,
+          #   family = font_families$font_family_axis_title,
+          #   size = font_sizes$font_size_axis_title
+          # ),
           axis.text.x = ggplot2::element_text(
             family = font_families$font_family_axis_text,
             size = font_sizes$font_size_axis_text,
@@ -90,7 +97,7 @@ mod_plot_service_type_server <- function(
             family = font_families$font_family_axis_text,
             size = font_sizes$font_size_axis_text,
             vjust = 1
-          ),
+          )
         )
     ) %>%
       plotly::layout(
@@ -101,7 +108,7 @@ mod_plot_service_type_server <- function(
         showlegend = TRUE,
         legend = list(
           orientation = "h",
-          y = -0.12
+          y = -0.125
         ),
         annotations = list(
           visible = FALSE,
@@ -134,7 +141,7 @@ mod_plot_service_type_server <- function(
 }
 
 ## To be copied in the UI
-# mod_plot_service_type_ui("plot_service_type_ui_1")
+# mod_plot_job_access_ui("plot_job_access_ui_1")
 
 ## To be copied in the server
-# callModule(mod_plot_service_type_server, "plot_service_type_ui_1", slider_input = slider_input)
+# callModule(mod_plot_job_access_server, "plot_job_access_ui_1")

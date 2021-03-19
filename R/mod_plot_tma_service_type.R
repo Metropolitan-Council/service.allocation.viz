@@ -1,4 +1,4 @@
-#' plot_service_type UI Function
+#' plot_scenario_tma UI Function
 #'
 #' @description A shiny Module.
 #'
@@ -7,17 +7,21 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_plot_service_type_ui <- function(id) {
+mod_plot_tma_service_type_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    plotlyOutput(ns("service_type_plot"))
+    plotly::plotlyOutput(
+      ns("tma_service_type_summary"),
+      # width = "75%",
+      # height = "225px"
+    )
   )
 }
 
-#' plot_service_type Server Function
+#' plot_scenario_tma Server Function
 #'
 #' @noRd
-mod_plot_service_type_server <- function(
+mod_plot_tma_service_type_server <- function(
   input,
   output,
   session,
@@ -26,51 +30,40 @@ mod_plot_service_type_server <- function(
   ns <- session$ns
 
 
-  output$service_type_plot <- plotly::renderPlotly({
+  output$tma_service_type_summary <- plotly::renderPlotly({
     ggplotly(
       tooltip = "text",
-      ggplot(data = data_for_plotting$service_type_by_tma$by_all) +
+      ggplot(data = data_for_plotting$service_type_by_tma$by_tma) +
         geom_col(
-          mapping = aes(
-            x = scenario_short,
-            y = total_increase,
-            fill = reorder(service_type, dplyr::desc(service_type)),
-            text = hover_text
+          aes(
+            x = market_area,
+            y = val_increase,
+            # group = service_type,
+            text = hover_text,
+            fill = reorder(service_type, dplyr::desc(service_type))
           ),
           color = "white",
           lwd = 0.4,
           position = "stack"
         ) +
         scale_fill_manual(values = convenient_colors) +
-        geom_col(
-          data = data_for_plotting$service_type_by_tma$by_all[selected == 0, ],
-          mapping = aes(
-            x = scenario_short,
-            y = total_increase,
-            text = hover_text,
-            fill = reorder(service_type, dplyr::desc(service_type))
-          ),
-          fill = "gray",
-          alpha = 1,
-          # lwd = 0.4,
-          # color = "white",
-          position = "stack"
-        ) +
         scale_y_continuous(
           labels = scales::label_comma(prefix = "+"),
+          limits = c(0, 350000),
           breaks = c(
-            200000,
-            400000,
-            600000
+            100 * 1000,
+            200 * 1000,
+            300 * 1000
           )
         ) +
         labs(
-          x = "",
+          x = "Transit Market Area",
           y = "",
-          title = "Change in Access to Transit by Service Level"
+          # title = "Scenario 1",
+          fill = "Service level"
         ) +
         app_theme() +
-        theme(
+        ggplot2::theme(
           axis.title.x = ggplot2::element_text(
             vjust = -1,
             family = font_families$font_family_axis_title,
@@ -93,7 +86,7 @@ mod_plot_service_type_server <- function(
           ),
         )
     ) %>%
-      plotly::layout(
+      layout(
         margin = list(l = 0, r = 0, b = 10, t = 50, pad = 10),
         # l = left; r = right; t = top; b = bottom
         # xaxis = axis_options,
@@ -134,7 +127,7 @@ mod_plot_service_type_server <- function(
 }
 
 ## To be copied in the UI
-# mod_plot_service_type_ui("plot_service_type_ui_1")
+# mod_plot_tma_service_type_ui("plot_tma_service_type_ui_1")
 
 ## To be copied in the server
-# callModule(mod_plot_service_type_server, "plot_service_type_ui_1", slider_input = slider_input)
+# callModule(mod_plot_tma_service_type_server, "plot_tma_service_type_ui_1")

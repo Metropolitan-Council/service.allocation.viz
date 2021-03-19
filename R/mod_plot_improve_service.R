@@ -1,4 +1,4 @@
-#' plot_service_type UI Function
+#' plot_improve_service UI Function
 #'
 #' @description A shiny Module.
 #'
@@ -7,17 +7,17 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_plot_service_type_ui <- function(id) {
+mod_plot_improve_service_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    plotlyOutput(ns("service_type_plot"))
+    plotlyOutput(ns("improve_service"))
   )
 }
 
-#' plot_service_type Server Function
+#' plot_improve_service Server Function
 #'
 #' @noRd
-mod_plot_service_type_server <- function(
+mod_plot_improve_service_server <- function(
   input,
   output,
   session,
@@ -26,61 +26,71 @@ mod_plot_service_type_server <- function(
   ns <- session$ns
 
 
-  output$service_type_plot <- plotly::renderPlotly({
+  output$improve_service <- plotly::renderPlotly({
+
+    # browser()
     ggplotly(
       tooltip = "text",
-      ggplot(data = data_for_plotting$service_type_by_tma$by_all) +
+      ggplot(data_for_plotting$summary_context_data[expand_improve == "Improve", ]) +
         geom_col(
-          mapping = aes(
+          aes(
             x = scenario_short,
-            y = total_increase,
-            fill = reorder(service_type, dplyr::desc(service_type)),
+            y = total,
+            fill = type,
+            group = type,
             text = hover_text
           ),
-          color = "white",
-          lwd = 0.4,
-          position = "stack"
+          position = position_dodge2(
+            padding = 0.1
+          )
         ) +
-        scale_fill_manual(values = convenient_colors) +
         geom_col(
-          data = data_for_plotting$service_type_by_tma$by_all[selected == 0, ],
+          data_for_plotting$summary_context_data[expand_improve == "Improve", ][selected == 0, ],
           mapping = aes(
             x = scenario_short,
-            y = total_increase,
-            text = hover_text,
-            fill = reorder(service_type, dplyr::desc(service_type))
+            y = total,
+            group = type,
+            text = hover_text
+          ),
+          position = position_dodge2(
+            padding = 0.1
           ),
           fill = "gray",
-          alpha = 1,
-          # lwd = 0.4,
-          # color = "white",
-          position = "stack"
+          alpha = 1
         ) +
         scale_y_continuous(
           labels = scales::label_comma(prefix = "+"),
           breaks = c(
-            200000,
-            400000,
-            600000
+            300 * 1000,
+            600 * 1000,
+            900 * 1000
           )
         ) +
+        scale_fill_manual(
+          values = convenient_colors,
+          labels = c(
+            "People",
+            "Jobs"
+          ),
+          name = ""
+        ) +
         labs(
+          title = "People and Jobs with Improved Transit Service",
           x = "",
-          y = "",
-          title = "Change in Access to Transit by Service Level"
+          y = ""
         ) +
         app_theme() +
         theme(
-          axis.title.x = ggplot2::element_text(
-            vjust = -1,
-            family = font_families$font_family_axis_title,
-            size = font_sizes$font_size_axis_title
-          ),
-          axis.title.y = ggplot2::element_text(
-            vjust = 2,
-            family = font_families$font_family_axis_title,
-            size = font_sizes$font_size_axis_title
-          ),
+          # axis.title.x = ggplot2::element_text(
+          #   vjust = -1,
+          #   family = font_families$font_family_axis_title,
+          #   size = font_sizes$font_size_axis_title
+          # ),
+          # axis.title.y = ggplot2::element_text(
+          #   vjust = 2,
+          #   family = font_families$font_family_axis_title,
+          #   size = font_sizes$font_size_axis_title
+          # ),
           axis.text.x = ggplot2::element_text(
             family = font_families$font_family_axis_text,
             size = font_sizes$font_size_axis_text,
@@ -90,7 +100,7 @@ mod_plot_service_type_server <- function(
             family = font_families$font_family_axis_text,
             size = font_sizes$font_size_axis_text,
             vjust = 1
-          ),
+          )
         )
     ) %>%
       plotly::layout(
@@ -101,7 +111,8 @@ mod_plot_service_type_server <- function(
         showlegend = TRUE,
         legend = list(
           orientation = "h",
-          y = -0.12
+          y = -0.12,
+          traceorder = "normal"
         ),
         annotations = list(
           visible = FALSE,
@@ -112,6 +123,7 @@ mod_plot_service_type_server <- function(
           )
         ),
         # hovermode = "x-unified",
+        # hoveron = "fills",
         hoverdistance = "5",
         hoverlabel = list(
           #----
@@ -134,7 +146,7 @@ mod_plot_service_type_server <- function(
 }
 
 ## To be copied in the UI
-# mod_plot_service_type_ui("plot_service_type_ui_1")
+# mod_plot_improve_service_ui("plot_improve_service_ui_1")
 
 ## To be copied in the server
-# callModule(mod_plot_service_type_server, "plot_service_type_ui_1", slider_input = slider_input)
+# callModule(mod_plot_improve_service_server, "plot_improve_service_ui_1")

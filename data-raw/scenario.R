@@ -18,6 +18,7 @@ scenario_def <- read_xlsx(
 ) %>%
   clean_names() %>%
   rename(scenario = x1) %>%
+  mutate(scenario = paste0("Scenario ", LETTERS[1:7])) %>%
   rowwise() %>%
   mutate(
     expanded_on_demand_service =
@@ -61,14 +62,33 @@ scenario_def_long <- scenario_def %>%
     value = value
   ) %>%
   mutate(scenario_text = stringr::str_replace_all(improvement_type, "_", " ") %>%
-    stringr::str_to_sentence()) %>%
+    stringr::str_to_sentence(),
+    value = case_when(improvement_type %in% c("expanded_on_demand_service") & value == 0 ~ "No",
+                      improvement_type %in% c("expanded_on_demand_service") & value == 1 ~ "Yes",
+                      TRUE ~ as.character(value))) %>%
   as.data.table()
 
 
 
 # Save final data ---------------------------------------------------------
 
+improvement_examples <- tibble(
+  improvement_type = unique(scenario_def_long$improvement_type),
+  improvement_example = c(
+    "Route that was already high frequency provided with even higher frequency (e.g. 15 minute service to 10 minute service)",
+    "Route with service between every 15 to 30 minutes increased to service at least every 15 minutes",
+    "Route with service frequencies greater than every 30 minutes improved to service frequencies between every 15 to 30 minutes",
+    "Increased number of trips on commuter routes",
+    "New routes that provide service to suburban job centers and new routes that operate entirely outside of Transit Market Areas 1 and 2",
+    "New local routes",
+    "New commuter routes",
+    "Additional resources dedicated to on-demand, flexible service to serve low ridership demand areas"
+  )
+)
 
+
+scenario_def_long <- scenario_def_long %>%
+  left_join(improvement_examples)
 
 usethis::use_data(scenario_def, overwrite = TRUE)
 usethis::use_data(scenario_def_long, overwrite = TRUE)

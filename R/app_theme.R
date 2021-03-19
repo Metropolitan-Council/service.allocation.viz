@@ -9,8 +9,8 @@
 app_theme <- function(
   font_sizes_ = font_sizes,
   font_families_ = font_families,
-  size_margin_ = size_margin) {
-
+  size_margin_ = size_margin
+) {
   base_size <- font_sizes_$font_size_base
   base_line_size <- base_size / 22
   base_rect_size <- base_size / 22
@@ -18,7 +18,7 @@ app_theme <- function(
   half_line <- base_size / 2
 
   ggplot2::theme(
-    line = element_blank(),
+    # line = element_blank(),
     rect = element_blank(),
     text = element_text(
       family = font_families_$font_family_base,
@@ -70,6 +70,7 @@ app_theme <- function(
       half_line,
       "pt"
     ),
+    panel.grid.major.y = element_line(size = 1, color = councilR::colors$suppGray),
     plot.margin = ggplot2::margin(size_margin_, size_margin_, size_margin_, size_margin_, "pt"),
     plot.title = element_text(
       size = font_sizes_$font_size_plot_title,
