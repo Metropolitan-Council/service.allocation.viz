@@ -134,8 +134,21 @@ coverage_colors <- c(
 )
 
 tooltip_text <- list(
-  high_frequency = "<strong>High frequency transit service </strong> includes buses or trains that come at least every 15-30 minutes. You can use for most or all of your daily needs.",
+  # transit service levels
+  high_frequency = "<strong>High frequency transit service </strong> includes buses or trains that come at least every 15-30 minutes. You can use high frequency service for most or all of your daily needs.",
   local = "<strong>Local transit service </strong> includes buses or trains that come at least every 15-30 minutes. Service is reliable, but you may have to plan ahead to use.",
-  people = "<strong>Affordable Housing Units</strong> Housing units for households with an income below 30% of the Area Median Income. <br>  <strong>Low-Income</strong> Individuals with an individual or family income below 185% of the federal poverty threshold",
-  jobs = "<strong>High-Wage jobs</strong> Jobs earning more than $40,000 per year. <br> <strong>Low-wage jobs </strong> Jobs earning less than $40,000 per year"
+  basic = "<strong>Basic Service </strong> Buses or trains come at most every 30 minutes",
+  commuter = "<strong> Commuter and Express </strong> Buses or trains only operate in the rush hour and serve limited stops",
+
+  # people, jobs definitions
+  people = "<strong>Affordable Housing Units</strong> Housing units for households with an income below 30% of the Area Median Income. <br> <strong> BIPOC</strong> Black, Indigenous, and people of color <br> <strong>Elderly</strong> People ages 65 and over <br> <strong>Low-Income</strong> Individuals with an individual or family income below 185% of the federal poverty threshold",
+
+  affordable_housing = "<strong>Affordable Housing Units</strong> Housing units for households with an income below 30% of the Area Median Income. ",
+  bipoc = "<strong> BIPOC</strong> Black, Indigenous, and people of color ",
+  low_income = "<strong>Low-Income</strong> Individuals with an individual or family income below 185% of the federal poverty threshold",
+  elderly = "<strong>Elderly</strong> People ages 65 and over",
+
+
+
+  jobs = "<strong>High-Wage jobs</strong> Jobs earning more than $40,000 per year. <br> <strong>Low-Wage jobs </strong> Jobs earning less than $40,000 per year"
 )
