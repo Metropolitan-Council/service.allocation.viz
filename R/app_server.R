@@ -181,4 +181,10 @@ app_server <- function(input, output, session) {
     "plot_scenario_tma_ui_2",
     data_for_plotting = data_for_plotting
   )
+
+  callModule(
+    mod_plot_tma_abstract_server,
+    "plot_tma_abstract_ui_1",
+    data_for_plotting = data_for_plotting
+  )
 }
