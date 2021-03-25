@@ -58,6 +58,13 @@ app_ui <- function(request) {
       br(),
       mod_scrolly_container_ui("scrolly_container_ui_1"),
       # HTML('</center>'),
+      br(),
+      br(),
+      br(),
+      br(),
+
+          h2("What do you think?"),
+          p("Which scenario best captures the strategy that you feel the region should engage when investing in expanding the transit system? Please let us know by completing the following survey: surveymonkey link"),
 
       tags$footer(
         #----

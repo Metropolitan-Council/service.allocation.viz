@@ -215,13 +215,6 @@ mod_scrolly_container_ui <- function(id) {
           HTML("</center>")
         ),
         br(),
-        scrollytell::scrolly_section(
-          id = 5,
-          wellPanel(
-            h3("What do you think?"),
-            p("Which scenario best captures the strategy that you feel the region should engage when investing in expanding the transit system? Please let us know by completing the following survey: surveymonkey link")
-          )
-        ),
         HTML("</center>")
       )
     )
