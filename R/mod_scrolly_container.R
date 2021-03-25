@@ -166,7 +166,12 @@ mod_scrolly_container_ui <- function(id) {
           br(),
           h4("What market areas will be served by these improvements?"),
           p(
-            "The region is divided into five distinct Transit Market Areas (TMAs). TMAs are a tool used to guide transit planning decisions. TMAs are determined by a combination of measures, including population and employment density, automobile availability, and intersection density. You can read more about TMAs in",
+            "The region is divided into five distinct",
+            my_tippy(
+              "Transit Market Areas (TMAs).",
+              tooltip = tooltip_text$tma_defs
+            ),
+            " TMAs are a tool used to guide transit planning decisions. TMAs are determined by a combination of measures, including population and employment density, automobile availability, and intersection density. You can read more about TMAs in",
             a(
               "Appendix G of the Transportation Policy Plan.",
               icon(name = "external-link-alt"),
