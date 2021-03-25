@@ -87,7 +87,6 @@ tma_area_abstract <- tma_area_abstract %>%
       "Transit Market Area V has very low population and employment densities and tends to be primarily Rural communities and Agricultural uses."
     ),
     hover_text = tma_desc_short
-
   )
 
 usethis::use_data(tma_area_abstract, overwrite = T)
@@ -111,46 +110,66 @@ tma_detailed <- councilR::import_from_gpkg("https://resources.gisdata.mn.gov/pub
   )
 
 
-roads <-  sf::st_sfc(sf::st_linestring(x = rbind(c(114.6, 145.9),
-                                                 c(114.6, 268.86),
-                                                 c(300.05, 268.86),
-                                                 c(300.05, 145.9),
-                                                 c(114.6, 145.9))),
-                     sf::st_linestring(x = rbind(c(199.43, 197.19),
-                                                 c(199.43, 335.58),
-                                                 c(229.13, 335.58),
-                                                 c(229.13, 145.98))),
-                     sf::st_linestring(x = rbind(c(176.69, 1),
-                                                 c(176.69, 268.86))),
-                     sf::st_linestring(x = rbind(c(114.6, 197.2),
-                                                 c(380, 197.2 ))),
-                     sf::st_linestring(x = rbind(c(229.13, 145.9),
-                                                 c(176.69, 82.12))),
-                     sf::st_linestring(x = rbind(c(229.13, 335.58),
-                                                 c(229.13, 380))),
-                     sf::st_linestring(x = rbind(c(114.6, 268.6),
-                                                 c(0.86, 357.6)))) %>%
+roads <- sf::st_sfc(
+  sf::st_linestring(x = rbind(
+    c(114.6, 145.9),
+    c(114.6, 268.86),
+    c(300.05, 268.86),
+    c(300.05, 145.9),
+    c(114.6, 145.9)
+  )),
+  sf::st_linestring(x = rbind(
+    c(199.43, 197.19),
+    c(199.43, 335.58),
+    c(229.13, 335.58),
+    c(229.13, 145.98)
+  )),
+  sf::st_linestring(x = rbind(
+    c(176.69, 1),
+    c(176.69, 268.86)
+  )),
+  sf::st_linestring(x = rbind(
+    c(114.6, 197.2),
+    c(380, 197.2)
+  )),
+  sf::st_linestring(x = rbind(
+    c(229.13, 145.9),
+    c(176.69, 82.12)
+  )),
+  sf::st_linestring(x = rbind(
+    c(229.13, 335.58),
+    c(229.13, 380)
+  )),
+  sf::st_linestring(x = rbind(
+    c(114.6, 268.6),
+    c(0.86, 357.6)
+  ))
+) %>%
   sf::st_as_sf()
 
-cities <- sf::st_sfc(sf::st_point(c(185, 215)),
-                     sf::st_point(c(258, 210)),
-                     sf::st_point(c(330, 195)),
-                     sf::st_point(c(200, 345)),
-                     sf::st_point(c(120, 275)),
-                     sf::st_point(c(110, 225)),
-                     sf::st_point(c(110, 140)),
-                     sf::st_point(c(176.69, 110)),
-                     sf::st_point(c(225, 135))) %>%
+cities <- sf::st_sfc(
+  sf::st_point(c(185, 215)),
+  sf::st_point(c(258, 210)),
+  sf::st_point(c(330, 195)),
+  sf::st_point(c(200, 345)),
+  sf::st_point(c(120, 275)),
+  sf::st_point(c(110, 225)),
+  sf::st_point(c(110, 140)),
+  sf::st_point(c(176.69, 110)),
+  sf::st_point(c(225, 135))
+) %>%
   sf::st_as_sf() %>%
-  mutate(city = c("Minneapolis",
-                  "St. Paul",
-                  "Woodbury",
-                  "Forest Lake",
-                  "Maple Grove",
-                  "Plymouth",
-                  "Eden Prairie",
-                  "Burnsville",
-                  "Eagan")) %>%
+  mutate(city = c(
+    "Minneapolis",
+    "St. Paul",
+    "Woodbury",
+    "Forest Lake",
+    "Maple Grove",
+    "Plymouth",
+    "Eden Prairie",
+    "Burnsville",
+    "Eagan"
+  )) %>%
   sf::st_intersection(tma_area_abstract)
 
 usethis::use_data(cities, overwrite = TRUE)
@@ -163,23 +182,30 @@ ggplot() +
     aes(fill = market_area),
     color = NA
   ) +
-  geom_sf(data  = roads,
-          color = "darkgray",
-          lwd = 1) +
-  geom_sf_text(data = cities,
-               aes(label = stringr::str_wrap(city,10)),
-               color = "white",
-               lineheight = 0.8,
-               family = "Arial Narrow",
-               size = font_sizes$font_size_base) +
-  coord_sf(xlim = c(12,360),
-           ylim = c(15,360),
-           expand = F) +
-  scale_fill_manual(values = c("#0054A4",
-                               "#0069cc",
-                               "#0084ff",
-                               "#339cff",
-                               "#b3daff")) +
+  geom_sf(
+    data = roads,
+    color = "darkgray",
+    lwd = 1
+  ) +
+  geom_sf_text(
+    data = cities,
+    aes(label = stringr::str_wrap(city, 10)),
+    color = "white",
+    lineheight = 0.8,
+    family = "Arial Narrow",
+    size = font_sizes$font_size_base
+  ) +
+  coord_sf(
+    xlim = c(12, 360),
+    ylim = c(15, 360),
+    expand = F
+  ) +
+  scale_fill_manual(values = c(
+    "#0054A4",
+    "#0069cc",
+    "#0084ff",
+    "#339cff",
+    "#b3daff"
+  )) +
   theme_void() +
   theme(legend.position = "bottom")
-
