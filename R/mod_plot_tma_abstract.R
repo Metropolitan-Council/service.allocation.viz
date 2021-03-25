@@ -69,8 +69,8 @@ mod_plot_tma_abstract_server <- function(
         #            size = 5
       ) +
       coord_sf(
-        xlim = c(20, 360),
-        ylim = c(15, 360),
+        # xlim = c(20, 360),
+        # ylim = c(15, 360),
         expand = F
       ) +
       scale_fill_manual(values = c(
