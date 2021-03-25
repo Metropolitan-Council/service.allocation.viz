@@ -187,4 +187,11 @@ app_server <- function(input, output, session) {
     "plot_tma_abstract_ui_1",
     data_for_plotting = data_for_plotting
   )
+
+
+  callModule(
+    mod_plot_ridership_increase_server,
+    "plot_ridership_increase_ui_1",
+    data_for_plotting = data_for_plotting
+  )
 }

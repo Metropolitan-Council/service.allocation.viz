@@ -211,7 +211,7 @@ mod_scrolly_container_ui <- function(id) {
             p("Measuring transit riders is a fundamental aspect of assessing a transit system’s impact. If the system is useful to people, more will likely ride it. While it is impossible to assess ridership potential perfectly, since many factors influence people’s choices, the following is an estimate of how each scenario’s improvements would impact regional transit ridership.")
           ),
           HTML("<center>"),
-          # mod_plot_job_access_ui("plot_job_access_ui_1"),
+          mod_plot_ridership_increase_ui("plot_ridership_increase_ui_1"),
           HTML("</center>")
         ),
         br(),
