@@ -182,8 +182,16 @@ mod_scrolly_container_ui <- function(id) {
           ),
           br(),
           HTML("<center>"),
-          mod_plot_tma_service_type_ui("plot_tma_service_type_ui_1"),
-          # mod_plot_tma_abstract_ui("plot_tma_abstract_ui_1"),
+          fluidRow(
+            column(
+              width = 8,
+              mod_plot_tma_service_type_ui("plot_tma_service_type_ui_1")
+            ),
+            column(
+              width = 4,
+              mod_plot_tma_abstract_ui("plot_tma_abstract_ui_1")
+            )
+          ),
           HTML("</center>")
         ),
         scrollytell::scrolly_section(
