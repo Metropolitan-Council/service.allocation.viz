@@ -139,16 +139,12 @@ tooltip_text <- list(
   local = "<strong>Local transit service </strong> includes buses or trains that come at least every 15-30 minutes. Service is reliable, but you may have to plan ahead to use.",
   basic = "<strong>Basic Service </strong> Buses or trains come at most every 30 minutes",
   commuter = "<strong> Commuter and Express </strong> Buses or trains only operate in the rush hour and serve limited stops",
-
   # people, jobs definitions
   people = "<strong>Affordable Housing Units</strong> Housing units for households with an income below 30% of the Area Median Income. <br> <strong> BIPOC</strong> Black, Indigenous, and people of color <br> <strong>Elderly</strong> People ages 65 and over <br> <strong>Low-Income</strong> Individuals with an individual or family income below 185% of the federal poverty threshold",
-
   affordable_housing = "<strong>Affordable Housing Units</strong> Housing units for households with an income below 30% of the Area Median Income. ",
   bipoc = "<strong> BIPOC</strong> Black, Indigenous, and people of color ",
   low_income = "<strong>Low-Income</strong> Individuals with an individual or family income below 185% of the federal poverty threshold",
   elderly = "<strong>Elderly</strong> People ages 65 and over",
-
-
-
-  jobs = "<strong>High-Wage jobs</strong> Jobs earning more than $40,000 per year. <br> <strong>Low-Wage jobs </strong> Jobs earning less than $40,000 per year"
+  jobs = "<strong>High-Wage jobs</strong> Jobs earning more than $40,000 per year. <br> <strong>Low-Wage jobs </strong> Jobs earning less than $40,000 per year",
+  tma_defs = "<strong>TMA 1</strong> has the highest density of population, employment, and lowest automobile availability. <br> <strong> TMA 2</strong> has high to moderately high population and employment densities. <br> <strong> TMA 3</strong> has moderate density and is typically Urban with large portions of Suburban and Suburban Edge communities. <br> <strong>TMA 4</strong> has lower concentrations of population and employment and a higher rate of auto ownership. It is primarily composed of Suburban Edge and Emerging Suburban Edge communities. <br> <strong>TMA 5</strong> has very low population and employment densities and tends to be primarily Rural communities and Agricultural uses."
 )
