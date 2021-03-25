@@ -103,14 +103,24 @@ label {
 	color: #000;
 }
 
-.irs-bar {
+
+.irs--shiny .irs-bar {
 	height: 8px;
 	top: 25px;
-	border-top: 1px solid var(--council-blue);
-	border-bottom: 1px solid var(--council-blue);
-	background: var(--council-blue);
+	border-top: 1px solid var(--council-blue) !important;
+	border-bottom: 1px solid var(--council-blue) !important;
+	background: var(--council-blue)!important;
 }
 
+.irs--shiny .irs-from, .irs--shiny .irs-to, .irs--shiny .irs-single {
+	color: #fff;
+	text-shadow: none;
+	padding: 1px 3px;
+	background-color: var(--council-blue) !important;
+	border-radius: 22px;
+	font-size: 14px;
+	line-height: 1.333;
+}
 .irs-bar-edge {
 	height: 8px;
 	top: 25px;
