@@ -9,6 +9,8 @@ app_ui <- function(request) {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # List the first level UI elements here
+    br(),
+    br(),
     fluidPage(
       # HTML('<center>'),
       h1("Bus Network Service Allocation Study"),
@@ -28,7 +30,6 @@ app_ui <- function(request) {
       br(),
       h2("Important Definitions"),
       h3("Route types"),
-
       tags$ul(HTML(tooltip_text$high_frequency)),
       tags$ul(HTML(tooltip_text$local)),
       tags$ul(HTML(tooltip_text$basic)),
@@ -39,8 +40,8 @@ app_ui <- function(request) {
       tags$ul(HTML(tooltip_text$bipoc)),
       tags$ul(HTML(tooltip_text$low_income)),
       tags$ul(HTML(tooltip_text$elderly)),
-
-      p("To get more information on key terms, hover your cursor over ",
+      p(
+        "To get more information on key terms, hover your cursor over ",
         my_tippy(
           text = " underlined text ",
           tooltip = "Here is some context!"
@@ -53,7 +54,7 @@ app_ui <- function(request) {
           interactive = "true",
           allowHTML = "true"
         )
-        ),
+      ),
       br(),
       mod_scrolly_container_ui("scrolly_container_ui_1"),
       # HTML('</center>'),
