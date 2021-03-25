@@ -49,11 +49,12 @@ mod_plot_tma_service_type_server <- function(
         scale_fill_manual(values = convenient_colors) +
         scale_y_continuous(
           labels = scales::label_comma(prefix = "+"),
-          limits = c(0, 350000),
+          limits = c(0, 400000),
           breaks = c(
             100 * 1000,
             200 * 1000,
-            300 * 1000
+            300 * 1000,
+            400 * 1000
           )
         ) +
         labs(
