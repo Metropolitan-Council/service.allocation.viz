@@ -40,6 +40,20 @@ app_ui <- function(request) {
       tags$ul(HTML(tooltip_text$low_income)),
       tags$ul(HTML(tooltip_text$elderly)),
 
+      p("To get more information on key terms, hover your cursor over ",
+        my_tippy(
+          text = " underlined text ",
+          tooltip = "Here is some context!"
+        ),
+        " or ",
+        tippy::with_tippy(
+          element = icon(name = "question-circle"),
+          tooltip = "Here is more context!",
+          placement = "right-end",
+          interactive = "true",
+          allowHTML = "true"
+        )
+        ),
       br(),
       mod_scrolly_container_ui("scrolly_container_ui_1"),
       # HTML('</center>'),
