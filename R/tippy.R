@@ -6,6 +6,8 @@
 #' @export
 #' @importFrom tippy tippy
 #'
+#' @noRd
+#'
 my_tippy <- function(
   tooltip,
   text

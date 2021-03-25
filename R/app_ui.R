@@ -62,10 +62,8 @@ app_ui <- function(request) {
       br(),
       br(),
       br(),
-
-          h2("What do you think?"),
-          p("Which scenario best captures the strategy that you feel the region should engage when investing in expanding the transit system? Please let us know by completing the following survey: surveymonkey link"),
-
+      h2("What do you think?"),
+      p("Which scenario best captures the strategy that you feel the region should engage when investing in expanding the transit system? Please let us know by completing the following survey: surveymonkey link"),
       tags$footer(
         #----
         tags$a(
