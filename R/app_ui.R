@@ -9,6 +9,7 @@ app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
+    HTML("<script src='https://unpkg.com/@popperjs/core@2;></script>)"),
     gotop::use_gotop(color = councilR::colors$councilBlue),
     # List the first level UI elements here
     br(),
