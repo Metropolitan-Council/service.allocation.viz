@@ -146,5 +146,7 @@ tooltip_text <- list(
   low_income = "<strong>Low-Income</strong> Individuals with an individual or family income below 185% of the federal poverty threshold",
   elderly = "<strong>Elderly</strong> People ages 65 and over",
   jobs = "<strong>High-Wage jobs</strong> Jobs earning more than $40,000 per year. <br> <strong>Low-Wage jobs </strong> Jobs earning less than $40,000 per year",
+  jobs_low = "<strong>Low-Wage jobs </strong> Jobs earning less than $40,000 per year",
+  jobs_high = "<strong>High-Wage jobs</strong> Jobs earning more than $40,000 per year.",
   tma_defs = "<strong>TMA 1</strong> has the highest density of population, employment, and lowest automobile availability. <br> <strong> TMA 2</strong> has high to moderately high population and employment densities. <br> <strong> TMA 3</strong> has moderate density and is typically Urban with large portions of Suburban and Suburban Edge communities. <br> <strong>TMA 4</strong> has lower concentrations of population and employment and a higher rate of auto ownership. It is primarily composed of Suburban Edge and Emerging Suburban Edge communities. <br> <strong>TMA 5</strong> has very low population and employment densities and tends to be primarily Rural communities and Agricultural uses."
 )

@@ -42,6 +42,11 @@ app_ui <- function(request) {
       tags$ul(HTML(tooltip_text$bipoc)),
       tags$ul(HTML(tooltip_text$low_income)),
       tags$ul(HTML(tooltip_text$elderly)),
+      br(),
+      h3("Jobs"),
+      tags$ul(HTML(tooltip_text$jobs_high)),
+      tags$ul(HTML(tooltip_text$jobs_low)),
+      br(),
       p(
         "To get more information on key terms, hover your cursor over ",
         my_tippy(
