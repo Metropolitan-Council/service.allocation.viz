@@ -3,11 +3,13 @@
 #' @param request Internal parameter for `{shiny}`.
 #'     DO NOT REMOVE.
 #' @import shiny
+#' @importFrom gotop use_gotop
 #' @noRd
 app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
+    gotop::use_gotop(color = councilR::colors$councilBlue),
     # List the first level UI elements here
     br(),
     br(),
