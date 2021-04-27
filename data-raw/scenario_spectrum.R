@@ -44,7 +44,10 @@ scenario_spectrum <- tidyr::tibble(
     scenario,
     "</b> ",
     mix_text
-  )
+  ),
+  text_color = c(rep("white", 2),
+                 rep("black", 3),
+                 rep("white", 2))
 )
 
 
