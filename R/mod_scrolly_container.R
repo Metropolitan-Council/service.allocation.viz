@@ -39,7 +39,7 @@ mod_scrolly_container_ui <- function(id) {
           mod_table_network_improvements_ui("table_ui_1"),
           HTML("</center>")
         ),
-        br(),
+        # br(),
         br(),
         scrollytell::scrolly_section(
           id = "02_new_all_day",
@@ -67,7 +67,7 @@ mod_scrolly_container_ui <- function(id) {
           HTML("<center>"),
           mod_plot_new_access_ui("plot_new_access_ui_1"),
           br(),
-          br(),
+          # br(),
           fluidRow(
             column(
               width = 6,
@@ -142,6 +142,7 @@ mod_scrolly_container_ui <- function(id) {
           ),
           HTML("</center>")
         ),
+        br(),
         scrollytell::scrolly_section(
           id = "04_service_type_changes",
           wellPanel(
