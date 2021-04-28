@@ -71,28 +71,33 @@ mod_scrolly_container_ui <- function(id) {
           fluidRow(
             column(
               width = 6,
-              tippy::with_tippy(
-                h4(
-                  "People",
+              # my_tippy(
+              #   tooltip = tooltip_text$people,
+              #   h4("People",
+              #      icon(name = "question-circle"),
+              #      class = "my-plot-title")
+              # ),
+              h4(
+                "People",
+                class = "my-plot-title",
+
+                my_tippy(
                   icon(name = "question-circle"),
-                  class = "my-plot-title"
-                ),
-                tooltip = tooltip_text$people,
-                placement = "right-end",
-                interactive = "true",
-                allowHTML = "true"
+                  tooltip = tooltip_text$people
+                )
               ),
               mod_plot_people_jobs_detail_ui("plot_people_expand_detail_ui_1")
             ),
             column(
               width = 6,
-              tippy::with_tippy(
-                h4(
-                  "Jobs",
+              h4(
+                "Jobs",
+                class = "my-plot-title",
+
+                my_tippy(
                   icon(name = "question-circle"),
-                  class = "my-plot-title"
-                ),
-                tooltip = tooltip_text$jobs
+                  tooltip = tooltip_text$jobs
+                )
               ),
               mod_plot_people_jobs_detail_ui("plot_jobs_expand_detail_ui_1")
             )
@@ -111,31 +116,27 @@ mod_scrolly_container_ui <- function(id) {
           fluidRow(
             column(
               width = 6,
-              tippy::with_tippy(
-                h4(
-                  "People",
+              h4(
+                "People",
+                class = "my-plot-title",
+
+                my_tippy(
                   icon(name = "question-circle"),
-                  class = "my-plot-title"
-                ),
-                tooltip = tooltip_text$people,
-                placement = "right-end",
-                interactive = "true",
-                allowHTML = "true"
+                  tooltip = tooltip_text$people
+                )
               ),
               mod_plot_people_jobs_detail_ui("plot_people_improve_detail_ui_1")
             ),
             column(
               width = 6,
-              tippy::with_tippy(
-                h4(
-                  "Jobs",
+              h4(
+                "Jobs",
+                class = "my-plot-title",
+
+                my_tippy(
                   icon(name = "question-circle"),
-                  class = "my-plot-title"
-                ),
-                tooltip = tooltip_text$jobs,
-                placement = "right-end",
-                interactive = "true",
-                allowHTML = "true"
+                  tooltip = tooltip_text$jobs
+                )
               ),
               mod_plot_people_jobs_detail_ui("plot_jobs_improve_detail_ui_1")
             )
@@ -164,6 +165,7 @@ mod_scrolly_container_ui <- function(id) {
           HTML("<center>"),
           mod_plot_service_type_ui("plot_service_type_ui_1"),
           HTML("</center>"),
+          br(),
           br(),
           h4("What market areas will be served by these improvements?"),
           p(

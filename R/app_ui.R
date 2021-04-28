@@ -9,7 +9,6 @@ app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
-    HTML("<script src='https://unpkg.com/@popperjs/core@2;></script>)"),
     gotop::use_gotop(color = councilR::colors$councilBlue),
     # List the first level UI elements here
     br(),
@@ -55,13 +54,17 @@ app_ui <- function(request) {
           tooltip = "Here is some context!"
         ),
         " or ",
-        tippy::with_tippy(
-          element = icon(name = "question-circle"),
-          tooltip = "Here is more context!",
-          placement = "right-end",
-          interactive = "true",
-          allowHTML = "true"
+        my_tippy(
+          text = icon(name = "question-circle"),
+          tooltip = "Here is more context!"
         )
+        # tippy::with_tippy(
+        #   element = icon(name = "question-circle"),
+        #   tooltip = "Here is more context!",
+        #   placement = "right-end",
+        #   interactive = "true",
+        #   allowHTML = "true"
+        # )
       ),
       br(),
       mod_scrolly_container_ui("scrolly_container_ui_1"),
