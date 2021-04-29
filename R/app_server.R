@@ -7,6 +7,7 @@
 app_server <- function(input, output, session) {
   # List the first level callModules here
   # browser()
+  callModule(mod_glossary_server, "glossary_ui_1")
 
   scrolly_section <- callModule(
     mod_scrolly_container_server,
