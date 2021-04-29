@@ -15,7 +15,7 @@ scenario_spectrum <- tidyr::tibble(
   ),
   scenario_id = unique(scenario_def_long$scenario_id),
   scenario_priority = c(
-    "Convenient Transit Concept",
+    "Convenient Concept",
     rep("", 5),
     "Coverage Concept"
   ),
@@ -31,10 +31,10 @@ scenario_spectrum <- tidyr::tibble(
   mix = paste0(as.character(mix_scenario_1), "/", as.character(mix_scenario_2)),
   mix_value = c(3, 2, 1, 0, -1, -2, -3),
   mix_text = c(
-    "All improvements from Convenient Transit Concept",
-    "Mostly improvements from Convenient Transit Concept",
-    "Improvements lean towards Convenient Transit Concept",
-    "Half improvements from Convenient Transit Concept, half improvements from Coverage Concept",
+    "All improvements from Convenient Concept",
+    "Mostly improvements from Convenient Concept",
+    "Improvements lean towards Convenient Concept",
+    "Half improvements from Convenient Concept, half improvements from Coverage Concept",
     "Improvements lean towards Coverage Concept",
     "Mostly improvements from Coverage Concept",
     "All improvements from Coverage Concept"
