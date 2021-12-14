@@ -40,8 +40,44 @@ scenario_def <- read_xlsx(
 
 scenario_rdrshp <- read_xlsx(path = "data-raw/scenario_rdrshp.xlsx") %>%
   clean_names() %>%
-  mutate(ridership_increase_percent = ridership_increase * 100)
+  mutate(
+    ridership_increase_percent = ridership_increase * 100,
+    scenario = c(
+      "Scenario A",
+      "Scenario B",
+      "Scenario C",
+      "Scenario D",
+      "Scenario E",
+      "Scenario F",
+      "Scenario G"
+    ),
+    scenario_short = factor(
+      scenario,
+      levels = c(
+        "Scenario A",
+        "Scenario B",
+        "Scenario C",
+        "Scenario D",
+        "Scenario E",
+        "Scenario F",
+        "Scenario G"
+      )
+    ),
+    scenario_id = stringr::str_sub(scenario, start = -1L, end = -1L),
+    hover_text = paste0(
+      "<b>",
+      scenario,
+      "</b>",
+      " will increase ridership by approximately ",
+      "<b>",
+      ridership_increase_percent,
+      "%",
+      "</b> "
+    )
+  ) %>%
+  as.data.table()
 
+usethis::use_data(scenario_rdrshp, overwrite = T)
 # scenario_def$ridership_increase_percent <- scenario_rdrshp$ridership_increase_percent
 
 scenario_def_long <- scenario_def %>%
@@ -61,11 +97,15 @@ scenario_def_long <- scenario_def %>%
     key = "improvement_type",
     value = value
   ) %>%
-  mutate(scenario_text = stringr::str_replace_all(improvement_type, "_", " ") %>%
-    stringr::str_to_sentence(),
-    value = case_when(improvement_type %in% c("expanded_on_demand_service") & value == 0 ~ "No",
-                      improvement_type %in% c("expanded_on_demand_service") & value == 1 ~ "Yes",
-                      TRUE ~ as.character(value))) %>%
+  mutate(
+    scenario_text = stringr::str_replace_all(improvement_type, "_", " ") %>%
+      stringr::str_to_sentence(),
+    value = case_when(
+      improvement_type %in% c("expanded_on_demand_service") & value == 0 ~ "No",
+      improvement_type %in% c("expanded_on_demand_service") & value == 1 ~ "Yes",
+      TRUE ~ as.character(value)
+    )
+  ) %>%
   as.data.table()
 
 

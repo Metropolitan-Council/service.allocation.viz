@@ -19,6 +19,7 @@ Imports:
     DT (>= 0.17),
     ggplot2 (>= 3.3.3),
     golem (>= 0.2.1),
+    gotop (>= 0.1.2),
     htmltools (>= 0.5.1.1),
     magrittr (>= 2.0.1),
     pkgload (>= 1.1.0),

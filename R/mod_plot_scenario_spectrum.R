@@ -55,8 +55,10 @@ mod_plot_scenario_spectrum_server <- function(input, output, session) {
           x = scenario,
           y = y,
           label = stringr::str_wrap(hover_text, 20),
+          color = text_color
         )) +
         scale_fill_distiller(type = "div", palette = "PRGn") +
+        scale_color_identity() +
         scale_x_discrete(labels = scenario_spectrum$scenario) +
         app_theme() +
         ggplot2::theme(

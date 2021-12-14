@@ -7,6 +7,7 @@
 app_server <- function(input, output, session) {
   # List the first level callModules here
   # browser()
+  callModule(mod_glossary_server, "glossary_ui_1")
 
   scrolly_section <- callModule(
     mod_scrolly_container_server,
@@ -179,6 +180,19 @@ app_server <- function(input, output, session) {
   callModule(
     mod_plot_tma_service_type_server,
     "plot_scenario_tma_ui_2",
+    data_for_plotting = data_for_plotting
+  )
+
+  callModule(
+    mod_plot_tma_abstract_server,
+    "plot_tma_abstract_ui_1",
+    data_for_plotting = data_for_plotting
+  )
+
+
+  callModule(
+    mod_plot_ridership_increase_server,
+    "plot_ridership_increase_ui_1",
     data_for_plotting = data_for_plotting
   )
 }

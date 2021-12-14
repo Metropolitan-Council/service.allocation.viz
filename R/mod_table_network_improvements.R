@@ -13,8 +13,8 @@ mod_table_network_improvements_ui <- function(id) {
   tagList(
     DT::DTOutput(
       ns("table"),
-      width = "60%",
-      height = "400px"
+      width = "75%",
+      height = "auto"
     )
   )
 }

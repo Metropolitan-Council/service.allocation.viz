@@ -1,4 +1,4 @@
-#' plot_scenario_tma UI Function
+#' plot_ridership_increase UI Function
 #'
 #' @description A shiny Module.
 #'
@@ -7,21 +7,17 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_plot_tma_service_type_ui <- function(id) {
+mod_plot_ridership_increase_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    plotly::plotlyOutput(
-      ns("tma_service_type_summary"),
-      # width = "75%",
-      # height = "225px"
-    )
+    plotlyOutput(ns("ridership_increase_plot"))
   )
 }
 
-#' plot_scenario_tma Server Function
+#' plot_ridership_increase Server Function
 #'
 #' @noRd
-mod_plot_tma_service_type_server <- function(
+mod_plot_ridership_increase_server <- function(
   input,
   output,
   session,
@@ -29,42 +25,43 @@ mod_plot_tma_service_type_server <- function(
 ) {
   ns <- session$ns
 
-
-  output$tma_service_type_summary <- plotly::renderPlotly({
+  output$ridership_increase_plot <- plotly::renderPlotly({
     ggplotly(
       tooltip = "text",
-      ggplot(data = data_for_plotting$service_type_by_tma$by_tma) +
+      ggplot(data = scenario_rdrshp[scenario_id %in% data_for_plotting$detail_data$scenario_id, ]) +
         geom_col(
-          aes(
-            x = market_area,
-            y = val_increase,
-            # group = service_type,
-            text = hover_text,
-            fill = reorder(service_type, dplyr::desc(service_type))
+          mapping = aes(
+            x = scenario,
+            y = ridership_increase,
+            # fill = reorder(service_type, dplyr::desc(service_type)),
+            text = hover_text
           ),
-          color = "white",
-          lwd = 0.4,
-          position = "stack"
+          color = "white"
         ) +
         scale_fill_manual(values = convenient_colors) +
+        geom_col(
+          data = scenario_rdrshp[!scenario_id %in% data_for_plotting$detail_data$scenario_id, ],
+          mapping = aes(
+            x = scenario,
+            y = ridership_increase,
+            # fill = reorder(service_type, dplyr::desc(service_type)),
+            text = hover_text
+          ),
+          color = "white",
+          fill = "gray",
+          alpha = 1
+          # lwd = 0.4,
+        ) +
         scale_y_continuous(
-          labels = scales::label_comma(prefix = "+"),
-          limits = c(0, 400000),
-          breaks = c(
-            100 * 1000,
-            200 * 1000,
-            300 * 1000,
-            400 * 1000
-          )
+          labels = scales::label_percent()
         ) +
         labs(
-          x = "Transit Market Area",
+          x = "",
           y = "",
-          # title = "Scenario 1",
-          fill = "Service level"
+          title = "Increase in Transit Ridership"
         ) +
         app_theme() +
-        ggplot2::theme(
+        theme(
           axis.title.x = ggplot2::element_text(
             vjust = -1,
             family = font_families$font_family_axis_title,
@@ -87,7 +84,7 @@ mod_plot_tma_service_type_server <- function(
           ),
         )
     ) %>%
-      layout(
+      plotly::layout(
         margin = list(l = 0, r = 0, b = 10, t = 50, pad = 10),
         # l = left; r = right; t = top; b = bottom
         # xaxis = axis_options,
@@ -128,7 +125,7 @@ mod_plot_tma_service_type_server <- function(
 }
 
 ## To be copied in the UI
-# mod_plot_tma_service_type_ui("plot_tma_service_type_ui_1")
+# mod_plot_ridership_increase_ui("plot_ridership_increase_ui_1")
 
 ## To be copied in the server
-# callModule(mod_plot_tma_service_type_server, "plot_tma_service_type_ui_1")
+# callModule(mod_plot_ridership_increase_server, "plot_ridership_increase_ui_1")
