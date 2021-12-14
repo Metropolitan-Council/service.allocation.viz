@@ -1,15 +1,14 @@
 Package: service.allocation.viz
-Title: An Amazing Shiny App
+Title: Scrolly-telling viz for comparing scenarios in the bus service
+    allocation study
 Version: 0.0.0.9000
-Authors@R: 
-    c(person(given = "Metropolitan Council",
-             role = "cph"),
-      person(given = "Liz",
-             family = "Roten",
-             role = c("cre", "aut"),
-             email = "liz.roten@metc.state.mn.us"))
+Date: 2021-12-14
+Authors@R: c(
+    person("Metropolitan Council", role = "cph"),
+    person("Liz", "Roten", , "liz.roten@metc.state.mn.us", role = c("cre", "aut"))
+  )
 Description: What the package does (one paragraph).
-License: What license is it under?
+License: MIT + file LICENSE
 Depends: 
     R (>= 2.10)
 Imports: 
@@ -50,4 +49,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
